@@ -12,16 +12,16 @@
     <title>HalfBold Converter</title>
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Half<span class="unbold">Bold Converter</span></h1>
     </header>
 
     <main>
         <div id="top">
-            <label for="inputText">Input text:</label> <br>
-            <textarea name="inputText" id="inputText" rows="10" cols="50"></textarea> <br><br>
+            <div id="input"><label for="inputText">Input text:</label> <br>
+            <textarea name="inputText" id="inputText" rows="10" cols="50"></textarea></div>
 
-			<label for="inputType">Input type:</label>
+			<div id="middle"><label for="inputType">Input type:</label>
 			<select name="inputType" id="inputType">
 				<option value="plaintext">Plain text</option>
 				<option value="html">HTML</option>
@@ -35,13 +35,15 @@
             <label for="markingColor">Marking color:</label>
             <input type="color" name="markingColor" id="markingColor"> <br>
 
-            <input type="button" value=">>> Convert >>>"> <br><br>
+            <input type="button" value=">>> Convert >>>"> </div>
 
-            <label for="outputText">Output text:</label> <br>
-            <textarea name="outputText" id="outputText" rows="10" cols="50" readonly></textarea> <br><br>
+           <div id="output"><label for="outputText">Output text:</label> <br>
+            <textarea name="outputText" id="outputText" rows="10" cols="50" readonly></textarea></div>  <br><br>
         </div>
         <div id="bottom">
-            Description and how to use
+            Description 
+            <br> <br>
+            How to use
         </div>
     </main>
 
