@@ -1,3 +1,8 @@
+<!--
+  Copyright (c) 2026 Maciej Przybył, Alina Osińska
+  Licensed under the MIT License. See LICENSE file.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +12,35 @@
     <title>HalfBold Converter</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Half<span class="unbold">Bold Converter</span></h1>
+    </header>
+
+    <main>
+        <div id="top">
+            <label for="inputText">Input text:</label> <br>
+            <textarea name="inputText" id="inputText" rows="10" cols="10"></textarea> <br>
+
+            <label for="boldingPercentage">Bolding percentage</label>
+            <input type="range" name="boldingPercentage" id="boldingPercentage" min="5" max="75" step="5"> <br>
+
+            <label for="markingColor">Marking color:</label>
+            <input type="color" name="markingColor" id="markingColor"> <br>
+
+            <input type="button" value="Convert"> <br>
+
+            <label for="outputText">Output text:</label> <br>
+            <textarea name="outputText" id="outputText" rows="10" cols="10" readonly></textarea> <br>
+        </div>
+        <div id="bottom">
+            Description and how to use
+        </div>
+    </main>
+
+    <footer>
+        <p>Copyright &copy; 2026 Maciej Przybył, Alina Osińska. Licensed under <a href="https://github.com/M4przybysz/halfbold-converter/blob/main/LICENSE">MIT License</a>.</p>
+        <p>GitHub repository: <a href="https://github.com/M4przybysz/halfbold-converter">halfbold-converter</a></p>
+    </footer>
 
     <script src="converter.js"></script>
 </body>
