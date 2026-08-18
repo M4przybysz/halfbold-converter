@@ -7,6 +7,10 @@
     font-family: Verdana;
 }
 
+textarea {
+	resize: none;
+}
+
 .unbold {
     font-weight: normal;
 }

@@ -19,7 +19,15 @@
     <main>
         <div id="top">
             <label for="inputText">Input text:</label> <br>
-            <textarea name="inputText" id="inputText" rows="10" cols="10"></textarea> <br>
+            <textarea name="inputText" id="inputText" rows="10" cols="50"></textarea> <br><br>
+
+			<label for="inputType">Input type:</label>
+			<select name="inputType" id="inputType">
+				<option value="plaintext">Plain text</option>
+				<option value="html">HTML</option>
+				<option value="markdown">Markdown</option>
+			</select> 
+			<br>
 
             <label for="boldingPercentage">Bolding percentage</label>
             <input type="range" name="boldingPercentage" id="boldingPercentage" min="5" max="75" step="5"> <br>
@@ -27,10 +35,10 @@
             <label for="markingColor">Marking color:</label>
             <input type="color" name="markingColor" id="markingColor"> <br>
 
-            <input type="button" value="Convert"> <br>
+            <input type="button" value=">>> Convert >>>"> <br><br>
 
             <label for="outputText">Output text:</label> <br>
-            <textarea name="outputText" id="outputText" rows="10" cols="10" readonly></textarea> <br>
+            <textarea name="outputText" id="outputText" rows="10" cols="50" readonly></textarea> <br><br>
         </div>
         <div id="bottom">
             Description and how to use
