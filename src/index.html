@@ -12,7 +12,7 @@
     <title>HalfBold Converter</title>
 </head>
 <body>
-    <header class="header">
+    <header>
         <h1>Half<span class="unbold">Bold Converter</span></h1>
     </header>
 
@@ -22,7 +22,6 @@
                 <label for="inputText">Input text:</label> <br>
                 <textarea name="inputText" id="inputText" rows="10" cols="50"></textarea>
             </div>
-
 			<div id="middle">
                 <label for="inputType">Input type:</label>
 			    <select name="inputType" id="inputType">
@@ -31,7 +30,7 @@
 				    <option value="markdown">Markdown</option>
 			    </select> 
             
-			<br>
+			    <br>
 
                 <label for="boldingPercentage">Bolding percentage</label>
                 <input type="range" name="boldingPercentage" id="boldingPercentage" min="5" max="75" step="5"> <br>
@@ -41,13 +40,13 @@
 
                 <input type="button" value=">>> Convert >>>"> 
             </div>
-
-           <div id="output">
+            <div id="output">
                 <label for="outputText">Output text:</label> <br>
                 <textarea name="outputText" id="outputText" rows="10" cols="50" readonly></textarea>
             </div>  
             <br><br>
         </div>
+
         <div id="bottom">
             Description 
             <br> <br>
@@ -56,8 +55,10 @@
     </main>
 
     <footer>
-        <p>Copyright &copy; 2026 Maciej Przybył, Alina Osińska. Licensed under <a href="https://github.com/M4przybysz/halfbold-converter/blob/main/LICENSE">MIT License</a>.</p>
-        <p>GitHub repository: <a href="https://github.com/M4przybysz/halfbold-converter">halfbold-converter</a></p>
+        <span>
+            Copyright &copy; 2026 Maciej Przybył, Alina Osińska. Licensed under <a href="https://github.com/M4przybysz/halfbold-converter/blob/main/LICENSE">MIT License</a>. <br>
+            GitHub repository: <a href="https://github.com/M4przybysz/halfbold-converter">halfbold-converter</a>
+        </span>
     </footer>
 
     <script src="converter.js"></script>
