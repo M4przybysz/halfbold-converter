@@ -18,27 +18,35 @@
 
     <main>
         <div id="top">
-            <div id="input"><label for="inputText">Input text:</label> <br>
-            <textarea name="inputText" id="inputText" rows="10" cols="50"></textarea></div>
+            <div id="input">
+                <label for="inputText">Input text:</label> <br>
+                <textarea name="inputText" id="inputText" rows="10" cols="50"></textarea>
+            </div>
 
-			<div id="middle"><label for="inputType">Input type:</label>
-			<select name="inputType" id="inputType">
-				<option value="plaintext">Plain text</option>
-				<option value="html">HTML</option>
-				<option value="markdown">Markdown</option>
-			</select> 
+			<div id="middle">
+                <label for="inputType">Input type:</label>
+			    <select name="inputType" id="inputType">
+				    <option value="plaintext">Plain text</option>
+				    <option value="html">HTML</option>
+				    <option value="markdown">Markdown</option>
+			    </select> 
+            
 			<br>
 
-            <label for="boldingPercentage">Bolding percentage</label>
-            <input type="range" name="boldingPercentage" id="boldingPercentage" min="5" max="75" step="5"> <br>
+                <label for="boldingPercentage">Bolding percentage</label>
+                <input type="range" name="boldingPercentage" id="boldingPercentage" min="5" max="75" step="5"> <br>
 
-            <label for="markingColor">Marking color:</label>
-            <input type="color" name="markingColor" id="markingColor"> <br>
+                <label for="markingColor">Marking color:</label>
+                <input type="color" name="markingColor" id="markingColor"> <br>
 
-            <input type="button" value=">>> Convert >>>"> </div>
+                <input type="button" value=">>> Convert >>>"> 
+            </div>
 
-           <div id="output"><label for="outputText">Output text:</label> <br>
-            <textarea name="outputText" id="outputText" rows="10" cols="50" readonly></textarea></div>  <br><br>
+           <div id="output">
+                <label for="outputText">Output text:</label> <br>
+                <textarea name="outputText" id="outputText" rows="10" cols="50" readonly></textarea>
+            </div>  
+            <br><br>
         </div>
         <div id="bottom">
             Description 
