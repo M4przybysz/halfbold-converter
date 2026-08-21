@@ -25,20 +25,21 @@
 			<div id="middle">
                 <label for="inputType">Input type:</label>
 			    <select name="inputType" id="inputType">
-				    <option value="plaintext">Plain text</option>
-				    <option value="html">HTML</option>
-				    <option value="markdown">Markdown</option>
+				    <option value="PLAIN_TEXT">Plain text</option>
+				    <option value="HTML">HTML</option>
+				    <option value="MARKDOWN">Markdown</option>
 			    </select> 
             
 			    <br>
 
                 <label for="boldingPercentage">Bolding percentage</label>
-                <input type="range" name="boldingPercentage" id="boldingPercentage" min="5" max="75" step="5"> <br>
+                <input type="range" name="boldingPercentage" id="boldingPercentage" min="0.05" max="0.75" step="0.05" value="0.5" oninput="outputBoldingPercentage(this.value)"> 
+                <label for="boldingPercentage" id="boldingPercentageOutput">50%</label> <br>
 
                 <label for="markingColor">Marking color:</label>
                 <input type="color" name="markingColor" id="markingColor"> <br>
 
-                <input type="button" value=">>> Convert >>>"> 
+                <input type="button" value=">>> Convert >>>" onclick="convertText()"> 
             </div>
             <div id="output">
                 <label for="outputText">Output text:</label> <br>

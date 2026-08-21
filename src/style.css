@@ -28,8 +28,7 @@ header h1 {
 
 main {
     height: calc(80vh - 40px);
-    margin: 10px;
-    padding: 10px;
+    margin: 20px;
 }
 
 footer {
@@ -56,22 +55,20 @@ textarea {
 }
 
 #input, #output {
-    vertical-align: top; 
-    width: 40%;
+    width: 36%;
     height: 90%;
     float: left;
 }
 
 #inputText, #outputText {
+    background-color: #e9dcdc;
     width: 100%;
     height: 100%;
-    background-color: #e9dcdc;
 }
 
 #middle {
-    vertical-align: top; 
-    width: 20%;
+    width: 27%;
     height: 90%;
-    text-align: center;
     float: left;    
+    text-align: center;
 }
