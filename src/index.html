@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <title>HalfBold Converter</title>
 </head>
 <body>
@@ -22,28 +22,35 @@
                 <label for="inputText">Input text:</label> <br>
                 <textarea name="inputText" id="inputText" rows="10" cols="50"></textarea>
             </div>
+
 			<div id="middle">
-                <label for="inputType">Input type:</label>
-			    <select name="inputType" id="inputType">
-				    <option value="PLAIN_TEXT">Plain text</option>
-				    <option value="HTML">HTML</option>
-				    <option value="MARKDOWN">Markdown</option>
-			    </select> 
-            
+                <div class="inputPair">
+                    <label for="inputType">Input type:</label>
+                    <select name="inputType" id="inputType">
+                        <option value="PLAIN_TEXT">Plain text</option>
+                        <option value="HTML">HTML</option>
+                        <option value="MARKDOWN">Markdown</option>
+                    </select> 
+                </div>
 			    <br>
-
-                <label for="boldingPercentage">Bolding percentage</label>
-                <input type="range" name="boldingPercentage" id="boldingPercentage" min="0.05" max="0.75" step="0.05" value="0.5" oninput="outputBoldingPercentage(this.value)"> 
-                <label for="boldingPercentage" id="boldingPercentageOutput">50%</label> <br>
-
-                <label for="markingColor">Marking color:</label>
-                <input type="color" name="markingColor" id="markingColor"> <br>
-
-                <input type="button" value=">>> Convert >>>" onclick="convertText()"> 
+                <div class="inputPair">
+                    <label for="boldingPercentage">Bolding percentage:</label>
+                    <input type="range" name="boldingPercentage" id="boldingPercentage" min="0.05" max="0.75" step="0.05" value="0.5" oninput="outputBoldingPercentage(this.value)"> 
+                    <label for="boldingPercentage" id="boldingPercentageOutput">50%</label> 
+                </div>
+                <br>
+                <div class="inputPair">
+                    <label for="markingColor">Marking color:</label>
+                    <input type="color" name="markingColor" id="markingColor">
+                </div>
+                <br>
+                <input type="button" value=">>> Convert >>>" id="convertButton" onclick="convertText()"> 
             </div>
+
             <div id="output">
                 <label for="outputText">Output text:</label> <br>
-                <textarea name="outputText" id="outputText" rows="10" cols="50" readonly></textarea>
+                <textarea name="outputText" id="outputTextarea" class="outputText" rows="10" cols="50" readonly></textarea>
+                <div id="outputDiv" class="outputText"></div>
             </div>  
             <br><br>
         </div>
@@ -62,6 +69,6 @@
         </span>
     </footer>
 
-    <script src="converter.js"></script>
+    <script src="./converter.js"></script>
 </body>
 </html>
