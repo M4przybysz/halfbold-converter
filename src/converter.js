@@ -35,15 +35,20 @@ function convertText() {
         output = document.getElementById("outputDiv")
 
         // Hide textarea and show outputDiv to make output text ready-to-read
-        if(window.getComputedStyle(output, null).display == 'none') { document.getElementById("outputTextarea").style.display = 'none' }
+        if(window.getComputedStyle(output, null).display == 'none') { 
+            document.getElementById("outputTextarea").style.display = 'none' 
+            output.style.display = 'block'
+        }
     }
     else {
         output = document.getElementById("outputTextarea")
 
         // Hide div and show textarea to return HTML/Markdown code with bolding applied
-        if(window.getComputedStyle(output, null).display == 'none') { document.getElementById("outputDiv").style.display = 'none' }
+        if(window.getComputedStyle(output, null).display == 'none') { 
+            document.getElementById("outputDiv").style.display = 'none' 
+            output.style.display = 'block'
+        }
     }
-    output.style.display = 'block'
 
     // Convert text based on input type
     switch(inputType) {
@@ -52,11 +57,11 @@ function convertText() {
             break;
         
         case InputTextType.HTML:
-            output.innerText = convertHTML(inputText, boldingPercentage, markingColor)
+            output.value = convertHTML(inputText, boldingPercentage, markingColor)
             break;
         
         case InputTextType.MARKDOWN:
-            output.innerText = convertMarkdown(inputText, boldingPercentage, markingColor)
+            output.value = convertMarkdown(inputText, boldingPercentage, markingColor)
             break;
         
         default:
@@ -81,16 +86,65 @@ function convertPlainText(inputText, boldingPercentage)
     })
 
     console.log(`converted textArray: ${textArray}`)
-    return textArray.join("") // Return converted text
+    return textArray.join('') // Return converted text
 }
 
 // Convert HTML
 function convertHTML(inputText, boldingPercentage, markingColor)
 {
-    
+    // Split text while maintaining whitespaces and separating HTML tags
+    textArray = inputText.split(/(\s+|<(?:"[^"]*"|'[^']*'|[^'">])*>)/).filter(element => element != '')
+    console.log(`textArray: ${textArray}`)
+
+    let bodyAllow = 0 // Counter to check if the text is inside the body. If it is then it'll be bolded according to the rules
+    let bSkip = 0 // Counter for skipping already bolded text. It's a number because it's technically possible to 
+                  // put <b> inside a <b> and using just bool would break the algorithm
+    let hSkip = 0 // Counter for skipping HTML headers (h1, h2, etc.)
+
+    textArray = textArray.map((element) => {
+        if(/<body(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for HTML body start
+            bodyAllow += 1 
+        }
+        else if(/<\/body\s*>/i.test(element)) { // Check for HTML body end
+            bodyAllow -= 1 
+        }
+        else if(/<h[1-6](?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for header start
+            hSkip += 1
+        }
+        else if(/<\/h[1-6]\s*>/i.test(element)) { // Check for header end
+            hSkip -= 1
+        }
+        else if(/<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element) && bodyAllow > 0 && hSkip <= 0) { // Check for already bolded text
+            bSkip += 1 // Already bolded text started
+
+            // Add coloring to the tag
+            if(markingColor != '#000000') { element = setHTMLBoldColor(element, markingColor) } 
+        }
+        else if(/<\/b\s*>/i.test(element) && bodyAllow > 0 && hSkip <= 0) { // Check for end of bolding
+            bSkip -= 1 // Already bolded text ended
+        }
+        else if(!/^\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$/.test(element) && bodyAllow > 0 && bSkip <= 0 && hSkip <= 0) {
+            // Bold the text if it's not empty or only whitespaces
+            let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
+            element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
+        }
+        return element
+    })
+
+    console.log(`converted textArray: ${textArray}`)
+    return textArray.join('') // Return converted text
 }
 
-// Convert markdown
+function setHTMLBoldColor(tagString, color)
+{
+    const temp = document.createElement('div')
+    temp.innerHTML = tagString + '</b>'
+    const bTag = temp.firstElementChild
+    bTag.style.color = color
+    return bTag.outerHTML.replace(/<\/b>$/i, '')
+}
+
+// Convert Markdown
 function convertMarkdown(inputText, boldingPercentage, markingColor)
 {
     
