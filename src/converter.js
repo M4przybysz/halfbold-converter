@@ -97,9 +97,8 @@ function convertHTML(inputText, boldingPercentage, markingColor)
     console.log(`textArray: ${textArray}`)
 
     let bodyAllow = 0 // Counter to check if the text is inside the body. If it is then it'll be bolded according to the rules
-    let bSkip = 0 // Counter for skipping already bolded text. It's a number because it's technically possible to 
-                  // put <b> inside a <b> and using just bool would break the algorithm
-    let hSkip = 0 // Counter for skipping HTML headers (h1, h2, etc.)
+    let bSkip = 0 // Counter for skipping already bolded text. It's a number because it's technically possible to put <b> inside a <b> and using just bool would break the algorithm
+    let tagSkip = 0 // Counter for skipping tags that don't need bolding / aren't supposed to be bolded
 
     textArray = textArray.map((element) => {
         if(/<body(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for HTML body start
@@ -108,22 +107,22 @@ function convertHTML(inputText, boldingPercentage, markingColor)
         else if(/<\/body\s*>/i.test(element)) { // Check for HTML body end
             bodyAllow -= 1 
         }
-        else if(/<h[1-6](?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for header start
-            hSkip += 1
+        else if(/<(?:h[1-6]|script|style)(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for header start
+            tagSkip += 1
         }
-        else if(/<\/h[1-6]\s*>/i.test(element)) { // Check for header end
-            hSkip -= 1
+        else if(/<\/(?:h[1-6]|script|style)\s*>/i.test(element)) { // Check for header end
+            tagSkip -= 1
         }
-        else if(/<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element) && bodyAllow > 0 && hSkip <= 0) { // Check for already bolded text
+        else if(/<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element) && bodyAllow > 0 && tagSkip <= 0) { // Check for already bolded text
             bSkip += 1 // Already bolded text started
 
             // Add coloring to the tag
             if(markingColor != '#000000') { element = setHTMLBoldColor(element, markingColor) } 
         }
-        else if(/<\/b\s*>/i.test(element) && bodyAllow > 0 && hSkip <= 0) { // Check for end of bolding
+        else if(/<\/b\s*>/i.test(element) && bodyAllow > 0 && tagSkip <= 0) { // Check for end of bolding
             bSkip -= 1 // Already bolded text ended
         }
-        else if(!/^\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$/.test(element) && bodyAllow > 0 && bSkip <= 0 && hSkip <= 0) {
+        else if(!/^\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$/.test(element) && bodyAllow > 0 && bSkip <= 0 && tagSkip <= 0) {
             // Bold the text if it's not empty or only whitespaces
             let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
             element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
