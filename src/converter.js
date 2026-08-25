@@ -10,7 +10,6 @@ const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
 const InputTextType = Object.freeze({
     PLAIN_TEXT : "PLAIN_TEXT",
     HTML : "HTML",
-    MARKDOWN : "MARKDOWN"
 })
 
 // Output of scrolling percentage while using the boldingPercentage range input 
@@ -22,9 +21,9 @@ function outputBoldingPercentage(value) {
 function convertText() {
     // Converter inputs
     let inputText = document.getElementById("inputText").value // Text to convert
-    let inputType = InputTextType[document.getElementById("inputType").value] // Type of inputed text (plain text/HTML/Markdown)
+    let inputType = InputTextType[document.getElementById("inputType").value] // Type of inputed text (plain text/HTML)
     let boldingPercentage = document.getElementById("boldingPercentage").value // How much of each word is supposed to be bold (range 5-75%)
-    let markingColor = document.getElementById("markingColor").value // Color of text that is already bolded in HTML and Markdown (hex color)
+    let markingColor = document.getElementById("markingColor").value // Color of text that is already bolded in HTML (hex color)
 
     // Log converter inpus
     console.log("Converter inputs: ", inputText, inputType, boldingPercentage, markingColor)
@@ -43,7 +42,7 @@ function convertText() {
     else {
         output = document.getElementById("outputTextarea")
 
-        // Hide div and show textarea to return HTML/Markdown code with bolding applied
+        // Hide div and show textarea to return HTML code with bolding applied
         if(window.getComputedStyle(output, null).display == 'none') { 
             document.getElementById("outputDiv").style.display = 'none' 
             output.style.display = 'block'
@@ -58,10 +57,6 @@ function convertText() {
         
         case InputTextType.HTML:
             output.value = convertHTML(inputText, boldingPercentage, markingColor)
-            break;
-        
-        case InputTextType.MARKDOWN:
-            output.value = convertMarkdown(inputText, boldingPercentage, markingColor)
             break;
         
         default:
@@ -141,10 +136,4 @@ function setHTMLBoldColor(tagString, color)
     const bTag = temp.firstElementChild
     bTag.style.color = color
     return bTag.outerHTML.replace(/<\/b>$/i, '')
-}
-
-// Convert Markdown
-function convertMarkdown(inputText, boldingPercentage, markingColor)
-{
-    
 }
