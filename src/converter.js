@@ -97,8 +97,11 @@ function convertHTML(inputText, boldingPercentage, markingColor)
     console.log(`textArray: ${textArray}`)
 
     let bodyAllow = 0 // Counter to check if the text is inside the body. If it is then it'll be bolded according to the rules
-    let bSkip = 0 // Counter for skipping already bolded text. It's a number because it's technically possible to put <b> inside a <b> and using just bool would break the algorithm
-    let tagSkip = 0 // Counter for skipping tags that don't need bolding / aren't supposed to be bolded
+    let tagSkipCounter = 0 // Counter for skipping tags that don't need bolding / aren't supposed to be bolded
+
+    let tagsToSkip = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
+    let tagStartRegex = new RegExp('<(?:' + tagsToSkip.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>`, 'i')
+    let tagEndRegex = new RegExp('<\\/(?:b|' + tagsToSkip.join('|') + ')\\s*>', 'i')
 
     textArray = textArray.map((element) => {
         if(/<body(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for HTML body start
@@ -107,22 +110,19 @@ function convertHTML(inputText, boldingPercentage, markingColor)
         else if(/<\/body\s*>/i.test(element)) { // Check for HTML body end
             bodyAllow -= 1 
         }
-        else if(/<(?:h[1-6]|script|style)(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for header start
-            tagSkip += 1
-        }
-        else if(/<\/(?:h[1-6]|script|style)\s*>/i.test(element)) { // Check for header end
-            tagSkip -= 1
-        }
-        else if(/<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element) && bodyAllow > 0 && tagSkip <= 0) { // Check for already bolded text
-            bSkip += 1 // Already bolded text started
+        else if(/<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) { // Check for already bolded text
+            tagSkipCounter += 1
 
-            // Add coloring to the tag
-            if(markingColor != '#000000') { element = setHTMLBoldColor(element, markingColor) } 
+            // Add coloring to the already bolded text
+            element = setHTMLBoldColor(element, markingColor)
         }
-        else if(/<\/b\s*>/i.test(element) && bodyAllow > 0 && tagSkip <= 0) { // Check for end of bolding
-            bSkip -= 1 // Already bolded text ended
+        else if(tagStartRegex.test(element)) { // Check for tags to spik start
+            tagSkipCounter += 1
         }
-        else if(!/^\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$/.test(element) && bodyAllow > 0 && bSkip <= 0 && tagSkip <= 0) {
+        else if(tagEndRegex.test(element)) { // Check for tags to skip end
+            tagSkipCounter -= 1
+        }
+        else if(!/^\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$/.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
             // Bold the text if it's not empty or only whitespaces
             let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
             element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
