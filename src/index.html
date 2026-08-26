@@ -23,7 +23,7 @@
                 <textarea name="inputText" id="inputText"></textarea>
             </div>
 
-			<div id="middle">
+			<div id="top_middle">
                 <div class="inputPair">
                     <label for="inputType">Input type:</label>
                     <select name="inputType" id="inputType">
@@ -55,9 +55,35 @@
         </div>
 
         <div id="bottom">
-            Description 
-            <br> <br>
-            How to use
+            <div id="bottom_left">
+                <h2>Description</h2>
+                <b>Half</b>Bold Converter converts plain text or HTML into a partially bolded version, making text faster to read. Runs fully locally, no server needed. Built with HTML, JS, CSS. Licensed under <a href="https://github.com/M4przybysz/halfbold-converter/blob/main/LICENSE">MIT License</a>.
+
+                <br><br>
+                <b>FUTURE FEATURES:</b>
+                <ol>
+                    <li>Big page mode for more comfortable reading of converted plain text</li>
+                    <li>Markdown coversion support</li>
+                </ol>
+            </div>
+            <div id="bottom_right">
+                <h2>How to use: </h2>
+                <ol>
+                    <li>Write or paste text/HTML code to convert inside <b>Input text</b> area</li>
+                    <li>Choose input type:
+                        <ul>
+                            <li><b>Plain text</b> for plain text</li>
+                            <li><b>HTML</b> for HTML code</li>
+                        </ul>
+                    </li>
+                    <li>Choose <b>bolding percentage</b> - how much of each word should be bolded (5-75%)</li>
+                    <li>If you're converting HTML choose <b>marking color</b> - color to mark text that was already bolded in the input</li>
+                    <li>Press <b>Convert</b> button</li>
+                    <li>Plain text gets converted to a ready-to-read half-bolded version. In HTML viable text is partialy bolded with &lt;b&gt; tags and text that was bold before conversion gets colored to the chosen marking color. </li>
+                </ol>
+                <br>
+                <b>NOTE:</b> If you're coverting HTML, text outside of body and inside these tags: [<i>h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map</i>] won't be converted by design
+            </div>
         </div>
     </main>
 

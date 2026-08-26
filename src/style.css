@@ -14,8 +14,14 @@ html, body {
     overflow: hidden;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 header {
     background-color: #b39797;
+    flex-shrink: 0;
     width: 100%;
     height: 10vh;
     text-align: center;
@@ -27,13 +33,18 @@ header h1 {
 }
 
 main {
+    flex: 1;
     height: calc(80vh - 40px);
-    margin: 20px;
+    /* margin: 20px; */
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 footer {
     background-color: #b39797;
     display: flex;
+    flex-shrink: 0;
     width: 100%;
     height: 10vh;
     align-items: center;
@@ -55,10 +66,10 @@ textarea {
 }
 
 #top {
-    height: 80%;
+    height: 90%;
 }
 
-#middle {
+#top_middle {
     display: flex;
     flex-direction: column;
     width: 27%;
@@ -105,4 +116,21 @@ textarea {
     overflow-y: scroll;
     overflow-x: hidden;
     white-space: pre-wrap;
+}
+
+#bottom {
+    height: 60%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#bottom_left {
+    float: left;
+    width: calc(40% - 20px);
+    text-align: justify;
+}
+
+#bottom_right {
+    float: right;
+    width: calc(40% - 20px);
 }
