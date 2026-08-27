@@ -69,7 +69,7 @@ textarea {
     height: 90%;
 }
 
-#top_middle {
+#topMiddle {
     display: flex;
     flex-direction: column;
     width: 27%;
@@ -119,18 +119,18 @@ textarea {
 }
 
 #bottom {
-    height: 80%;
+    height: 70%;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-#bottom_left {
+#bottomLeft {
     float: left;
     width: calc(40% - 20px);
     text-align: justify;
 }
 
-#bottom_right {
+#bottomRight {
     float: right;
     width: calc(40% - 20px);
 }
