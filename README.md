@@ -2,13 +2,15 @@
 
 **Half**Bold Converter converts plain text or HTML into a partially bolded version, making text faster to read. Converter runs fully locally, no server needed. Built with HTML, JS, CSS. 
 
+Checkout via GitHub Pages: [m4przybysz.github.io/halfbold-converter](https://m4przybysz.github.io/halfbold-converter/)
+
 ## Features
 - Convert plain text or HTML to half-bolded format
 - Adjustable bolding percentage (5-75%)
 - Marks already bolded text in HTML with custom color
+- Big page mode for more comfortable reading of converted plain text
 
 ## Planned features:
-- Big page mode for more comfortable reading of converted plain text
 - Markdown coversion support
 
 ## How to use:
