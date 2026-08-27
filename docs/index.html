@@ -47,7 +47,8 @@
             </div>
 
             <div id="output">
-                <label for="outputText">Output text:</label> <br>
+                <label for="outputText">Output text:</label> 
+                <input type="button" id="openBigPageButton" value="Open big page" onclick="openBigPage()"> <br>
                 <textarea name="outputText" id="outputTextarea" class="outputText"readonly></textarea>
                 <div id="outputDiv" class="outputText"></div>
             </div>
@@ -103,6 +104,11 @@
             GitHub repository: <a href="https://github.com/M4przybysz/halfbold-converter">halfbold-converter</a>
         </span>
     </footer>
+
+    <div id="bigPageContainer">
+        <div id="bigPage"></div>
+        <input type="button" value="X" id="closeBigPageButton" onclick="closeBigPage()">
+    </div>
 
     <script src="./converter.js"></script>
 </body>

@@ -20,13 +20,13 @@ function outputBoldingPercentage(value) {
 // General converter function
 function convertText() {
     // Converter inputs
-    let inputText = document.getElementById("inputText").value // Text to convert
-    let inputType = InputTextType[document.getElementById("inputType").value] // Type of inputed text (plain text/HTML)
-    let boldingPercentage = document.getElementById("boldingPercentage").value // How much of each word is supposed to be bold (range 5-75%)
-    let markingColor = document.getElementById("markingColor").value // Color of text that is already bolded in HTML (hex color)
+    let inputText = document.getElementById('inputText').value // Text to convert
+    let inputType = InputTextType[document.getElementById('inputType').value] // Type of inputed text (plain text/HTML)
+    let boldingPercentage = document.getElementById('boldingPercentage').value // How much of each word is supposed to be bold (range 5-75%)
+    let markingColor = document.getElementById('markingColor').value // Color of text that is already bolded in HTML (hex color)
 
     // Log converter inpus
-    console.log("Converter inputs: ", inputText, inputType, boldingPercentage, markingColor)
+    console.log('Converter inputs: ', inputText, inputType, boldingPercentage, markingColor)
 
     // Assign output HTML element
     let output = null  
@@ -35,7 +35,8 @@ function convertText() {
 
         // Hide textarea and show outputDiv to make output text ready-to-read
         if(window.getComputedStyle(output, null).display == 'none') { 
-            document.getElementById("outputTextarea").style.display = 'none' 
+            document.getElementById('openBigPageButton').style.display = 'block'
+            document.getElementById('outputTextarea').style.display = 'none' 
             output.style.display = 'block'
         }
     }
@@ -44,6 +45,7 @@ function convertText() {
 
         // Hide div and show textarea to return HTML code with bolding applied
         if(window.getComputedStyle(output, null).display == 'none') { 
+            document.getElementById('openBigPageButton').style.display = 'none'
             document.getElementById("outputDiv").style.display = 'none' 
             output.style.display = 'block'
         }
@@ -53,6 +55,7 @@ function convertText() {
     switch(inputType) {
         case InputTextType.PLAIN_TEXT:
             output.innerHTML = convertPlainText(inputText, boldingPercentage)
+            document.getElementById('bigPage').innerHTML = output.innerHTML
             break;
         
         case InputTextType.HTML:
@@ -137,3 +140,9 @@ function setHTMLBoldColor(tagString, color)
     bTag.style.color = color
     return bTag.outerHTML.replace(/<\/b>$/i, '')
 }
+
+// Open big page
+function openBigPage() { document.getElementById('bigPageContainer').style.display = 'flex' }
+
+// Close big page
+function closeBigPage() { document.getElementById('bigPageContainer').style.display = 'none' }
