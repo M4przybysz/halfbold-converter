@@ -69,7 +69,21 @@ textarea {
     height: 90%;
 }
 
-#top_middle {
+#input, #output {
+    float: left;
+    width: 36%;
+    height: 90%;
+}
+
+#inputText, .outputText {
+    background-color: #e9dcdc;
+    width: calc(100% - 20px);
+    height: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#topMiddle {
     display: flex;
     flex-direction: column;
     width: 27%;
@@ -80,20 +94,6 @@ textarea {
     justify-content: center;
 }
 
-#input, #output {
-    width: 36%;
-    height: 90%;
-    float: left;
-}
-
-#inputText, .outputText {
-    background-color: #e9dcdc;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    border-radius: 10px;
-}
-
 #convertButton {
     background-color: #e9dcdc;
     width: 50%;
@@ -101,36 +101,96 @@ textarea {
     border-radius: 10px;
 }
 
-#convertButton:hover {
+#convertButton:hover, #openBigPageButton:hover {
     background-color: #dac8c8;
 }
 
-#convertButton:active {
+#convertButton:active, #openBigPageButton:active {
     background-color: #b39797;
+}
+
+#openBigPageButton {
+    background-color: #e9dcdc;
+    display: none;
+    float: right;
+    width: 8vw;
+    height: 3vh;
+    margin-top: -10px;
+    border-radius: 10px;
 }
 
 #outputDiv {
     display: none;
     border: 1px solid black;
     word-wrap: break-word;
+    white-space: pre-wrap;
     overflow-y: scroll;
     overflow-x: hidden;
-    white-space: pre-wrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 #bottom {
-    height: 80%;
+    height: 70%;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-#bottom_left {
+#bottomLeft {
     float: left;
     width: calc(40% - 20px);
     text-align: justify;
 }
 
-#bottom_right {
+#bottomRight {
     float: right;
     width: calc(40% - 20px);
+}
+
+#bigPageContainer {
+    background-color: rgba(100, 100, 100, 0.5);
+    /* display: flex; */
+    display: none;
+    flex-direction: row;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#bigPage {
+    background-color: #F5EDD6;
+    width: calc(50vw - 40px);
+    height: calc(90vh - 3vh - 20px);
+    margin: 5vh 0px 5vh auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#bigPage::-webkit-scrollbar, #outputDiv::-webkit-scrollbar {
+    display: none;
+}
+
+#closeBigPageButton {
+    background-color: #ff6961;
+    width: 5vh;
+    height: 5vh;
+    margin: 5vh auto auto 1vh;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#closeBigPageButton:hover {
+    background-color: #ff4339;
+}
+
+#closeBigPageButton:active {
+    background-color: #cf2118;
 }

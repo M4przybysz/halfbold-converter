@@ -23,7 +23,7 @@
                 <textarea name="inputText" id="inputText"></textarea>
             </div>
 
-			<div id="top_middle">
+			<div id="topMiddle">
                 <div class="inputPair">
                     <label for="inputType">Input type:</label>
                     <select name="inputType" id="inputType">
@@ -47,7 +47,8 @@
             </div>
 
             <div id="output">
-                <label for="outputText">Output text:</label> <br>
+                <label for="outputText">Output text:</label> 
+                <input type="button" id="openBigPageButton" value="Open big page" onclick="openBigPage()"> <br>
                 <textarea name="outputText" id="outputTextarea" class="outputText"readonly></textarea>
                 <div id="outputDiv" class="outputText"></div>
             </div>
@@ -55,7 +56,7 @@
         </div>
 
         <div id="bottom">
-            <div id="bottom_left">
+            <div id="bottomLeft">
                 <h2>Description</h2>
                 <b>Half</b>Bold Converter converts plain text or HTML into a partially bolded version, making text faster to read. Converter runs fully locally, no server needed. Built with HTML, JS, CSS. 
 
@@ -76,7 +77,7 @@
                     <li>Markdown coversion support</li>
                 </ol>
             </div>
-            <div id="bottom_right">
+            <div id="bottomRight">
                 <h2>How to use:</h2>
                 <ol>
                     <li>Write or paste text/HTML code to convert inside <b>Input text</b> area</li>
@@ -103,6 +104,11 @@
             GitHub repository: <a href="https://github.com/M4przybysz/halfbold-converter">halfbold-converter</a>
         </span>
     </footer>
+
+    <div id="bigPageContainer">
+        <div id="bigPage"></div>
+        <input type="button" value="X" id="closeBigPageButton" onclick="closeBigPage()">
+    </div>
 
     <script src="./converter.js"></script>
 </body>
