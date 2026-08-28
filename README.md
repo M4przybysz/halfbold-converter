@@ -12,6 +12,7 @@ Checkout via GitHub Pages: [m4przybysz.github.io/halfbold-converter](https://m4p
 
 ## Planned features:
 - Markdown coversion support
+- QoL additions to big page mode
 
 ## How to use:
 1. Write/paste text or HTML into input area
