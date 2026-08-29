@@ -63,7 +63,7 @@ function convertText() {
             break;
         
         default:
-            console.warn(`Unknown input text type: ${inputType}`) // Warning if someone uses unsupported inputType
+            console.warn(`Unknown input text type: ${inputType}`) // Warning if someone somehow uses unsupported inputType
             break;
     }
 }
@@ -72,8 +72,9 @@ function convertText() {
 function convertPlainText(inputText, boldingPercentage)
 {
     let textArray = inputText.split(/(\s+)/) // Split text while maintinging whitespaces
-    console.log(`textArray: ${textArray}`)
+    // console.log(`textArray: ${textArray}`)
 
+    // Convert the text
     textArray = textArray.map((element) => {
         if(!/^\s*$/.test(element)) {
             // Bold the text if it's not empty or only whitespaces
@@ -83,7 +84,7 @@ function convertPlainText(inputText, boldingPercentage)
         return element
     })
 
-    console.log(`converted textArray: ${textArray}`)
+    // console.log(`converted textArray: ${textArray}`)
     return textArray.join('') // Return converted text
 }
 
@@ -92,7 +93,7 @@ function convertHTML(inputText, boldingPercentage, markingColor)
 {
     // Split text while maintaining whitespaces and separating HTML tags
     let textArray = inputText.split(/(\s+|<(?:"[^"]*"|'[^']*'|[^'">])*>)/).filter(element => element != '')
-    console.log(`textArray: ${textArray}`)
+    // console.log(`textArray: ${textArray}`)
 
     let bodyAllow = 0 // Counter to check if the text is inside the body. If it is then it'll be bolded according to the rules
     let tagSkipCounter = 0 // Counter for skipping tags that don't need bolding / aren't supposed to be bolded
@@ -101,11 +102,15 @@ function convertHTML(inputText, boldingPercentage, markingColor)
     let tagStartRegex = new RegExp('<(?:b|' + tagsToSkip.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>`, 'i')
     let tagEndRegex = new RegExp('<\\/(?:b|' + tagsToSkip.join('|') + ')\\s*>', 'i')
 
+    // Check if there are any body tags. If there's no body then treat everything as if it was inside of the body tag
+    if(!inputText.match(/<body(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i) && !inputText.match(/<\/body\s*>/i)) { bodyAllow = 1 }
+
+    // Convert the code
     textArray = textArray.map((element) => {
         if(/<body(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i.test(element)) { // Check for HTML body start
             bodyAllow += 1 
         }
-        else if(/<\/body\s*>/i.test(element)) { // Check for HTML body end
+        else if(/<\/body\s*>/i.test(element) && bodyAllow > 0) { // Check for HTML body end
             bodyAllow -= 1 
         }
         else if(tagStartRegex.test(element) && bodyAllow > 0) { // Check for tags to skip start
@@ -115,7 +120,7 @@ function convertHTML(inputText, boldingPercentage, markingColor)
 
             tagSkipCounter += 1
         }
-        else if(tagEndRegex.test(element) && bodyAllow > 0) { // Check for tags to skip end
+        else if(tagEndRegex.test(element) && bodyAllow > 0 && tagSkipCounter > 0) { // Check for tags to skip end
             tagSkipCounter -= 1
         }
         else if(!/^\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$/.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
@@ -126,7 +131,7 @@ function convertHTML(inputText, boldingPercentage, markingColor)
         return element
     })
 
-    console.log(`converted textArray: ${textArray}`)
+    // console.log(`converted textArray: ${textArray}`)
     return textArray.join('') // Return converted text
 }
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test page</title>
+    <style>body { font-family: sans-serif; }</style>
+    <script>console.log('should stay untouched, in head, not body');</script>
+</head>
+<body>
+
+    <h1>This heading should not be bolded</h1>
+    <h3>Neither should this one</h3>
+
+    <p>Plain paragraph text that should get partially bolded normally.</p>
+
+    <p>Text with <b>already bold</b> word in the middle.</p>
+
+    <b>Top level bold at start of body</b>
+
+    <pre><b>Bold inside pre should not be colored or touched</b></pre>
+
+    <code>var x = 1; // code block, should not be touched</code>
+
+    <script>
+        function shouldNotBold() { return "ignored"; }
+    </script>
+
+    <style>
+        .ignored { color: red; }
+    </style>
+
+    <textarea>Text inside textarea should not be bolded</textarea>
+
+    <p>Nested <b>bold with <i>italic</i> inside</b> continues here.</p>
+
+    <div>
+        <p>Div wrapped paragraph, should bold normally.</p>
+        <pre>
+            <code>
+                nested pre + code, should not touch this either
+            </code>
+        </pre>
+    </div>
+
+    <svg width="100" height="100">
+        <circle cx="50" cy="50" r="40" />
+    </svg>
+
+    <p>   </p>
+
+    <p></p>
+
+    <p>Single<b>word</b>runtogether<b>bold</b>test.</p>
+
+    <select>
+        <option>should not bold</option>
+    </select>
+
+    <p>Final paragraph after all the edge cases, plain and simple.</p>
+
+</body>
+</html>

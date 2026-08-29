@@ -94,7 +94,7 @@
                     <li>Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML, the viable text is partially bolded with &lt;b&gt; tags and text that was bold before conversion gets colored to the chosen marking color.</li>
                 </ol>
                 <br>
-                <b>NOTE:</b> If you're converting HTML, text outside of body and inside these tags: [<i>h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map</i>] won't be converted by design.
+                <b>NOTE:</b> If you're converting HTML, text outside of body and inside these tags: [<i>h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map</i>] won't be converted by design. If there are no body tags (&lt;body&gt;, &lt;/body&gt;), the entire code gets treated as if was inside of the HTML body.
             </div>
         </div>
     </main>

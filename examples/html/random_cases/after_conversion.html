@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test page</title>
+    <style>body { font-family: sans-serif; }</style>
+    <script>console.log('should stay untouched, in head, not body');</script>
+</head>
+<body>
+
+    <h1>This heading should not be bolded</h1>
+    <h3>Neither should this one</h3>
+
+    <p><b>Pl</b>ain <b>para</b>graph <b>te</b>xt <b>th</b>at <b>sho</b>uld <b>g</b>et <b>part</b>ially <b>bol</b>ded <b>norm</b>ally.</p>
+
+    <p><b>Te</b>xt <b>wi</b>th <b style="color: rgb(0, 0, 255);">already bold</b> <b>wo</b>rd <b>i</b>n <b>t</b>he <b>mid</b>dle.</p>
+
+    <b style="color: rgb(0, 0, 255);">Top level bold at start of body</b>
+
+    <pre><b>Bold inside pre should not be colored or touched</b></pre>
+
+    <code>var x = 1; // code block, should not be touched</code>
+
+    <script>
+        function shouldNotBold() { return "ignored"; }
+    </script>
+
+    <style>
+        .ignored { color: red; }
+    </style>
+
+    <textarea>Text inside textarea should not be bolded</textarea>
+
+    <p><b>Nes</b>ted <b style="color: rgb(0, 0, 255);">bold with <i>italic</i> inside</b> <b>cont</b>inues <b>he</b>re.</p>
+
+    <div>
+        <p><b>D</b>iv <b>wra</b>pped <b>parag</b>raph, <b>sho</b>uld <b>bo</b>ld <b>norm</b>ally.</p>
+        <pre>
+            <code>
+                nested pre + code, should not touch this either
+            </code>
+        </pre>
+    </div>
+
+    <svg width="100" height="100">
+        <circle cx="50" cy="50" r="40" />
+    </svg>
+
+    <p>   </p>
+
+    <p></p>
+
+    <p><b>Sin</b>gle<b style="color: rgb(0, 0, 255);">word</b><b>runto</b>gether<b style="color: rgb(0, 0, 255);">bold</b><b>te</b>st.</p>
+
+    <select>
+        <option>should not bold</option>
+    </select>
+
+    <p><b>Fi</b>nal <b>para</b>graph <b>af</b>ter <b>a</b>ll <b>t</b>he <b>ed</b>ge <b>cas</b>es, <b>pl</b>ain <b>a</b>nd <b>sim</b>ple.</p>
+
+</body>
+</html>
