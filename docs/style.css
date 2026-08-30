@@ -66,7 +66,7 @@ textarea {
 }
 
 #top {
-    height: 90%;
+    height: 65vh;
 }
 
 #input, #output {
@@ -131,7 +131,7 @@ textarea {
 }
 
 #bottom {
-    height: 70%;
+    height: 60vh;
     padding-left: 20px;
     padding-right: 20px;
 }

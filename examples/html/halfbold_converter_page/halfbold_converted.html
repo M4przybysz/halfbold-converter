@@ -1,0 +1,116 @@
+<!--
+    Copyright (c) 2026 Maciej Przybył, Alina Osińska
+    Licensed under the MIT License. See LICENSE file.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../docs/style.css">
+    <title>HalfBold Converter</title>
+</head>
+<body>
+    <header>
+        <h1>Half<span class="unbold">Bold Converted</span></h1>
+    </header>
+
+    <main>
+        <div id="top">
+            <div id="input">
+                <label for="inputText"><b>In</b>put <b>te</b>xt:</label> <br>
+                <textarea name="inputText" id="inputText"></textarea>
+            </div>
+
+			<div id="topMiddle">
+                <div class="inputPair">
+                    <label for="inputType"><b>In</b>put <b>ty</b>pe:</label>
+                    <select name="inputType" id="inputType">
+                        <option value="PLAIN_TEXT">Plain text</option>
+                        <option value="HTML">HTML</option>
+                    </select> 
+                </div>
+			    <br>
+                <div class="inputPair">
+                    <label for="boldingPercentage"><b>Bol</b>ding <b>perce</b>ntage:</label>
+                    <input type="range" name="boldingPercentage" id="boldingPercentage" min="0.05" max="0.75" step="0.05" value="0.5" oninput="outputBoldingPercentage(this.value)"> 
+                    <label for="boldingPercentage" id="boldingPercentageOutput"><b>5</b>0%</label> 
+                </div>
+                <br>
+                <div class="inputPair">
+                    <label for="markingColor"><b>Mar</b>king <b>col</b>or:</label>
+                    <input type="color" name="markingColor" id="markingColor">
+                </div>
+                <br>
+                <input type="button" value=">>> Convert >>>" id="convertButton" onclick="convertText()"> 
+            </div>
+
+            <div id="output">
+                <label for="outputText"><b>Out</b>put <b>te</b>xt:</label> 
+                <input type="button" id="openBigPageButton" value="Open big page" onclick="openBigPage()"> <br>
+                <textarea name="outputText" id="outputTextarea" class="outputText"readonly></textarea>
+                <div id="outputDiv" class="outputText"></div>
+            </div>
+            <br><br>
+        </div>
+
+        <div id="bottom">
+            <div id="bottomLeft">
+                <h2>Description</h2>
+                <b style="color: rgb(0, 0, 255);">Half</b><b>Bo</b>ld <b>Conv</b>erter <b>conv</b>erts <b>pl</b>ain <b>te</b>xt <b>o</b>r <b>HT</b>ML <b>in</b>to <b>a</b> <b>part</b>ially <b>bol</b>ded <b>vers</b>ion, <b>mak</b>ing <b>te</b>xt <b>fas</b>ter <b>t</b>o <b>re</b>ad. <b>T</b>he <b>conv</b>erter <b>ru</b>ns <b>fu</b>lly <b>loca</b>lly, <b>n</b>o <b>ser</b>ver <b>i</b>s <b>nee</b>ded. <b>Bu</b>ilt <b>wi</b>th <b>HT</b>ML, <b>J</b>S, <b>a</b>nd <b>CS</b>S. 
+
+                <br><br>
+
+                <b style="color: rgb(0, 0, 255);">Features:</b>
+                <ol>
+                    <li><b>Con</b>vert <b>pl</b>ain <b>te</b>xt <b>o</b>r <b>HT</b>ML <b>t</b>o <b>half-</b>bolded <b>for</b>mat</li>
+                    <li><b>Adjus</b>table <b>bol</b>ding <b>perce</b>ntage <b>(5-</b>75%)</li>
+                    <li><b>Ma</b>rks <b>alr</b>eady <b>bol</b>ded <b>te</b>xt <b>i</b>n <b>HT</b>ML <b>wi</b>th <b>cus</b>tom <b>co</b>lor</li>
+                    <li><b>B</b>ig <b>pa</b>ge <b>mo</b>de <b>f</b>or <b>mo</b>re <b>comfo</b>rtable <b>rea</b>ding <b>o</b>f <b>conv</b>erted <b>pl</b>ain <b>te</b>xt</li>
+                </ol>
+
+                <br>
+
+                <b style="color: rgb(0, 0, 255);">Planned features:</b>
+                <ol>
+                    <li><b>Mark</b>down <b>conve</b>rsion <b>sup</b>port</li>
+                    <li><b>Q</b>oL <b>addi</b>tions <b>t</b>o <b>b</b>ig <b>pa</b>ge <b>mo</b>de</li>
+                </ol>
+            </div>
+            <div id="bottomRight">
+                <h2>How to use:</h2>
+                <ol>
+                    <li><b>Wr</b>ite <b>o</b>r <b>pa</b>ste <b>text</b>/HTML <b>co</b>de <b>t</b>o <b>con</b>vert <b>ins</b>ide <b>t</b>he <b style="color: rgb(0, 0, 255);">Input text</b> <b>ar</b>ea.</li>
+                    <li><b>Cho</b>ose <b>in</b>put <b>ty</b>pe:
+                        <ul>
+                            <li><b style="color: rgb(0, 0, 255);">Plain text</b> <b>f</b>or <b>pl</b>ain <b>te</b>xt</li>
+                            <li><b style="color: rgb(0, 0, 255);">HTML</b> <b>f</b>or <b>HT</b>ML <b>co</b>de</li>
+                        </ul>
+                    </li>
+                    <li><b>S</b>et <b style="color: rgb(0, 0, 255);">bolding percentage</b> <b>-</b> <b>h</b>ow <b>mu</b>ch <b>o</b>f <b>ea</b>ch <b>wo</b>rd <b>sho</b>uld <b>b</b>e <b>bol</b>ded <b>(5-7</b>5%).</li>
+                    <li><b>I</b>f <b>you</b>'re <b>conve</b>rting <b>HT</b>ML, <b>cho</b>ose <b>t</b>he <b style="color: rgb(0, 0, 255);">marking color</b> <b>-</b> <b>co</b>lor <b>t</b>o <b>ma</b>rk <b>te</b>xt <b>th</b>at <b>w</b>as <b>alr</b>eady <b>bol</b>ded <b>i</b>n <b>t</b>he <b>inp</b>ut.</li>
+                    <li><b>Pr</b>ess <b>t</b>he <b style="color: rgb(0, 0, 255);">Convert</b> <b>but</b>ton.</li>
+                    <li><b>Pl</b>ain <b>te</b>xt <b>ge</b>ts <b>conv</b>erted <b>t</b>o <b>a</b> <b>ready-</b>to-read <b>half-</b>bolded <b>vers</b>ion. <b>I</b>n <b>t</b>he <b>ca</b>se <b>o</b>f <b>HT</b>ML, <b>t</b>he <b>via</b>ble <b>te</b>xt <b>i</b>s <b>part</b>ially <b>bol</b>ded <b>wi</b>th <b>&lt;</b>b&gt; <b>ta</b>gs <b>a</b>nd <b>te</b>xt <b>th</b>at <b>w</b>as <b>bo</b>ld <b>bef</b>ore <b>conve</b>rsion <b>ge</b>ts <b>col</b>ored <b>t</b>o <b>t</b>he <b>cho</b>sen <b>mar</b>king <b>col</b>or.</li>
+                </ol>
+                <br>
+                <b style="color: rgb(0, 0, 255);">NOTE:</b> <b>I</b>f <b>you</b>'re <b>conve</b>rting <b>HT</b>ML, <b>te</b>xt <b>out</b>side <b>o</b>f <b>bo</b>dy <b>a</b>nd <b>ins</b>ide <b>th</b>ese <b>ta</b>gs: <b>[</b><i><b>h[1</b>-6], <b>scr</b>ipt, <b>sty</b>le, <b>co</b>de, <b>pr</b>e, <b>text</b>area, <b>nosc</b>ript, <b>sv</b>g, <b>can</b>vas, <b>sel</b>ect, <b>ma</b>th, <b>data</b>list, <b>temp</b>late, <b>ifr</b>ame, <b>obj</b>ect, <b>aud</b>io, <b>vid</b>eo, <b>prog</b>ress, <b>met</b>er, <b>m</b>ap</i><b>]</b> <b>wo</b>n't <b>b</b>e <b>conv</b>erted <b>b</b>y <b>des</b>ign. <b>I</b>f <b>th</b>ere <b>a</b>re <b>n</b>o <b>bo</b>dy <b>ta</b>gs <b>(&lt;bo</b>dy&gt;, <b>&lt;/bo</b>dy&gt;), <b>t</b>he <b>ent</b>ire <b>co</b>de <b>ge</b>ts <b>tre</b>ated <b>a</b>s <b>i</b>f <b>w</b>as <b>ins</b>ide <b>o</b>f <b>t</b>he <b>HT</b>ML <b>bo</b>dy.
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <span>
+            <b>Copy</b>right <b>&co</b>py; <b>20</b>26 <b>Mac</b>iej <b>Przy</b>był, <b>Al</b>ina <b>Osiń</b>ska. <b>Lice</b>nsed <b>un</b>der <a href="https://github.com/M4przybysz/halfbold-converter/blob/main/LICENSE"><b>M</b>IT <b>Lic</b>ense</a><b>.</b> <br>
+            <b>Git</b>Hub <b>repos</b>itory: <a href="https://github.com/M4przybysz/halfbold-converter"><b>halfbold-</b>converter</a>
+        </span>
+    </footer>
+
+    <div id="bigPageContainer">
+        <div id="bigPage"></div>
+        <input type="button" value="X" id="closeBigPageButton" onclick="closeBigPage()">
+    </div>
+
+    <script src="../../../converter.js"></script>
+</body>
+</html>
