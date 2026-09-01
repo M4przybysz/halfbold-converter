@@ -1,21 +1,26 @@
 ---
 name: Feature request
-about: Suggest an idea for this project
-title: ''
+about: Propose a new feature or improvement
+title: "[Feature]: "
 labels: enhancement
 assignees: ''
-type: Feature
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Verification
+Before submitting a new feature request please verify and check the following:
+- [ ] I checked if the feature exists on the newest version from the main branch
+- [ ] I checked if the feature exists in the "Planned features" section
+- [ ] I checked if there is no similar request already submitted
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+### Description 
+A clear and concise description of the feature you would like to see.
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### Why is it needed?
+Explain a problem or need for this feature.
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### Suggested soutions
+Describe how this feature could be implemented.
+
+### Additional context
+Any relevant screenshots, links, and/or resources.

@@ -1,23 +1,27 @@
 ---
 name: Bug report
-about: Create a report to help us improve and fix bugs
-title: ''
+about: Report a bug
+title: "[Bug]: "
 labels: bug
 assignees: ''
-type: Bug
 
 ---
 
-**Specifications:**
+### Verification
+Before submitting a new issue report please verify and check the following:
+- [ ] I tested the problem on the newest version from the main branch
+- [ ] I checked if there is no similar issue already submitted
+
+### Specifications:
 (please complete the following information)
- - OS: [e.g. iOS, Windows]
- - Browser [e.g. chrome, safari]
- - Browser version [e.g. 22]
+- OS: [e.g. Windows, Linux]
+- Browser [e.g. Chrome, Safari]
+- Browser version [e.g. 1.0.0]
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+### Description
+A clear and concise description of the bug.
 
-**Steps to reproduce**
+### Steps to reproduce
 Steps to reproduce the behavior/find the bug
 
 Example: 
@@ -26,11 +30,11 @@ Example:
 3. Scroll down to '....'
 4. See error
 
-**Expected behavior**
+### Expected behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+### Screenshots
+Add screenshots if applicable.
 
-**Additional context**
-Add any other context about the problem here.
+### Additional context
+Any relevant screenshots, links, and/or resources.
