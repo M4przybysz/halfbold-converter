@@ -15,14 +15,14 @@ Before submitting a new issue report please verify and check the following:
 ### Specifications:
 (please complete the following information)
 - OS: [e.g. Windows, Linux]
-- Browser [e.g. Chrome, Safari]
+- Browser [e.g. Chrome, Firefox]
 - Browser version [e.g. 1.0.0]
 
 ### Description
-A clear and concise description of the bug.
+Clear and concise description of the bug.
 
 ### Steps to reproduce
-Steps to reproduce the behavior/find the bug
+Steps to reproduce the behavior/find the bug.
 
 Example: 
 1. Go to '...'
