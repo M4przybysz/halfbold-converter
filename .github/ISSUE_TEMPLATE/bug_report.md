@@ -33,8 +33,5 @@ Example:
 ### Expected behavior
 A clear and concise description of what you expected to happen.
 
-### Screenshots
-Add screenshots if applicable.
-
 ### Additional context
 Any relevant screenshots, links, and/or resources.

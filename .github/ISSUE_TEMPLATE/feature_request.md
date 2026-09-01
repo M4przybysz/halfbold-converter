@@ -19,7 +19,7 @@ A clear and concise description of the feature you would like to see.
 ### Why is it needed?
 Explain a problem or need for this feature.
 
-### Suggested soutions
+### Suggested solutions
 Describe how this feature could be implemented.
 
 ### Additional context
