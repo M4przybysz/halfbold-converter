@@ -1,5 +1,6 @@
 ### Verification
 Before submitting a new pull request please verify and check the following:
+- [ ] I have checked if the changes exist on the newest version from the main branch
 - [ ] I checked if there is no similar pull request already submitted
 - [ ] I have performed a self-review of my changes
 - [ ] I have commented my changes (particularly in hard-to-understand areas)
