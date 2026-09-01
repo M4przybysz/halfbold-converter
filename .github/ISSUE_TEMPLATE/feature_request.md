@@ -14,7 +14,7 @@ Before submitting a new feature request please verify and check the following:
 - [ ] I checked if there is no similar request already submitted
 
 ### Description 
-A clear and concise description of the feature you would like to see.
+Clear and concise description of the feature you would like to see.
 
 ### Why is it needed?
 Explain a problem or need for this feature.
