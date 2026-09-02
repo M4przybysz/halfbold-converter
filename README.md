@@ -38,7 +38,8 @@ Files required to make the converter work:
 - index.html
 - converter.js
 - style.css
-(all 3 files are inside `./docs` folder)
+
+(all 3 files are inside [./docs](./docs/) folder)
 
 To run the tool you need to put the files listed above in one directory and open index.html in a browser that supports modern HTML5, JavaScript and CSS.
 
