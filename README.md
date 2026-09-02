@@ -32,3 +32,25 @@ To turn your text/HTML into half-bolded format follow these steps:
 3. Set the **bolding percentage** (how much of each word should be bolded).
 4. If you're converting HTML, choose the **marking color** for text that's already bold.
 5. Click the **Convert** button.
+
+## Local setup
+Files required to make the converter work:
+- index.html
+- converter.js
+- style.css
+
+(all 3 files are inside [./docs](./docs/) folder)
+
+To run the tool you need to put the files listed above in one directory and open index.html in a browser that supports modern HTML5, JavaScript and CSS.
+
+## Contributing
+For detailed contribution guidelines see [CONTRIBUTING.md](./CONTRIBUTING.md) file.
+
+## Issues and feedback
+To report an issue and/or give feedback see [Issues](https://github.com/M4przybysz/halfbold-converter/issues) page on GitHub. To check out used issue templates files see [ISSUE_TEMPLATE](./.github/ISSUE_TEMPLATE/) folder.
+
+Currently templates support submitting:
+- bug reports
+- feature request
+- documentation additions/updates
+- general feedback and inquiries
