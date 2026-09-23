@@ -72,8 +72,8 @@ function convertPlainText(inputText, boldingPercentage, minCharsToBold, boldPunc
     // Create text splitting regex
     const SPLIT_REGEX = new RegExp(
         '(\\s+' + 
-        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}]+`) + 
-        (boldSpecialChars ? '' : `|[@#$%^&*_+=<>/\\\\|~\`]+`) + 
+        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) + 
+        (boldSpecialChars ? '' : `|[@#$%^&*_+-=<>/\\\\|~\`]+`) + 
         ')'
     )
 
@@ -84,8 +84,8 @@ function convertPlainText(inputText, boldingPercentage, minCharsToBold, boldPunc
     textArray = textArray.map((element) => {
         const CHECK_REGEX = new RegExp(
             '^\\s*$' +
-            (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}]+$`) + 
-            (boldSpecialChars ? '' : `|^[@#$%^&*_+=<>/\\\\|~\`]+$`)
+            (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}–—]+$`) + 
+            (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>/\\\\|~\`]+$`)
         )
 
         if(!CHECK_REGEX.test(element)) {
@@ -106,8 +106,8 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
     // Create text splitting regex
     const SPLIT_REGEX = new RegExp(
         `(\\s+|<(?:"[^"]*"|'[^']*'|[^'">])*>` + 
-        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}]+`) + 
-        (boldSpecialChars ? '' : `|[@#$%^&*_+=<>/\\\\|~\`]+`) + 
+        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) + 
+        (boldSpecialChars ? '' : `|[@#$%^&*_+-=<>/\\\\|~\`]+`) + 
         ')'
     )
 
@@ -146,8 +146,8 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
         else {
             const CHECK_REGEX = new RegExp(
                 `^\\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$` +
-                (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}]+$`) + 
-                (boldSpecialChars ? '' : `|^[@#$%^&*_+=<>/\\\\|~\`]+$`)
+                (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}–—]+$`) + 
+                (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>/\\\\|~\`]+$`)
             )
 
             if(!CHECK_REGEX.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
