@@ -18,6 +18,7 @@ function convertText() {
     let inputText = document.getElementById('inputText').value // Text to convert
     let inputType = InputTextType[document.getElementById('inputType').value] // Type of inputed text (plain text/HTML)
     let boldingPercentage = document.getElementById('boldingPercentage').value // How much of each word is supposed to be bold (range 5-75%)
+    let minCharsToBold = document.getElementById('minCharsToBold').value // minimum number of characters to bold (1 or more)
     let boldPunctuation = document.getElementById('boldPunctuation').checked // Bold or don't bold punctuation (true/false)
     let boldSpecialChars = document.getElementById('boldSpecialChars').checked // bold or don't bold special characters (true/false)
     let markingColor = document.getElementById('markingColor').value // Color of text that is already bolded in HTML (color)
@@ -51,12 +52,12 @@ function convertText() {
     // Convert text based on input type
     switch(inputType) {
         case InputTextType.PLAIN_TEXT:
-            output.innerHTML = convertPlainText(inputText, boldingPercentage, boldPunctuation, boldSpecialChars)
+            output.innerHTML = convertPlainText(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars)
             document.getElementById('bigPage').innerHTML = output.innerHTML
             break;
         
         case InputTextType.HTML:
-            output.value = convertHTML(inputText, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
+            output.value = convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars, markingColor)
             break;
         
         default:
@@ -66,7 +67,7 @@ function convertText() {
 }
 
 // Convert plain text
-function convertPlainText(inputText, boldingPercentage, boldPunctuation, boldSpecialChars)
+function convertPlainText(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars)
 {
     // Create text splitting regex
     const SPLIT_REGEX = new RegExp(
@@ -90,7 +91,7 @@ function convertPlainText(inputText, boldingPercentage, boldPunctuation, boldSpe
 
         if(!CHECK_REGEX.test(element)) {
             // Bold the text if it's not empty or only whitespaces
-            let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
+            let boldingLength = clamp(element.length * boldingPercentage, minCharsToBold, element.length)
             element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
         }
         return element
@@ -101,7 +102,7 @@ function convertPlainText(inputText, boldingPercentage, boldPunctuation, boldSpe
 }
 
 // Convert HTML
-function convertHTML(inputText, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
+function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars, markingColor)
 {
     // Create text splitting regex
     const SPLIT_REGEX = new RegExp(
@@ -153,7 +154,7 @@ function convertHTML(inputText, boldingPercentage, boldPunctuation, boldSpecialC
 
             if(!CHECK_REGEX.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
                 // Bold the text if it's not empty or only whitespaces
-                let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
+                let boldingLength = clamp(element.length * boldingPercentage, minCharsToBold, element.length)
                 element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
             }
         }
