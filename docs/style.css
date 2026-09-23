@@ -30,7 +30,6 @@ header h1 {
 main {
     flex: 1;
     height: calc(80vh - 40px);
-    /* margin: 20px; */
     padding: 20px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -62,6 +61,7 @@ textarea {
 
 #top {
     height: 65vh;
+    flex-shrink: 0;
 }
 
 #input, #output {
@@ -130,9 +130,10 @@ textarea {
 }
 
 #bottom {
-    height: 60vh;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 20px;
+    overflow-y: auto;
 }
 
 #bottomLeft {
@@ -148,7 +149,6 @@ textarea {
 
 #bigPageContainer {
     background-color: rgba(100, 100, 100, 0.5);
-    /* display: flex; */
     display: none;
     flex-direction: row;
     position: absolute;

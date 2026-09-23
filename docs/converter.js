@@ -24,7 +24,7 @@ function convertText() {
     let markingColor = document.getElementById('markingColor').value // Color of text that is already bolded in HTML (color)
 
     // Log converter inpus
-    console.log('Converter inputs: ', inputText, inputType, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
+    //console.log('Converter inputs: ', inputText, inputType, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
 
     // Assign output HTML element
     let output = null  
@@ -76,10 +76,9 @@ function convertPlainText(inputText, boldingPercentage, minCharsToBold, boldPunc
         (boldSpecialChars ? '' : `|[@#$%^&*_+=<>/\\\\|~\`]+`) + 
         ')'
     )
-    console.log(`text split regex: ${SPLIT_REGEX}`)
 
     let textArray = inputText.split(SPLIT_REGEX) // Split text while maintinging whitespaces (+ punctuation and special chars based on converter settings)
-    console.log(`textArray: ${textArray}`)
+    //console.log(`textArray: ${textArray}`)
 
     // Convert the text
     textArray = textArray.map((element) => {
@@ -150,7 +149,6 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
                 (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}]+$`) + 
                 (boldSpecialChars ? '' : `|^[@#$%^&*_+=<>/\\\\|~\`]+$`)
             )
-            console.log(element)
 
             if(!CHECK_REGEX.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
                 // Bold the text if it's not empty or only whitespaces

@@ -34,7 +34,7 @@
                 </div>
                 <br>
                 <div class="inputPair">
-                    <label for="minCharsToBold">Minimum chars to bold:</label>
+                    <label for="minCharsToBold">Minimum number characters to bold:</label>
                     <input type="number" name="minCharsToBold" id="minCharsToBold" min="1" step="1" value="1">
                 </div>
                 <br>
@@ -44,7 +44,7 @@
                 </div>
                 <br>
                 <div class="inputPair">
-                    <label for="boldSpecialChars">Bold special chars:</label>
+                    <label for="boldSpecialChars">Bold special characters:</label>
                     <input type="checkbox" name="boldSpecialChars" id="boldSpecialChars" checked>
                 </div>
                 <br>
@@ -62,7 +62,6 @@
                 <textarea name="outputText" id="outputTextarea" class="outputText"readonly></textarea>
                 <div id="outputDiv" class="outputText"></div>
             </div>
-            <br><br>
         </div>
 
         <div id="bottom">
@@ -71,29 +70,24 @@
                 <b>Half</b>Bold Converter is a small and simple text converter inspired by Bionic Reading. It allows you to turn plain text or HTML code into their partially bolded versions, making the text faster to read by adding fixation points your eyes can lock onto to every word. The converter can run fully locally, no server is needed. Built with HTML, JS, and CSS. 
 
                 <br><br>
-                ddd ddddddd ddd... ...ddd ...ddd ddd... 
-
-                .,;:!?'"()[]{}
-
-                @#$%^&*_+=&lt;&gt;/\\\\|~\`
-                <br><br>
 
                 <b>Features</b>
-                <ol>
+                <ul>
                     <li>Convert plain text or HTML to half-bolded format</li>
                     <li>Adjustable bolding percentage (5-75%)</li>
+                    <li>Adjustable minimum number of characters to bold (1+)</li>
+                    <li>Bolding of punctuation and special characters that can be turned on/off</li>
                     <li>Marks already bolded text in HTML with custom color</li>
                     <li>Big page mode for more comfortable reading of converted plain text</li>
-                </ol>
+                </ul>
 
                 <br>
 
                 <b>Planned features</b>
-                <ol>
+                <ul>
                     <li>Markdown conversion support</li>
                     <li>QoL additions to big page mode (including: customizing font, text size, page color, text color, and more)</li>
-                    <li>More converter settings (including: min chars to bold, skipping punctuation and special symbols)</li>
-                </ol>
+                </ul>
             </div>
             <div id="bottomRight">
                 <h2>How to use:</h2>
@@ -106,6 +100,8 @@
                         </ul>
                     </li>
                     <li>Set the <b>bolding percentage</b> (5-75%) - how much of each word should be bolded.</li>
+                    <li>Set the <b>minimum number of characters to bold</b> in each word (1 or more).</li>
+                    <li>Check/uncheck <b>bolding of punctuation and special characters</b>.</li>
                     <li>If you're converting HTML, choose the <b>marking color</b> - color to mark text that was already bolded in the input.</li>
                     <li>Press the <b>Convert</b> button.</li>
                     <li>Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML, the eligible text is partially bolded with &lt;b&gt; tags and text that was bold before conversion gets colored to the chosen marking color.</li>
