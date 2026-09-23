@@ -18,10 +18,12 @@ function convertText() {
     let inputText = document.getElementById('inputText').value // Text to convert
     let inputType = InputTextType[document.getElementById('inputType').value] // Type of inputed text (plain text/HTML)
     let boldingPercentage = document.getElementById('boldingPercentage').value // How much of each word is supposed to be bold (range 5-75%)
-    let markingColor = document.getElementById('markingColor').value // Color of text that is already bolded in HTML (hex color)
+    let boldPunctuation = document.getElementById('boldPunctuation').checked // Bold or don't bold punctuation (true/false)
+    let boldSpecialChars = document.getElementById('boldSpecialChars').checked // bold or don't bold special characters (true/false)
+    let markingColor = document.getElementById('markingColor').value // Color of text that is already bolded in HTML (color)
 
     // Log converter inpus
-    console.log('Converter inputs: ', inputText, inputType, boldingPercentage, markingColor)
+    console.log('Converter inputs: ', inputText, inputType, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
 
     // Assign output HTML element
     let output = null  
@@ -49,12 +51,12 @@ function convertText() {
     // Convert text based on input type
     switch(inputType) {
         case InputTextType.PLAIN_TEXT:
-            output.innerHTML = convertPlainText(inputText, boldingPercentage)
+            output.innerHTML = convertPlainText(inputText, boldingPercentage, boldPunctuation, boldSpecialChars)
             document.getElementById('bigPage').innerHTML = output.innerHTML
             break;
         
         case InputTextType.HTML:
-            output.value = convertHTML(inputText, boldingPercentage, markingColor)
+            output.value = convertHTML(inputText, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
             break;
         
         default:
@@ -64,14 +66,29 @@ function convertText() {
 }
 
 // Convert plain text
-function convertPlainText(inputText, boldingPercentage)
+function convertPlainText(inputText, boldingPercentage, boldPunctuation, boldSpecialChars)
 {
-    let textArray = inputText.split(/(\s+)/) // Split text while maintinging whitespaces
-    // console.log(`textArray: ${textArray}`)
+    // Create text splitting regex
+    const SPLIT_REGEX = new RegExp(
+        '(\\s+' + 
+        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}]+`) + 
+        (boldSpecialChars ? '' : `|[@#$%^&*_+=<>/\\\\|~\`]+`) + 
+        ')'
+    )
+    console.log(`text split regex: ${SPLIT_REGEX}`)
+
+    let textArray = inputText.split(SPLIT_REGEX) // Split text while maintinging whitespaces (+ punctuation and special chars based on converter settings)
+    console.log(`textArray: ${textArray}`)
 
     // Convert the text
     textArray = textArray.map((element) => {
-        if(!/^\s*$/.test(element)) {
+        const CHECK_REGEX = new RegExp(
+            '^\\s*$' +
+            (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}]+$`) + 
+            (boldSpecialChars ? '' : `|^[@#$%^&*_+=<>/\\\\|~\`]+$`)
+        )
+
+        if(!CHECK_REGEX.test(element)) {
             // Bold the text if it's not empty or only whitespaces
             let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
             element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
@@ -79,16 +96,24 @@ function convertPlainText(inputText, boldingPercentage)
         return element
     })
 
-    // console.log(`converted textArray: ${textArray}`)
+    //console.log(`converted textArray: ${textArray}`)
     return textArray.join('') // Return converted text
 }
 
 // Convert HTML
-function convertHTML(inputText, boldingPercentage, markingColor)
+function convertHTML(inputText, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
 {
-    // Split text while maintaining whitespaces and separating HTML tags
-    let textArray = inputText.split(/(\s+|<(?:"[^"]*"|'[^']*'|[^'">])*>)/).filter(element => element != '')
-    // console.log(`textArray: ${textArray}`)
+    // Create text splitting regex
+    const SPLIT_REGEX = new RegExp(
+        `(\\s+|<(?:"[^"]*"|'[^']*'|[^'">])*>` + 
+        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}]+`) + 
+        (boldSpecialChars ? '' : `|[@#$%^&*_+=<>/\\\\|~\`]+`) + 
+        ')'
+    )
+
+    // Split text while maintaining whitespaces (+ punctuation and special chars based on converter settings) and separating HTML tags 
+    let textArray = inputText.split(SPLIT_REGEX).filter(element => element != '')
+    //console.log(`textArray: ${textArray}`)
 
     let bodyAllow = 0 // Counter to check if the text is inside the body. If it is then it'll be bolded according to the rules
     let tagSkipCounter = 0 // Counter for skipping tags that don't need bolding / aren't supposed to be bolded
@@ -118,15 +143,24 @@ function convertHTML(inputText, boldingPercentage, markingColor)
         else if(tagEndRegex.test(element) && bodyAllow > 0 && tagSkipCounter > 0) { // Check for tags to skip end
             tagSkipCounter -= 1
         }
-        else if(!/^\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$/.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
-            // Bold the text if it's not empty or only whitespaces
-            let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
-            element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
+        else {
+            const CHECK_REGEX = new RegExp(
+                `^\\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$` +
+                (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}]+$`) + 
+                (boldSpecialChars ? '' : `|^[@#$%^&*_+=<>/\\\\|~\`]+$`)
+            )
+            console.log(element)
+
+            if(!CHECK_REGEX.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
+                // Bold the text if it's not empty or only whitespaces
+                let boldingLength = clamp(element.length * boldingPercentage, 1, element.length)
+                element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
+            }
         }
         return element
     })
 
-    // console.log(`converted textArray: ${textArray}`)
+    //console.log(`converted textArray: ${textArray}`)
     return textArray.join('') // Return converted text
 }
 

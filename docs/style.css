@@ -89,6 +89,10 @@ textarea {
     justify-content: center;
 }
 
+#minCharsToBold {
+    width: 50px;
+}
+
 #convertButton {
     background-color: #e9dcdc;
     width: 50%;
