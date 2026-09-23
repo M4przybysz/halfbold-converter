@@ -13,13 +13,14 @@ The converter can run fully locally, no server is needed. Built with HTML, JS, a
 ## Features
 - Convert plain text or HTML into a half-bolded format
 - Adjustable bolding percentage (5-75%)
+- Adjustable minimum number of characters to bold (1+)
+- Bolding of punctuation and special characters that can be turned on/off
 - Marks already bolded text in HTML with custom color
 - Big page mode for more comfortable reading of converted plain text
 
 ## Planned features
 - Markdown conversion support
 - QoL additions to big page mode (including: changing font, text size, page color, text color, and more)
-- More converter settings (including: min chars to bold, skipping punctuation and special symbols)
 
 ## How to use
 This tool can:
@@ -30,8 +31,13 @@ To turn your text/HTML into half-bolded format follow these steps:
 1. Write/paste text or HTML code into the **Input text** area.
 2. Choose **input type**: Plain text or HTML.
 3. Set the **bolding percentage** (how much of each word should be bolded).
-4. If you're converting HTML, choose the **marking color** for text that's already bold.
-5. Click the **Convert** button.
+4. Set the **minimum number of characters to bold** in each word (1 or more).
+5. Check/uncheck **bolding of punctuation and special characters**.
+6. If you're converting HTML, choose the **marking color** for text that's already bold.
+7. Click the **Convert** button.
+8. Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML, the eligible text is partially bolded with \<b\> tags and text that was bold before conversion gets colored to the chosen marking color.
+
+**NOTE:** If you're converting HTML, text outside of body and inside these tags: [h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map] won't be converted by design. If there are no body tags (\<body\> and \</body\>), the entire code gets treated as if it was inside the HTML body.
 
 ## Local setup
 Files required to make the converter work:
