@@ -5,6 +5,7 @@ const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
 const InputTextType = Object.freeze({
     PLAIN_TEXT : "PLAIN_TEXT",
     HTML : "HTML",
+    MARKDOWN : "MARKDOWN",
 })
 
 // Output of scrolling percentage while using the boldingPercentage range input 
@@ -59,6 +60,10 @@ function convertText() {
         case InputTextType.HTML:
             output.value = convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars, markingColor)
             break;
+
+        case inputType.MARKDOWN:
+            output.value = convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars)
+            break;
         
         default:
             console.warn(`Unknown input text type: ${inputType}`) // Warning if someone somehow uses unsupported inputType
@@ -77,18 +82,20 @@ function convertPlainText(inputText, boldingPercentage, minCharsToBold, boldPunc
         ')'
     )
 
-    let textArray = inputText.split(SPLIT_REGEX) // Split text while maintinging whitespaces (+ punctuation and special chars based on converter settings)
+    // Create regex for checking if element is convertable
+    const ELEMENT_CHECK_REGEX = new RegExp(
+        '^\\s*$' +
+        (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}–—]+$`) + 
+        (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>/\\\\|~\`]+$`)
+    )
+
+    // Split text while maintinging whitespaces (+ punctuation and special chars based on converter settings)
+    let textArray = inputText.split(SPLIT_REGEX).filter('') 
     //console.log(`textArray: ${textArray}`)
 
     // Convert the text
     textArray = textArray.map((element) => {
-        const CHECK_REGEX = new RegExp(
-            '^\\s*$' +
-            (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}–—]+$`) + 
-            (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>/\\\\|~\`]+$`)
-        )
-
-        if(!CHECK_REGEX.test(element)) {
+        if(!ELEMENT_CHECK_REGEX.test(element)) {
             // Bold the text if it's not empty or only whitespaces
             let boldingLength = clamp(element.length * boldingPercentage, minCharsToBold, element.length)
             element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
@@ -111,16 +118,25 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
         ')'
     )
 
+    // Create regexes for tags to skip
+    let tagsToSkip = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
+    let tagStartRegex = new RegExp('<(?:b|' + tagsToSkip.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>`, 'i')
+    let tagEndRegex = new RegExp('<\\/(?:b|' + tagsToSkip.join('|') + ')\\s*>', 'i')
+
+    // Create regex for checking if element is convertable
+    const ELEMENT_CHECK_REGEX = new RegExp(
+        `^\\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$` +
+        (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}–—]+$`) + 
+        (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>/\\\\|~\`]+$`)
+    )
+
     // Split text while maintaining whitespaces (+ punctuation and special chars based on converter settings) and separating HTML tags 
     let textArray = inputText.split(SPLIT_REGEX).filter(element => element != '')
     //console.log(`textArray: ${textArray}`)
 
+    // Tag counters
     let bodyAllow = 0 // Counter to check if the text is inside the body. If it is then it'll be bolded according to the rules
     let tagSkipCounter = 0 // Counter for skipping tags that don't need bolding / aren't supposed to be bolded
-
-    let tagsToSkip = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
-    let tagStartRegex = new RegExp('<(?:b|' + tagsToSkip.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>`, 'i')
-    let tagEndRegex = new RegExp('<\\/(?:b|' + tagsToSkip.join('|') + ')\\s*>', 'i')
 
     // Check if there are any body tags. If there's no body then treat everything as if it was inside of the body tag
     if(!inputText.match(/<body(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i) && !inputText.match(/<\/body\s*>/i)) { bodyAllow = 1 }
@@ -143,19 +159,12 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
         else if(tagEndRegex.test(element) && bodyAllow > 0 && tagSkipCounter > 0) { // Check for tags to skip end
             tagSkipCounter -= 1
         }
-        else {
-            const CHECK_REGEX = new RegExp(
-                `^\\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$` +
-                (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}–—]+$`) + 
-                (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>/\\\\|~\`]+$`)
-            )
-
-            if(!CHECK_REGEX.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
-                // Bold the text if it's not empty or only whitespaces
-                let boldingLength = clamp(element.length * boldingPercentage, minCharsToBold, element.length)
-                element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
-            }
+        else if(!ELEMENT_CHECK_REGEX.test(element) && bodyAllow > 0 && tagSkipCounter <= 0) {
+            // Bold the text if it's not empty or only whitespaces
+            let boldingLength = clamp(element.length * boldingPercentage, minCharsToBold, element.length)
+            element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength)
         }
+
         return element
     })
 
@@ -170,6 +179,20 @@ function setHTMLBoldColor(tagString, color)
     const bTag = temp.firstElementChild
     bTag.style.color = color
     return bTag.outerHTML.replace(/<\/b>$/i, '')
+}
+
+// Convert Markdown
+function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars) 
+{
+    // Split input line by line
+    textLineArray = inputText.split(/\r\n|\r|\n/).filter('')
+    console.log(textLineArray)
+
+    // Loop through lines
+    textLineArray = textLineArray.map((line) => {
+        
+        return line
+    })
 }
 
 // Open big page
