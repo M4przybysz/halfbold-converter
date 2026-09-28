@@ -1,61 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test page</title>
-    <style>body { font-family: sans-serif; }</style>
-    <script>console.log('should stay untouched, in head, not body');</script>
+    <title>Test Page Title</title>
+    <meta charset="UTF-8">
+    <style>
+        .cls > p { color: red; font-weight: bold; }
+        body::before { content: "**not markdown**"; }
+    </style>
+    <script>
+        var x = "should not be bolded"; if (a < b && c > d) { alert('x > y'); }
+    </script>
 </head>
 <body>
 
-    <h1>This heading should not be bolded</h1>
-    <h3>Neither should this one</h3>
+    <h1>H1 Header plain text</h1>
+    <h2 class="x" id="y">H2 with attributes</h2>
+    <h3>H3 with <b>bold inside header (should stay skipped)</b></h3>
+    <h4>H4 Header</h4>
+    <h5>H5 Header</h5>
+    <h6>H6 Header</h6>
 
-    <p><b>Pl</b>ain <b>para</b>graph <b>te</b>xt <b>th</b>at <b>sho</b>uld <b>g</b>et <b>part</b>ially <b>bol</b>ded <b>norm</b>ally.</p>
+    <p><b>Para</b>graph <b>wi</b>th <b style="color: rgb(0, 0, 255);">bold text</b> <b>a</b>nd <strong><b>str</b>ong <b>te</b>xt</strong> <b>mi</b>xed <b>wi</b>th <b>pl</b>ain <b>te</b>xt <b>th</b>at <b>sho</b>uld <b>b</b>e <b>bol</b>ded.</p>
 
-    <p><b>Te</b>xt <b>wi</b>th <b style="color: rgb(0, 0, 255);">already bold</b> <b>wo</b>rd <b>i</b>n <b>t</b>he <b>mid</b>dle.</p>
+    <p><b>Bo</b>ld <b>wi</b>th <b>attri</b>butes: <b class="x" data-a="a&gt;b" style="color: rgb(0, 0, 255); font-family: Arial;">tricky bold</b></p>
 
-    <b style="color: rgb(0, 0, 255);">Top level bold at start of body</b>
+    <p><b>Nes</b>ted <b>bo</b>ld: <b style="color: rgb(0, 0, 255);">outer <b>inner</b> outer</b></p>
 
-    <pre><b>Bold inside pre should not be colored or touched</b></pre>
+    <p><b>Uppe</b>rcase <b>ta</b>gs: <b style="color: rgb(0, 0, 255);">BOLD</B> <b>a</b>nd <STRONG><b>STR</b>ONG</STRONG></p>
 
-    <code>var x = 1; // code block, should not be touched</code>
+    <p><b>Self-c</b>losing <b>ta</b>gs: <img src="a.png" alt="x > y" /> <hr/> <br/> <input type="text" value="a<b"></p>
 
-    <script>
-        function shouldNotBold() { return "ignored"; }
-    </script>
+    <p><b>Vo</b>id <b>elem</b>ents <b>wit</b>hout <b>sla</b>sh: <br> <hr> <img src="b.png" alt="test"> <input type="checkbox"></p>
 
-    <style>
-        .ignored { color: red; }
-    </style>
+    <p><b>Com</b>ment <b>te</b>st: <!-- comment with <b>fake tag</b> inside --> <b>pl</b>ain <b>te</b>xt <b>af</b>ter <b>comm</b>ent.</p>
 
-    <textarea>Text inside textarea should not be bolded</textarea>
+    <p><b>T</b>ag <b>wi</b>th <b>sin</b>gle <b>quo</b>tes: <span style='color: blue;'><b>sin</b>gle <b>quo</b>ted <b>at</b>tr</span></p>
 
-    <p><b>Nes</b>ted <b style="color: rgb(0, 0, 255);">bold with <i>italic</i> inside</b> <b>cont</b>inues <b>he</b>re.</p>
+    <p><b>T</b>ag <b>wi</b>th <b>mi</b>xed <b>quo</b>tes: <a href="https://example.com" title='A "quoted" title'><b>mi</b>xed <b>quo</b>tes <b>li</b>nk</a></p>
 
-    <div>
-        <p><b>D</b>iv <b>wra</b>pped <b>parag</b>raph, <b>sho</b>uld <b>bo</b>ld <b>norm</b>ally.</p>
-        <pre>
-            <code>
-                nested pre + code, should not touch this either
-            </code>
-        </pre>
-    </div>
+    <p><b>T</b>ag <b>wi</b>th <b>n</b>o <b>quo</b>tes: <div data-x=noquotes><b>unqu</b>oted <b>attr</b>ibute</div></p>
+
+    <p><b>Self-ref</b>erencing <b>an</b>gle <b>i</b>n <b>at</b>tr: <a href="https://example.com?a=<1>"><b>we</b>ird <b>hr</b>ef</a></p>
+
+    <blockquote><b>Block</b>quote <b>te</b>xt <b>wi</b>th <b style="color: rgb(0, 0, 255);">bold</b> <b>ins</b>ide, <b>sho</b>uld <b>th</b>is <b>con</b>vert <b>o</b>r <b>sk</b>ip?</blockquote>
+
+    <ul>
+        <li><b>Li</b>st <b>it</b>em <b>o</b>ne <b>pl</b>ain <b>te</b>xt</li>
+        <li><b>Li</b>st <b>it</b>em <b>t</b>wo <b>wi</b>th <b style="color: rgb(0, 0, 255);">bold</b></li>
+        <li><b>Nes</b>ted <b>li</b>st:
+            <ul>
+                <li><b>Nes</b>ted <b>it</b>em</li>
+            </ul>
+        </li>
+    </ul>
+
+    <ol>
+        <li><b>Ord</b>ered <b>it</b>em <b>o</b>ne</li>
+        <li><b>Ord</b>ered <b>it</b>em <b>t</b>wo</li>
+    </ol>
+
+    <table>
+        <thead>
+            <tr><th><b>Hea</b>der <b>1</b></th><th><b>Hea</b>der <b>2</b></th></tr>
+        </thead>
+        <tbody>
+            <tr><td><b>Ce</b>ll <b>te</b>xt</td><td><b style="color: rgb(0, 0, 255);">Bold cell</b></td></tr>
+            <tr><td><b>Li</b>nk <b>ce</b>ll: <a href="https://example.com"><b>li</b>nk</a></td><td><b>Pl</b>ain</td></tr>
+        </tbody>
+    </table>
+
+    <pre>
+        Preformatted   text
+            keeps    spacing
+        should NOT be bolded
+    </pre>
+
+    <code>Standalone code block text, should be skipped</code>
+
+    <p><b>Inl</b>ine <code>code with <b>fake bold</b> inside</code> <b>mi</b>xed <b>wi</b>th <b>pl</b>ain <b>te</b>xt.</p>
+
+    <textarea>
+        Textarea content
+        should stay untouched
+    </textarea>
+
+    <noscript>Noscript fallback text should be skipped</noscript>
 
     <svg width="100" height="100">
+        <text x="10" y="20">SVG text content</text>
         <circle cx="50" cy="50" r="40" />
     </svg>
 
-    <p>   </p>
+    <canvas id="c" width="200" height="100">Canvas fallback text</canvas>
+
+    <select>
+        <option value="1">Option one</option>
+        <option value="2" selected>Option two</option>
+    </select>
+
+    <datalist id="d">
+        <option value="Suggestion one">
+        <option value="Suggestion two">
+    </datalist>
+
+    <math>
+        <mi>x</mi><mo>=</mo><mn>1</mn>
+    </math>
+
+    <template>
+        <div>Template content, inert</div>
+    </template>
+
+    <iframe src="https://example.com">Iframe fallback text</iframe>
+
+    <object data="a.swf">Object fallback text</object>
+
+    <audio controls>
+    <source src="a.mp3" type="audio/mpeg">
+        Audio fallback text
+    </audio>
+
+    <video controls width="300">
+    <source src="a.mp4" type="video/mp4">
+        Video fallback text
+    </video>
+
+    <progress value="5" max="10">50%</progress>
+    <meter value="0.6">60%</meter>
+
+    <map name="m">
+        <area shape="rect" coords="0,0,10,10" href="#">
+    </map>
+
+    <details>
+        <summary><b>Sum</b>mary <b>te</b>xt <b>(pl</b>ain, <b>sho</b>uld <b>bol</b>d?)</summary>
+        <b>Det</b>ails <b>bo</b>dy <b>te</b>xt
+    </details>
+
+    <dialog open><b>Dia</b>log <b>con</b>tent <b>te</b>xt</dialog>
+
+    <figure>
+        <img src="a.png" alt="figure image">
+        <figcaption><b>Fig</b>ure <b>cap</b>tion <b>te</b>xt</figcaption>
+    </figure>
+
+    <dl>
+        <dt><b>Te</b>rm <b>o</b>ne</dt>
+        <dd><b>Defin</b>ition <b>o</b>ne</dd>
+    </dl>
+
+    <section>
+        <article>
+            <header><b>Art</b>icle <b>hea</b>der <b>te</b>xt</header>
+            <p><b>Art</b>icle <b>para</b>graph <b>wi</b>th <b style="color: rgb(0, 0, 255);">bold</b><b>.</b></p>
+            <footer><b>Art</b>icle <b>foo</b>ter <b>te</b>xt</footer>
+        </article>
+    </section>
+
+    <nav><a href="#"><b>N</b>av <b>li</b>nk</a></nav>
+    <aside><b>As</b>ide <b>con</b>tent <b>te</b>xt</aside>
+    <main><b>Ma</b>in <b>con</b>tent <b>te</b>xt</main>
+
+    <form action="/submit" method="post">
+        <label for="name"><b>Na</b>me:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit"><b>Sub</b>mit</button>
+    </form>
+
+    <p><b>Inl</b>ine <b>elem</b>ents: <em><b>e</b>m</em> <i><b>i</b></i> <u><b>u</b></u> <s><b>s</b></s> <del><b>d</b>el</del> <ins><b>i</b>ns</ins> <mark><b>ma</b>rk</mark> <small><b>sm</b>all</small> <sub><b>s</b>ub</sub> <sup><b>s</b>up</sup> <kbd><b>k</b>bd</kbd> <samp><b>sa</b>mp</samp> <var><b>v</b>ar</var> <abbr title="abbreviation"><b>ab</b>br</abbr> <q><b>inl</b>ine <b>qu</b>ote</q> <dfn><b>d</b>fn</dfn> <time datetime="2026-09-28"><b>ti</b>me</time> <b>cita</b>tion <wbr></p>
+
+    <p><b>Anc</b>hor <b>wi</b>th <b>frag</b>ment: <a href="#section1"><b>ju</b>mp <b>li</b>nk</a> <b>a</b>nd <b>mai</b>lto: <a href="mailto:test@example.com"><b>em</b>ail <b>li</b>nk</a></p>
+
+    <p><b>Self-nesti</b>ng-looking <b>ta</b>g: <span><span><span><b>tri</b>ple <b>nes</b>ted <b>sp</b>an</span></span></span></p>
+
+    <p><b>Em</b>pty <b>ta</b>gs: <b style="color: rgb(0, 0, 255);"></b> <i></i> <span></span></p>
+
+    <p><b>T</b>ag <b>span</b>ning <b>wh</b>at <b>lo</b>oks <b>li</b>ke <b>mult</b>iple <b>sente</b>nces. <b style="color: rgb(0, 0, 255);">Bold sentence one. Bold sentence two! Bold sentence three?</b> <b>Pl</b>ain <b>te</b>xt <b>aft</b>er.</p>
+
+    <p>&amp; &lt; &gt; &copy; &nbsp; &#169; &quot; <b>enti</b>ties <b>mi</b>xed <b>wi</b>th <b>pl</b>ain <b>te</b>xt.</p>
+
+    <p>   <b>Leading/</b>trailing <b>white</b>space <b>ins</b>ide <b>para</b>graph <b>ta</b>gs   </p>
 
     <p></p>
 
-    <p><b>Sin</b>gle<b style="color: rgb(0, 0, 255);">word</b><b>runto</b>gether<b style="color: rgb(0, 0, 255);">bold</b><b>te</b>st.</p>
-
-    <select>
-        <option>should not bold</option>
-    </select>
-
-    <p><b>Fi</b>nal <b>para</b>graph <b>af</b>ter <b>a</b>ll <b>t</b>he <b>ed</b>ge <b>cas</b>es, <b>pl</b>ain <b>a</b>nd <b>sim</b>ple.</p>
-
+    <div>
+    
+    </div>
 </body>
 </html>

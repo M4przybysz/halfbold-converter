@@ -112,7 +112,7 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
 {
     // Create text splitting regex
     const SPLIT_REGEX = new RegExp(
-        `(\\s+|<(?:"[^"]*"|'[^']*'|[^'">])*>` + 
+        `(\\s+|<!--[\\s\\S]*?-->|&[a-zA-Z0-9#]+;|<(?:"[^"]*"|'[^']*'|[^'">])*>` + 
         (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) + 
         (boldSpecialChars ? '' : `|[@#$%^&*_+-=<>/\\\\|~\`]+`) + 
         ')'
@@ -120,21 +120,21 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
 
     // Create regexes for tags to skip
     const TAGS_TO_SKIP_ARRAY = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
-    const TAG_START_REGEX = new RegExp('<(?:b|' + TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>`, 'i')
-    const TAG_END_REGEX = new RegExp('<\\/(?:b|' + TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>', 'i')
+    const TAG_START_REGEX = new RegExp('^<(?:b|' + TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$`, 'i')
+    const TAG_END_REGEX = new RegExp('^<\\/(?:b|' + TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>$', 'i')
 
     // Create html body tag regexes
     const BODY_START_REGEX = /<body(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i
     const BODY_END_REGEX = /<\/body\s*>/i
 
     // Create HTML b tag start regex
-    const B_START_REGEX = /^<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i
+    const B_START_REGEX = /^<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$/i
 
     // Create regex for checking if element is convertable
     const ELEMENT_CHECK_REGEX = new RegExp(
-        `^\\s*$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$` +
+        `^\\s*$|^<!--[\\s\\S]*?-->$|^&[a-zA-Z0-9#]+;$|^<(?:"[^"]*"|'[^']*'|[^'">])*>$` +
         (boldPunctuation ? '' : `|^[.,;:!?'"()[\\]{}–—]+$`) + 
-        (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>/\\\\|~\`]+$`)
+        (boldSpecialChars ? '' : `|^[@#$%^&*_+-=<>\\/\\\\|~\`]+$`)
     )
 
     // Tag counters
@@ -146,10 +146,12 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
 
     // Split text while maintaining whitespaces (+ punctuation and special chars based on converter settings) and separating HTML tags 
     let textArray = inputText.split(SPLIT_REGEX).filter(element => element != '')
-    //console.log(`textArray: ${textArray}`)
+    console.log(`textArray: ${textArray}`)
 
     // Convert the code
     textArray = textArray.map((element) => {
+        //console.log(`Element: ${element}\nParameters: ${bodyAllow}, ${tagSkipCounter}\nChecks: ${BODY_END_REGEX.test(element)}, ${BODY_END_REGEX.test(element)}, ${TAG_START_REGEX.test(element)}, ${TAG_END_REGEX.test(element)}, ${B_START_REGEX.test(element)}, ${!ELEMENT_CHECK_REGEX.test(element)}`)
+
         if(BODY_START_REGEX.test(element)) { // Check for HTML body start
             bodyAllow += 1 
         }
@@ -186,9 +188,9 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
 
     // Create regex for splitting text in lines
     const TEXT_SPLIT_REGEX = new RegExp(
-        `(\\s+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*{1,3}|_{1,3}|~~|\`|!?\\[[^\\]]*\\]\\([^)]*\\)|<[^<>\\s]+:\\/\\/[^<>\\s]+>|^\\s{0,3}(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+\\.)\\s+` +
+        `(\\s+|<!--[\\s\\S]*?-->|&[a-zA-Z0-9#]+;|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*{1,3}|_{1,3}|~~|\`|!?\\[[^\\]]*\\]\\([^)]*\\)|<[^<>\\s]+:\\/\\/[^<>\\s]+>|^\\s{0,3}(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+\\.)\\s+` +
         (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) +
-        (boldSpecialChars ? '' : `|[@#$%^&*_+\\-=<>/\\\\|~\`]+`) +
+        (boldSpecialChars ? '' : `|[@#$%^&*_+\\-=<>\\/\\\\|~\`]+`) +
         ')', 'g'
     )
 
@@ -203,16 +205,16 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
 
     // Create regexes for HTML tags to skip
     const HTML_TAGS_TO_SKIP_ARRAY = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
-    const HTML_TAG_START_REGEX = new RegExp('<(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>`, 'i')
-    const HTML_TAG_END_REGEX = new RegExp('<\\/(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>', 'i')
+    const HTML_TAG_START_REGEX = new RegExp('^<(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$`, 'i')
+    const HTML_TAG_END_REGEX = new RegExp('^<\\/(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>$', 'i')
 
     // Create HTML b tag start and Markdown bold tag-like (**) regex
-    const HTML_B_START_REGEX = /^<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i
+    const HTML_B_START_REGEX = /^<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$/i
     const MARKDOWN_B_START_REGEX = /^(\*\*|__)$/
 
     // Create regex for checking if element is convertable
     const ELEMENT_CHECK_REGEX = new RegExp(
-        `^(?:\\s*|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*{1,3}|_{1,3}|~~|\`|!?\\[[^\\]]*\\]\\([^)]*\\)|<[^<>\\s]+:\\/\\/[^<>\\s]+>|\\s{0,3}(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+\\.)\\s+` +
+        `^(?:\\s*|^<!--[\\s\\S]*?-->$|^&[a-zA-Z0-9#]+;$|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*{1,3}|_{1,3}|~~|\`|!?\\[[^\\]]*\\]\\([^)]*\\)|<[^<>\\s]+:\\/\\/[^<>\\s]+>|\\s{0,3}(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+\\.)\\s+` +
         (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) +
         (boldSpecialChars ? '' : `|[@#$%^&*_+\\-=<>/\\\\|~\`]+`) +
         ')$'
