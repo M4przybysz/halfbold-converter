@@ -2,7 +2,7 @@
 
 **Half**Bold Converter is a small and simple text converter inspired by Bionic Reading. It allows you to turn plain text or HTML code into their partially bolded versions, making the text faster to read by adding fixation points your eyes can lock onto to every word. 
 
-**Half**Bold Converter is not limited to plain text and can also convert HTML code (Markdown support in developmnet). It also provides customization to the conversion process, including adjustable bolding percentage of each word and color for marking text that's bold in the HTML input.
+**Half**Bold Converter is not limited to plain text, and can also convert HTML code and Markdown-formatted text. It also provides customization to the conversion process, including adjustable bolding percentage of each word and color for marking text that's bold in the HTML/Markdown input.
 
 Check it out on GitHub Pages: [m4przybysz.github.io/halfbold-converter/](https://m4przybysz.github.io/halfbold-converter/)
 
@@ -11,7 +11,7 @@ For examples of text to convert, and before/after HTML conversion check the [exa
 The converter can run fully locally, no server is needed. Built with HTML, JS, and CSS. Licensed under [MIT License](./LICENSE).
 
 ## Features
-- Convert plain text or HTML into a half-bolded format
+- Convert plain text, HTML, or Markdown into a half-bolded format
 - Adjustable bolding percentage (5-75%)
 - Adjustable minimum number of characters to bold (1+)
 - Bolding of punctuation and special characters that can be turned on/off
@@ -19,7 +19,6 @@ The converter can run fully locally, no server is needed. Built with HTML, JS, a
 - Big page mode for more comfortable reading of converted plain text
 
 ## Planned features
-- Markdown conversion support
 - QoL additions to big page mode (including: changing font, text size, page color, text color, and more)
 
 ## How to use
@@ -28,16 +27,18 @@ This tool can:
 - add partial bolding to text in HTML code by adding \<b\> tags to words
 
 To turn your text/HTML into half-bolded format follow these steps:
-1. Write/paste text or HTML code into the **Input text** area.
-2. Choose **input type**: Plain text or HTML.
-3. Set the **bolding percentage** (how much of each word should be bolded).
+1. Write/paste text, HTML code, or Markdown-formatted text into the **Input text** area.
+2. Choose **input type**: Plain text, HTML, or Markdown.
+3. Set the **bolding percentage** (5-75%) - how much of each word should be bolded.
 4. Set the **minimum number of characters to bold** in each word (1 or more).
 5. Check/uncheck **bolding of punctuation and special characters**.
-6. If you're converting HTML, choose the **marking color** for text that's already bold.
+6. If you're converting HTML or Markdown, choose the **marking color** for text that's already bold.
 7. Click the **Convert** button.
-8. Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML, the eligible text is partially bolded with \<b\> tags and text that was bold before conversion gets colored to the chosen marking color.
+8. Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML and Markdown, the eligible text is partially bolded with \<b\> tags and text that was bold before conversion gets colored to the chosen marking color.
 
-**NOTE:** If you're converting HTML, text outside of body and inside these tags: [h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map] won't be converted by design. If there are no body tags (\<body\> and \</body\>), the entire code gets treated as if it was inside the HTML body.
+**NOTE (HTML):** If you're converting HTML, text outside of body and inside these tags: [h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map] won't be converted by design. If there are no body tags (\<body\> and \</body\>), the entire code gets treated as if it was inside the HTML body.
+
+**NOTE (Markdown):** If you're converting markdown, the text inside the HTML tags from the list above and formatted into: [headers, horizontal lines, blockquotes, tables, footnotes, code, links, images] won't be converted by design. 
 
 ## Local setup
 Files required to make the converter work:
