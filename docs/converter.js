@@ -128,7 +128,7 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
     const BODY_END_REGEX = /<\/body\s*>/i
 
     // Create HTML b tag start regex
-    const B_START_REGEX = /<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i
+    const B_START_REGEX = /^<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i
 
     // Create regex for checking if element is convertable
     const ELEMENT_CHECK_REGEX = new RegExp(
@@ -207,7 +207,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
     const HTML_TAG_END_REGEX = new RegExp('<\\/(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>', 'i')
 
     // Create HTML b tag start and Markdown bold tag-like (**) regex
-    const HTML_B_START_REGEX = /<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i
+    const HTML_B_START_REGEX = /^<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>/i
     const MARKDOWN_B_START_REGEX = /^(\*\*|__)$/
 
     // Create regex for checking if element is convertable
@@ -233,7 +233,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
         let whitespace_check = WHITESPACE_CODE_SKIP_REGEX.test(line)
         let line_check = LINE_SKIP_REGEX.test(line)
         let next_line_check = false
-        if(i < array.length && !whitespace_check) { next_line_check = NEXT_LINE_SKIP_REGEX.test(array[i+1]) }
+        if(i + 1 < array.length && !whitespace_check) { next_line_check = NEXT_LINE_SKIP_REGEX.test(array[i + 2]) }
 
         if(!whitespace_check && !line_check && !next_line_check) { // Continue if the line shouldn't be skipped
             // Split text in the line

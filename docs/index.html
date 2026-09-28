@@ -74,7 +74,7 @@
 
                 <b>Features</b>
                 <ul>
-                    <li>Convert plain text or HTML to half-bolded format</li>
+                    <li>Convert plain text, HTML, or Markdown to half-bolded format</li>
                     <li>Adjustable bolding percentage (5-75%)</li>
                     <li>Adjustable minimum number of characters to bold (1+)</li>
                     <li>Bolding of punctuation and special characters that can be turned on/off</li>
@@ -86,29 +86,31 @@
 
                 <b>Planned features</b>
                 <ul>
-                    <li>Markdown conversion support</li>
                     <li>QoL additions to big page mode (including: customizing font, text size, page color, text color, and more)</li>
                 </ul>
             </div>
             <div id="bottomRight">
                 <h2>How to use:</h2>
                 <ol>
-                    <li>Write or paste text/HTML code to convert inside the <b>Input text</b> area.</li>
+                    <li>Write or paste your plain text, HTML code, or Markdown-formatted text to convert inside the <b>Input text</b> area.</li>
                     <li>Choose input type:
                         <ul>
                             <li><b>Plain text</b> for plain text</li>
                             <li><b>HTML</b> for HTML code</li>
+                            <li><b>Markdown</b> for Markdown-formatted text</li>
                         </ul>
                     </li>
                     <li>Set the <b>bolding percentage</b> (5-75%) - how much of each word should be bolded.</li>
                     <li>Set the <b>minimum number of characters to bold</b> in each word (1 or more).</li>
                     <li>Check/uncheck <b>bolding of punctuation and special characters</b>.</li>
-                    <li>If you're converting HTML, choose the <b>marking color</b> - color to mark text that was already bolded in the input.</li>
+                    <li>If you're converting HTML or Markdown, choose the <b>marking color</b> - color to mark text that was already bolded in the input.</li>
                     <li>Press the <b>Convert</b> button.</li>
-                    <li>Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML, the eligible text is partially bolded with &lt;b&gt; tags and text that was bold before conversion gets colored to the chosen marking color.</li>
+                    <li>Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML and Markdown, the eligible text is partially bolded with "&lt;b&gt;" tags or "**" and text that was bold before conversion gets colored with the chosen marking color.</li>
                 </ol>
                 <br>
-                <b>NOTE:</b> If you're converting HTML, text outside of body and inside these tags: [<i>h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map</i>] won't be converted by design. If there are no body tags (&lt;body&gt; and &lt;/body&gt;), the entire code gets treated as if it was inside the HTML body.
+                <b>NOTE (HTML):</b> If you're converting HTML, text outside of body and inside these tags: [<i>h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map</i>] won't be converted by design. If there are no body tags (&lt;body&gt; and &lt;/body&gt;), the entire code gets treated as if it was inside the HTML body. 
+                <br><br>
+                <b>NOTE (Markdown):</b> If you're converting markdown, the text inside the HTML tags from the list above and formatted into: [headers, horizontal lines, blockquotes, tables, footnotes, code, links, images] won't be converted by design. 
             </div>
         </div>
     </main>

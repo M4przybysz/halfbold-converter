@@ -1,64 +1,301 @@
-# Header should be skipped entirely (with **bold inside** untouched)
+# H1 Header with **bold** and `code`
+## H2 Header with <b>html bold</b>
+### H3 Header
+#### H4 Header
+##### H5 Header
+###### H6 Header
+####### Not a header (7 hashes)
+#NoSpace not a header
+   ### Header with 3 leading spaces
 
-Regular paragraph with plain text to bold, mixed with **already bold markdown** and __also bold underscore style__.
+Setext H1
+=========
 
-Paragraph with <b>already bold html</b> and <b style="color: red;">styled bold html</b> mixed with plain text needing bolding.
+Setext H2
+---------
 
-> Blockquote line should be skipped along with **bold inside quote**.
+## Inline formatting
 
-```javascript
-// Fenced code block entirely skipped
-const x = "plain text that looks boldable but isn't";
-function test() { return **notReallyBold**; }
+Plain text with **bold**, __bold underscore__, *italic*, _italic underscore_, ***bold italic***, ___bold italic underscore___, ~~strikethrough~~, and `inline code`.
+
+Nested: *italic with **bold** inside*, **bold with *italic* inside**.
+
+Escaped: \*not italic\*, \*\*not bold\*\*, \_not italic\_, \`not code\`, \# not header.
+
+Empty markers: **** and `` and ~~~~.
+
+## Line breaks
+
+Two trailing spaces break  
+next line after break.
+
+Backslash break\
+next line after backslash.
+
+## Blockquotes
+
+> Blockquote line one
+> Blockquote line two with **bold**
+>No space after marker
+   > Indented blockquote
+> > Nested blockquote
+> > > Third level
+
+## Lists
+
+- Dash item
+* Star item
++ Plus item
+-NotAList (no space)
+1. Ordered one
+2. Ordered two
+10. Ordered ten
+1) Paren style ordered
+- [ ] Unchecked task
+- [x] Checked task
+- [X] Checked task uppercase
+  - Nested item
+    - Deeper nested item with **bold**
+1. Ordered with
+   continuation line
+
+## Code
+
+```
+Fenced no language
+# not a header
+**not bold**
 ```
 
-Inline code should skip: `const y = 5;` but surrounding plain text should bold normally.
+```javascript
+const x = "**fake bold**";
+function test(a, b) { return a && b || !a; }
+```
 
-- List item with plain text to bold
-- List item with **already bold** part
-- [ ] Task item unchecked, plain text
-- [x] Task item checked, with **bold** part
+~~~python
+# tilde fence
+print("hello")
+~~~
 
-| Table | Header | Row |
-|-------|--------|-----|
-| plain | **bold** | `code` |
+    Indented code block (4 spaces)
+    second line
+
+	Tab indented code
+
+## Horizontal rules
 
 ---
+***
+___
+- - -
+* * *
 
-Link should be skipped as unit: [click here](https://example.com) surrounded by plain text.
+## Links and images
 
-Image also skipped: ![alt text](https://example.com/img.png) with plain text around.
+[Inline link](https://example.com)
+[Link with title](https://example.com "Title")
+[Link with **bold** text](https://example.com)
+[Link with (parens)](https://example.com/a_(b))
+[Reference link][ref1]
+[Collapsed ref][]
+[Shortcut ref]
+![Image alt](https://example.com/img.png)
+![Image with title](https://example.com/img.png "Title")
+![Reference image][img1]
+<https://example.com/autolink>
+<mailto:test@example.com>
+Bare URL: https://example.com and www.example.com
 
-Autolink skipped: <https://example.com> plain text continues here.
+[ref1]: https://example.com "Reference"
+[Collapsed ref]: https://example.com
+[Shortcut ref]: https://example.com
+[img1]: https://example.com/img.png
+
+## Tables
+
+| Left | Center | Right |
+|:-----|:------:|------:|
+| a | b | c |
+| **bold** | `code` | [link](https://example.com) |
+| | empty left | |
+
+No leading pipe table:
+
+A | B
+--|--
+1 | 2
+
+## Footnotes
+
+Text with footnote[^1] and another[^note].
+
+[^1]: Footnote one.
+[^note]: Footnote two with **bold**.
+
+## Definition list
+
+Term
+: Definition one
+: Definition two
+
+## HTML inline tags
+
+<b>bold</b> <strong>strong</strong> <i>italic</i> <em>em</em> <u>underline</u> <s>strike</s> <del>del</del> <ins>ins</ins> <mark>mark</mark> <small>small</small> <sub>sub</sub> <sup>sup</sup> <code>code tag</code> <kbd>kbd</kbd> <samp>samp</samp> <var>var</var> <abbr title="abbr">abbr</abbr> cite <q>quote</q> <dfn>dfn</dfn> <time datetime="2026-09-28">time</time> <span style="color: red;">span</span> <a href="https://example.com">anchor</a> <br> <br/> <wbr>
+
+Bold with attributes: <b class='x' data-a="a>b" style="color: #ff0000; font-family: Arial;">tricky bold</b>
+
+Nested bold: <b>outer <b>inner</b> outer</b>
+
+Uppercase tags: <B>BOLD</B> <CODE>CODE</CODE>
+
+Self closing: <img src="a.png" alt="x > y" /> <hr /> <input type="text" value="a<b">
+
+Comment: <!-- comment with <b>tag</b> inside -->
+
+Stray angle brackets: 3 < 5 and 5 > 3 and a<b and c>d.
+
+## HTML block tags
+
+<div class="box">
+Div content plain text
+</div>
+
+<p>Paragraph tag text</p>
+
+<h1>HTML H1</h1>
+<h2 class="x">HTML H2</h2>
+<h6>HTML H6</h6>
+
+<blockquote>HTML blockquote text</blockquote>
+
+<ul>
+<li>HTML list item one</li>
+<li>HTML list item two</li>
+</ul>
+
+<ol>
+<li>Ordered HTML item</li>
+</ol>
+
+<table>
+<thead><tr><th>Head</th></tr></thead>
+<tbody><tr><td>Cell text</td></tr></tbody>
+</table>
+
+<pre>
+Preformatted   text
+    keeps   spacing
+</pre>
+
+<details>
+<summary>Summary text</summary>
+Details content text
+</details>
+
+<section><article><header><footer><nav><aside><main>Semantic tags text</main></aside></nav></footer></header></article></section>
+
+<figure><figcaption>Figure caption text</figcaption></figure>
+
+<dl><dt>Term</dt><dd>Definition</dd></dl>
+
+## HTML skipped tags
 
 <script>
-// entire script tag content skipped
-var boldable = "should not be touched";
+var x = "should not be bolded"; if (a < b && c > d) { alert('x'); }
 </script>
 
 <style>
-.fake-bold { font-weight: **not-a-real-property**; }
+.cls > p { color: red; font-weight: bold; }
 </style>
 
-<pre>
-Preformatted text
-should NOT be bolded
-even with plain words here
-</pre>
+<textarea>Textarea text stays</textarea>
 
-<h3>HTML header tag, should also be skipped like markdown headers</h3>
+<noscript>Noscript fallback text</noscript>
 
-Setext-style header below:
-Header Text Here
-================
+<svg width="10" height="10"><text x="0" y="10">SVG text</text></svg>
 
-Footnote reference in text[^1] should bold normally around it.
+<canvas>Canvas fallback text</canvas>
 
-[^1]: Footnote line itself should be skipped.
+<select><option>Option one</option><option>Option two</option></select>
 
-Mixed edge case: paragraph with <b>html bold</b>, then **markdown bold**, then plain text, then `inline code`, then [a link](https://example.com), all in one line.
+<math><mi>x</mi><mo>=</mo><mn>1</mn></math>
 
-Whitespace-only line below (should skip):
+<datalist id="d"><option value="One"></option></datalist>
+
+<template><div>Template text</div></template>
+
+<iframe src="https://example.com">Iframe fallback text</iframe>
+
+<object data="a.swf">Object fallback text</object>
+
+<audio controls>Audio fallback text</audio>
+
+<video controls>Video fallback text</video>
+
+<progress value="5" max="10">50%</progress>
+
+<meter value="0.5">50%</meter>
+
+<map name="m"><area shape="rect" coords="0,0,1,1" href="#"></map>
+
+## Punctuation
+
+Period. Comma, semicolon; colon: exclamation! question? Apostrophe's "double quotes" 'single quotes'.
+
+Brackets: (round) [square] {curly}.
+
+Dashes: hyphen-ated, en–dash, em—dash, minus - alone.
+
+Ellipsis... and repeated!!! ??? ?!?! ,,, ;;; :::
+
+Quotes at edges: "start of line and end of line".
+
+## Special characters
+
+@ # $ % ^ & * _ + - = < > / \ | ~ `
+
+Email: test@example.com, price: $19.99, discount: 50%, math: a+b=c, path: /usr/bin, windows: C:\Users\name, pipe: a|b, tilde: ~home, hash: #tag, caret: x^2.
+
+Entities: &amp; &lt; &gt; &copy; &nbsp; &#169; &#x1F600; &quot;
+
+Unicode: café, naïve, Zażółć gęślą jaźń, 日本語のテキスト, Привет мир, emoji 😀 🎉, symbols © ® ™ € £ ¥ § ¶ † ‡ • ° ± × ÷.
+
+Emoji shortcode: :smile: :tada:
+
+Math-like: $x^2 + y^2 = z^2$ and $$\sum_{i=1}^{n} i$$
+
+## Whitespace edge cases
+
+Multiple    spaces    between    words.
+Tab	between	words.
+Trailing spaces at end   
+   Leading spaces (3) at start
+Whitespace-only line below:
    
 
-Final paragraph with tabs	and    multiple   spaces   between   words   to   bold   individually.
+Two blank lines below:
+
+
+End of section.
+
+## Mixed edge cases
+
+Line with <b>html bold</b>, **markdown bold**, plain text, `inline code`, [a link](https://example.com), <https://example.com>, ![img](a.png), ~~strike~~, and <i>html italic</i> all together!
+
+**Bold at line start** then plain text, and plain text then **bold at line end**
+
+*Italic at start* and _italic at end_
+
+**Bold across
+two lines**
+
+<b>HTML bold across
+two lines</b>
+
+`code with **stars** and <b>tags</b> inside`
+
+[link with `code` inside](https://example.com)
+
+<b>**double bold**</b> and **<b>double bold reversed</b>**
+
+Last line without trailing newline
