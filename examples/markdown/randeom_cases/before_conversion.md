@@ -152,8 +152,6 @@ Self closing: <img src="a.png" alt="x > y" /> <hr /> <input type="text" value="a
 
 Comment: <!-- comment with <b>tag</b> inside -->
 
-Stray angle brackets: 3 < 5 and 5 > 3 and a<b and c>d.
-
 ## HTML block tags
 
 <div class="box">
@@ -169,34 +167,55 @@ Div content plain text
 <blockquote>HTML blockquote text</blockquote>
 
 <ul>
-<li>HTML list item one</li>
-<li>HTML list item two</li>
+   <li>HTML list item one</li>
+   <li>HTML list item two</li>
 </ul>
 
 <ol>
-<li>Ordered HTML item</li>
+   <li>Ordered HTML item</li>
 </ol>
 
 <table>
-<thead><tr><th>Head</th></tr></thead>
-<tbody><tr><td>Cell text</td></tr></tbody>
+   <thead><tr><th>Head</th></tr></thead>
+   <tbody><tr><td>Cell text</td></tr></tbody>
 </table>
 
 <pre>
-Preformatted   text
+   Preformatted   text
     keeps   spacing
 </pre>
 
 <details>
-<summary>Summary text</summary>
-Details content text
+   <summary>Summary text</summary>
+   Details content text
 </details>
 
-<section><article><header><footer><nav><aside><main>Semantic tags text</main></aside></nav></footer></header></article></section>
+<section>
+   <article>
+      <header>
+         <footer>
+            <nav>
+               <aside>
+                  <main>
+                     Semantic tags text
+                  </main>
+               </aside>
+            </nav>
+         </footer>
+      </header>
+   </article>
+</section>
 
-<figure><figcaption>Figure caption text</figcaption></figure>
+<figure>
+   <figcaption>
+      Figure caption text
+   </figcaption>
+</figure>
 
-<dl><dt>Term</dt><dd>Definition</dd></dl>
+<dl>
+   <dt>Term</dt>
+   <dd>Definition</dd>
+</dl>
 
 ## HTML skipped tags
 
@@ -252,8 +271,6 @@ Quotes at edges: "start of line and end of line".
 
 ## Special characters
 
-@ # $ % ^ & * _ + - = < > / \ | ~ `
-
 Email: test@example.com, price: $19.99, discount: 50%, math: a+b=c, path: /usr/bin, windows: C:\Users\name, pipe: a|b, tilde: ~home, hash: #tag, caret: x^2.
 
 Entities: &amp; &lt; &gt; &copy; &nbsp; &#169; &#x1F600; &quot;
@@ -261,8 +278,6 @@ Entities: &amp; &lt; &gt; &copy; &nbsp; &#169; &#x1F600; &quot;
 Unicode: café, naïve, Zażółć gęślą jaźń, 日本語のテキスト, Привет мир, emoji 😀 🎉, symbols © ® ™ € £ ¥ § ¶ † ‡ • ° ± × ÷.
 
 Emoji shortcode: :smile: :tada:
-
-Math-like: $x^2 + y^2 = z^2$ and $$\sum_{i=1}^{n} i$$
 
 ## Whitespace edge cases
 

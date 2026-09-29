@@ -16,21 +16,21 @@ Setext H2
 
 ## Inline formatting
 
-**Pl**ain **te**xt **wi**th <b style="color: rgb(0, 0, 0);">bold</b>**,** <b style="color: rgb(0, 0, 0);">bold underscore</b>**,** *italic***,** _italic underscore_**,** ***bold italic*****,** ___bold italic underscore___**,** ~~strikethrough~~**,** **a**nd `inline code`**.**
+**Pl**ain **te**xt **wi**th <b style="color: rgb(0, 0, 255);">bold</b>**,** <b style="color: rgb(0, 0, 255);">bold underscore</b>**,** *italic***,** _italic underscore_**,** ***bold italic*****,** ___bold italic underscore___**,** ~~strikethrough~~**,** **a**nd `inline code`**.**
 
-**Nes**ted: *italic with <b style="color: rgb(0, 0, 0);">bold</b> inside***,** <b style="color: rgb(0, 0, 0);">bold with *italic* inside</b>**.**
+**Nes**ted: *italic with <b style="color: rgb(0, 0, 255);">bold</b> inside***,** <b style="color: rgb(0, 0, 255);">bold with *italic* inside</b>**.**
 
-**Esca**ped: **\***not italic\***,** **\***\***n**ot **bo**ld\*\***,** **\**_not italic\_**,** **\**`not code\`**,** **\**# **n**ot **hea**der.
+**Esca**ped: \***n**ot **ita**lic\***,** \*\***n**ot **bo**ld\*\***,** \_**n**ot **ita**lic\_**,** \`**n**ot **co**de\`**,** \# **n**ot **hea**der.
 
-Empty markers: **** and `` and ~~~~.
+**Em**pty **mark**ers: **** **a**nd **`**` **a**nd **~~**~~**.**
 
 ## Line breaks
 
-Two trailing spaces break  
-next line after break.
+**T**wo **trai**ling **spa**ces **br**eak  
+**ne**xt **li**ne **af**ter **bre**ak.
 
-Backslash break\
-next line after backslash.
+**Back**slash **bre**ak\
+**ne**xt **li**ne **af**ter **backs**lash.
 
 ## Blockquotes
 
@@ -43,32 +43,32 @@ next line after backslash.
 
 ## Lists
 
-- Dash item
-* Star item
-+ Plus item
--NotAList (no space)
-1. Ordered one
-2. Ordered two
-10. Ordered ten
-1) Paren style ordered
-- [ ] Unchecked task
-- [x] Checked task
-- [X] Checked task uppercase
-  - Nested item
-    - Deeper nested item with **bold**
-1. Ordered with
-   continuation line
+- **Da**sh **it**em
+* **St**ar **it**em
++ **Pl**us **it**em
+**-Not**AList **(**no **spa**ce)
+1. **Ord**ered **o**ne
+2. **Ord**ered **t**wo
+10. **Ord**ered **t**en
+1) **Pa**ren **st**yle **ord**ered
+- [ ] **Unch**ecked **ta**sk
+- [x] **Che**cked **ta**sk
+- [X] **Che**cked **ta**sk **uppe**rcase
+  - **Nes**ted **it**em
+    - **Dee**per **nes**ted **it**em **wi**th <b style="color: rgb(0, 0, 255);">bold</b>
+1. **Ord**ered **wi**th
+   **contin**uation **li**ne
 
 ## Code
 
 ```
 Fenced no language
 # not a header
-</b>not bold<b style="color: rgb(0, 0, 0);">
+**not bold**
 ```
 
 ```javascript
-const x = "</b>fake bold<b style="color: rgb(0, 0, 0);">";
+const x = "**fake bold**";
 function test(a, b) { return a && b || !a; }
 ```
 
@@ -87,7 +87,7 @@ print("hello")
 ---
 ***
 ___
-- - -
+- **-** **-**
 * * *
 
 ## Links and images
@@ -104,12 +104,12 @@ ___
 ![Reference image][img1]
 <https://example.com/autolink>
 <mailto:test@example.com>
-Bare URL: https://example.com and www.example.com
+**Ba**re **UR**L: https://example.com **a**nd www.example.com
 
-[ref1]: https://example.com "Reference"
-[Collapsed ref]: https://example.com
-[Shortcut ref]: https://example.com
-[img1]: https://example.com/img.png
+**[re**f1]: https://example.com **"Refe**rence"
+**[Coll**apsed **re**f]: https://example.com
+**[Sho**rtcut **re**f]: https://example.com
+**[im**g1]: https://example.com/img.png
 
 ## Tables
 
@@ -119,7 +119,7 @@ Bare URL: https://example.com and www.example.com
 | **bold** | `code` | [link](https://example.com) |
 | | empty left | |
 
-No leading pipe table:
+**N**o **lea**ding **pi**pe **tab**le:
 
 A | B
 --|--
@@ -127,76 +127,95 @@ A | B
 
 ## Footnotes
 
-Text with footnote[^1] and another[^note].
+**Te**xt **wi**th **foot**note[^1] **a**nd **ano**ther[^note]**.**
 
 [^1]: Footnote one.
 [^note]: Footnote two with **bold**.
 
 ## Definition list
 
-Term
+**Te**rm
 : Definition one
 : Definition two
 
 ## HTML inline tags
 
-<b style="color: rgb(0, 0, 0);">bold</b> <strong>strong</strong> <i>italic</i> <em>em</em> <u>underline</u> <s>strike</s> <del>del</del> <ins>ins</ins> <mark>mark</mark> <small>small</small> <sub>sub</sub> <sup>sup</sup> <code>code tag</code> <kbd>kbd</kbd> <samp>samp</samp> <var>var</var> <abbr title="abbr">abbr</abbr> cite <q>quote</q> <dfn>dfn</dfn> <time datetime="2026-09-28">time</time> <span style="color: red;">span</span> <a href="https://example.com">anchor</a> <br> <br/> <wbr>
+<b style="color: rgb(0, 0, 255);">bold</b> <strong><b>str</b>ong</strong> <i><b>ita</b>lic</i> <em><b>e</b>m</em> <u><b>unde</b>rline</u> <s><b>str</b>ike</s> <del><b>d</b>el</del> <ins><b>i</b>ns</ins> <mark><b>ma</b>rk</mark> <small><b>sm</b>all</small> <sub><b>s</b>ub</sub> <sup><b>s</b>up</sup> <code>code tag</code> <kbd><b>k</b>bd</kbd> <samp><b>sa</b>mp</samp> <var><b>v</b>ar</var> <abbr title="abbr"><b>ab</b>br</abbr> **ci**te <q><b>qu</b>ote</q> <dfn><b>d</b>fn</dfn> <time datetime="2026-09-28"><b>ti</b>me</time> <span style="color: red;"><b>sp</b>an</span> <a href="https://example.com"><b>anc</b>hor</a> <br> <br/> <wbr>
 
-Bold with attributes: <b class="x" data-a="a&gt;b" style="color: rgb(0, 0, 0); font-family: Arial;">tricky bold</b>
+**Bo**ld **wi**th **attri**butes: <b class="x" data-a="a&gt;b" style="color: rgb(0, 0, 255); font-family: Arial;">tricky bold</b>
 
-Nested bold: <b style="color: rgb(0, 0, 0);">outer <b style="color: rgb(0, 0, 0);">inner</b> outer</b>
+**Nes**ted **bo**ld: <b style="color: rgb(0, 0, 255);">outer <b style="color: rgb(0, 0, 255);">inner</b> outer</b>
 
-Uppercase tags: <b style="color: rgb(0, 0, 0);">BOLD</B> <CODE>CODE</CODE>
+**Uppe**rcase **ta**gs: <b style="color: rgb(0, 0, 255);">BOLD</B> <CODE>CODE</CODE>
 
-Self closing: <img src="a.png" alt="x > y" /> <hr /> <input type="text" value="a<b">
+**Se**lf **clos**ing: <img src="a.png" alt="x > y" /> <hr /> <input type="text" value="a<b">
 
-Comment: <!-- comment with <b>tag</b> inside -->
-
-Stray angle brackets: 3 < 5 and 5 > 3 and a<b and="" c="" style="color: rgb(0, 0, 0);">d.
+**Comm**ent: <!-- comment with <b>tag</b> inside -->
 
 ## HTML block tags
 
 <div class="box">
-Div content plain text
+<b>D</b>iv <b>con</b>tent <b>pl</b>ain <b>te</b>xt
 </div>
 
-<p>Paragraph tag text</p>
+<p><b>Para</b>graph <b>t</b>ag <b>te</b>xt</p>
 
 <h1>HTML H1</h1>
 <h2 class="x">HTML H2</h2>
 <h6>HTML H6</h6>
 
-<blockquote>HTML blockquote text</blockquote>
+<blockquote><b>HT</b>ML <b>block</b>quote <b>te</b>xt</blockquote>
 
 <ul>
-<li>HTML list item one</li>
-<li>HTML list item two</li>
+   <li><b>HT</b>ML <b>li</b>st <b>it</b>em <b>o</b>ne</li>
+   <li><b>HT</b>ML <b>li</b>st <b>it</b>em <b>t</b>wo</li>
 </ul>
 
 <ol>
-<li>Ordered HTML item</li>
+   <li><b>Ord</b>ered <b>HT</b>ML <b>it</b>em</li>
 </ol>
 
 <table>
-<thead><tr><th>Head</th></tr></thead>
-<tbody><tr><td>Cell text</td></tr></tbody>
+   <thead><tr><th><b>He</b>ad</th></tr></thead>
+   <tbody><tr><td><b>Ce</b>ll <b>te</b>xt</td></tr></tbody>
 </table>
 
 <pre>
-Preformatted   text
+   Preformatted   text
     keeps   spacing
 </pre>
 
 <details>
-<summary>Summary text</summary>
-Details content text
+   <summary><b>Sum</b>mary <b>te</b>xt</summary>
+   <b>Det</b>ails <b>con</b>tent <b>te</b>xt
 </details>
 
-<section><article><header><footer><nav><aside><main>Semantic tags text</main></aside></nav></footer></header></article></section>
+<section>
+   <article>
+      <header>
+         <footer>
+            <nav>
+               <aside>
+                  <main>
+                     Semantic tags text
+                  </main>
+               </aside>
+            </nav>
+         </footer>
+      </header>
+   </article>
+</section>
 
-<figure><figcaption>Figure caption text</figcaption></figure>
+<figure>
+   <figcaption>
+      Figure caption text
+   </figcaption>
+</figure>
 
-<dl><dt>Term</dt><dd>Definition</dd></dl>
+<dl>
+   <dt><b>Te</b>rm</dt>
+   <dd><b>Defin</b>ition</dd>
+</dl>
 
 ## HTML skipped tags
 
@@ -240,62 +259,58 @@ var x = "should not be bolded"; if (a < b && c > d) { alert('x'); }
 
 ## Punctuation
 
-Period. Comma, semicolon; colon: exclamation! question? Apostrophe's "double quotes" 'single quotes'.
+**Per**iod. **Com**ma, **semic**olon; **col**on: **exclam**ation! **ques**tion? **Apostr**ophe's **"do**uble **quo**tes" **'si**ngle **quot**es'.
 
-Brackets: (round) [square] {curly}.
+**Brac**kets: **(ro**und) [square] **{cur**ly}.
 
-Dashes: hyphen-ated, en–dash, em—dash, minus - alone.
+**Das**hes: **hyphen**-ated, **en–d**ash, **em—d**ash, **mi**nus **-** **alo**ne.
 
-Ellipsis... and repeated!!! ??? ?!?! ,,, ;;; :::
+**Ellip**sis... **a**nd **repea**ted!!! **?**?? **?!**?! **,**,, **;**;; **:**::
 
-Quotes at edges: "start of line and end of line".
+**Quo**tes **a**t **edg**es: **"st**art **o**f **li**ne **a**nd **e**nd **o**f **lin**e".
 
 ## Special characters
 
-@ # $ % ^ & * _ + - = < > / \ | ~ `
+**Ema**il: **test@exa**mple.com, **pri**ce: **$19**.99, **disc**ount: **50**%, **ma**th: **a+b**=c, **pa**th: **/usr**/bin, **wind**ows: **C**:\U**se**rs\n**am**e, **pi**pe: **a|**b, **til**de: **~****ho**me, **ha**sh: **#t**ag, **car**et: **x^**2.
 
-Email: test@example.com, price: $19.99, discount: 50%, math: a+b=c, path: /usr/bin, windows: C:\Users\name, pipe: a|b, tilde: ~home, hash: #tag, caret: x^2.
+**Enti**ties: &amp; &lt; &gt; &copy; &nbsp; &#169; &#x1F600; &quot;
 
-Entities: &amp; &lt; &gt; &copy; &nbsp; &#169; &#x1F600; &quot;
+**Unic**ode: **ca**fé, **naï**ve, **Zaż**ółć **gę**ślą **ja**źń, **日本語の**テキスト, **При**вет **ми**р, **em**oji **�**� **�**�, **sym**bols **©** **®** **™** **€** **£** **¥** **§** **¶** **†** **‡** **•** **°** **±** **×** **÷**.
 
-Unicode: café, naïve, Zażółć gęślą jaźń, 日本語のテキスト, Привет мир, emoji 😀 🎉, symbols © ® ™ € £ ¥ § ¶ † ‡ • ° ± × ÷.
-
-Emoji shortcode: :smile: :tada:
-
-Math-like: $x^2 + y^2 = z^2$ and $$\sum_{i=1}^{n} i$$
+**Em**oji **short**code: **:sm**ile: **:ta**da:
 
 ## Whitespace edge cases
 
-Multiple    spaces    between    words.
-Tab	between	words.
-Trailing spaces at end   
-   Leading spaces (3) at start
-Whitespace-only line below:
+**Mult**iple    **spa**ces    **bet**ween    **wor**ds.
+**T**ab	**bet**ween	**wor**ds.
+**Trai**ling **spa**ces **a**t **e**nd   
+   **Lea**ding **spa**ces **(**3) **a**t **st**art
+**Whitesp**ace-only **li**ne **bel**ow:
    
 
-Two blank lines below:
+**T**wo **bl**ank **li**nes **bel**ow:
 
 
-End of section.
+**E**nd **o**f **sect**ion.
 
 ## Mixed edge cases
 
-Line with <b style="color: rgb(0, 0, 0);">html bold</b>, **markdown bold**, plain text, `inline code`, [a link](https://example.com), <https://example.com>, ![img](a.png), ~~strike~~, and <i>html italic</i> all together!
+**Li**ne **wi**th <b style="color: rgb(0, 0, 255);">html bold</b>**,** <b style="color: rgb(0, 0, 255);">markdown bold</b>**,** **pl**ain **te**xt, `inline code`**,** [a link](https://example.com)**,** <https://example.com>**,** ![img](a.png)**,** ~~strike~~**,** **a**nd <i><b>ht</b>ml <b>ita</b>lic</i> **a**ll **toge**ther!
 
-**Bold at line start** then plain text, and plain text then **bold at line end**
+<b style="color: rgb(0, 0, 255);">Bold at line start</b> **th**en **pl**ain **te**xt, **a**nd **pl**ain **te**xt **th**en <b style="color: rgb(0, 0, 255);">bold at line end</b>
 
-*Italic at start* and _italic at end_
+*Italic at start* **a**nd _italic at end_
 
-**Bold across
-two lines**
-
-<b style="color: rgb(0, 0, 0);">HTML bold across
+<b style="color: rgb(0, 0, 255);">Bold across
 two lines</b>
 
-`code with **stars** and <b style="color: rgb(0, 0, 0);">tags</b> inside`
+<b style="color: rgb(0, 0, 255);">HTML bold across
+two lines</b>
+
+`code with <b style="color: rgb(0, 0, 255);">stars</b> and <b>tags</b> inside`
 
 [link with `code` inside](https://example.com)
 
-<b style="color: rgb(0, 0, 0);">**double bold**</b> and **<b style="color: rgb(0, 0, 0);">double bold reversed</b>**
+<b style="color: rgb(0, 0, 255);">**double bold**</b> **a**nd <b style="color: rgb(0, 0, 255);"><b>double bold reversed</b></b>
 
-Last line without trailing newline
+**La**st **li**ne **wit**hout **trai**ling **new**line

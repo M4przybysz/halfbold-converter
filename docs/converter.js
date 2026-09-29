@@ -146,7 +146,7 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
 
     // Split text while maintaining whitespaces (+ punctuation and special chars based on converter settings) and separating HTML tags 
     let textArray = inputText.split(SPLIT_REGEX).filter(element => element != '')
-    console.log(`textArray: ${textArray}`)
+    //console.log(`textArray: ${textArray}`)
 
     // Convert the code
     textArray = textArray.map((element) => {
@@ -188,25 +188,34 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
 
     // Create regex for splitting text in lines
     const TEXT_SPLIT_REGEX = new RegExp(
-        `(\\s+|<!--[\\s\\S]*?-->|&[a-zA-Z0-9#]+;|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*{1,3}|_{1,3}|~~|\`|!?\\[[^\\]]*\\]\\([^)]*\\)|<[^<>\\s]+:\\/\\/[^<>\\s]+>|^\\s{0,3}(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+\\.)\\s+` +
+        `(^\\s*(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+[.)])\\s+|\\s+|<!--[\\s\\S]*?-->|&[a-zA-Z0-9#]+;|\\\\.|!?\\[[^\\]]*\\]\\(\\s*(?:[^()\\s]|\\([^()]*\\))*(?:\\s+(?:"[^"]*"|'[^']*'))?\\s*\\)|!?\\[[^\\]]*\\]\\[[^\\]]*\\]|!?\\[[^\\]]*\\](?!\\(|\\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\\s]+|[^<>\\s]+@[^<>\\s]+)>|https?:\\/\\/[^\\s<>]+|www\\.[^\\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*+|_+|\`+|~+|\\${1,2}` +
         (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) +
         (boldSpecialChars ? '' : `|[@#$%^&*_+\\-=<>\\/\\\\|~\`]+`) +
         ')', 'g'
     )
 
     // Create regexes for lines to skip
-    const LINES_TO_SKIP_ARRAY = ['#{1,6}\\s', '>', '===', '\\-\\-\\-', '\\*\\*\\*', '___', '\\|', '\\[\\^[^\\]]+\\]:']
+    const LINES_TO_SKIP_ARRAY = ['#{1,6}\\s', '>', '===', '\\-\\-\\-', '\\*\\*\\*', '___', '\\|', '\\[\\^[^\\]]+\\]:', ':\\s']
     const LINE_SKIP_REGEX = new RegExp('^\\s{0,3}(' + LINES_TO_SKIP_ARRAY.join('|') + ')')
     const NEXT_LINE_SKIP_REGEX = /^\s{0,3}(=+|-+)\s*$/
     const WHITESPACE_CODE_SKIP_REGEX = /^(\t| {4,})/
+    const LIST_INDICATOR_REGEX = /^\s*(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+/ // For checking if previous line is a list item
+    const TABLE_ROW_REGEX = /^\s*[^|\n]*(\|[^|\n]*){1,}\s*$/
+    const TABLE_SEPARATOR_REGEX = /^\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?\s*$/
 
     // Create regex for Markdown tag-likes to skip
-    const TAGLIKE_TO_SKIP_REGEX = /`|~~|```|~~~|\*{1,3}|_{1,3}/
+    const TAGLIKE_TO_SKIP_REGEX = /^(`|```|~~~|~~|\*{1,3}|_{1,3}|\${1,2})$/
+    const MULTILINE_TAGLIKE_TO_SKIP_REGEX = /^(```|~~~)$/
+    const NESTED_LIST_INDICATOR_REGEX = /^\s+(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+$/
 
-    // Create regexes for HTML tags to skip
+    // Create regexes for HTML tags
+    const HTML_TAG_START_REGEX = /^<(?!\/)(?!(?:[a-zA-Z][a-zA-Z0-9+.-]*:|[^<>\s]+@))(?:"[^"]*"|'[^']*'|[^'">])*(?<!\/)>$/
+    const HTML_TAG_END_REGEX = /^<\/(?:"[^"]*"|'[^']*'|[^'">])*>$/
+    const HTML_VOID_TAGS = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']
+    const HTML_VOID_TAG_REGEX = new RegExp(`^<(?:` + HTML_VOID_TAGS.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?\\/?>$`, 'i')
     const HTML_TAGS_TO_SKIP_ARRAY = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
-    const HTML_TAG_START_REGEX = new RegExp('^<(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$`, 'i')
-    const HTML_TAG_END_REGEX = new RegExp('^<\\/(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>$', 'i')
+    const HTML_TAG_TO_SKIP_START_REGEX = new RegExp('^<(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$`, 'i')
+    const HTML_TAG_TO_SKIP_END_REGEX = new RegExp('^<\\/(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>$', 'i')
 
     // Create HTML b tag start and Markdown bold tag-like (**) regex
     const HTML_B_START_REGEX = /^<b(?:\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$/i
@@ -214,49 +223,65 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
 
     // Create regex for checking if element is convertable
     const ELEMENT_CHECK_REGEX = new RegExp(
-        `^(?:\\s*|^<!--[\\s\\S]*?-->$|^&[a-zA-Z0-9#]+;$|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*{1,3}|_{1,3}|~~|\`|!?\\[[^\\]]*\\]\\([^)]*\\)|<[^<>\\s]+:\\/\\/[^<>\\s]+>|\\s{0,3}(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+\\.)\\s+` +
+        `^(?:\\s*(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+[.)])\\s+|\\s*|<!--[\\s\\S]*?-->|&[a-zA-Z0-9#]+;|\\\\.|!?\\[[^\\]]*\\]\\(\\s*(?:[^()\\s]|\\([^()]*\\))*(?:\\s+(?:"[^"]*"|'[^']*'))?\\s*\\)|!?\\[[^\\]]*\\]\\[[^\\]]*\\]|!?\\[[^\\]]*\\](?!\\(|\\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\\s]+|[^<>\\s]+@[^<>\\s]+)>|https?:\\/\\/[^\\s<>]+|www\\.[^\\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*+|_+|\`\`\`|~~~|~~|\\${1,2}` +
         (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) +
         (boldSpecialChars ? '' : `|[@#$%^&*_+\\-=<>/\\\\|~\`]+`) +
         ')$'
     )
 
     // Tag counters
+    let htmlValidTagCounter = 0 // Counter for tags that do not block bolding. Used to switch between Markdown and HTML bolding methods
     let htmlTagSkipCounter = 0 // Counter for skipping HTML tags that don't need bolding / aren't supposed to be bolded
     let taglikeStack = [] // Stack for safer and better handling of Markdown tag-likes
     let replaceNextBold = false // Bool for marking if the next bold (** or __) taglike is the closing one and should be replaced 
 
     // Split input line by line
     let textLineArray = inputText.split(LINE_SPLIT_REGEX).filter(line => line != '')
-    //console.log(textLineArray)
+    console.log(textLineArray)
 
     // Loop through lines
     textLineArray = textLineArray.map((line, i, array) => {
         // Check for line skipping conditions
-        let whitespace_check = WHITESPACE_CODE_SKIP_REGEX.test(line)
-        let line_check = LINE_SKIP_REGEX.test(line)
-        let next_line_check = false
-        if(i + 1 < array.length && !whitespace_check) { next_line_check = NEXT_LINE_SKIP_REGEX.test(array[i + 2]) }
+        let prevLineListCheck = (i - 2 >= 0 ? LIST_INDICATOR_REGEX.test(array[i - 2]) : false)
+        let listCheck = LIST_INDICATOR_REGEX.test(line)
+        let whitespaceCheck = WHITESPACE_CODE_SKIP_REGEX.test(line) && !prevLineListCheck
+        let lineCheck = LINE_SKIP_REGEX.test(line) 
 
-        if(!whitespace_check && !line_check && !next_line_check) { // Continue if the line shouldn't be skipped
+        let nextLineCheck = false
+        if(i + 2 < array.length && !whitespaceCheck) { nextLineCheck = NEXT_LINE_SKIP_REGEX.test(array[i + 2]) }
+        
+        let tableCheck = false
+        if(i + 2 < array.length && i - 2 >= 0 && !whitespaceCheck && (TABLE_ROW_REGEX.test(line) || TABLE_SEPARATOR_REGEX.test(line)) ) { tableCheck = TABLE_ROW_REGEX.test(array[i - 2]) || TABLE_SEPARATOR_REGEX.test(array[i - 2]) || TABLE_ROW_REGEX.test(array[i + 2]) || TABLE_SEPARATOR_REGEX.test(array[i + 2]) }
+
+        if(!whitespaceCheck && !lineCheck && !nextLineCheck && !tableCheck) { // Continue if the line shouldn't be skipped
             // Split text in the line
             let textArray = line.split(TEXT_SPLIT_REGEX).filter(element => element != '')
+            console.log(textArray)
 
             // Loop through the elements in the line
             textArray = textArray.map((element) => {
-                if(HTML_TAG_START_REGEX.test(element)) { // Check for HTML tags to skip start
+                console.log(`Element: ${element} \nCounters: ${htmlValidTagCounter}, ${htmlTagSkipCounter}, ${taglikeStack}, ${replaceNextBold} \nChecks: ${HTML_TAG_TO_SKIP_START_REGEX.test(element)}, ${HTML_TAG_TO_SKIP_END_REGEX.test(element)}, ${HTML_B_START_REGEX.test(element)}, ${TAGLIKE_TO_SKIP_REGEX.test(element)}, ${MARKDOWN_B_START_REGEX.test(element)}, ${!ELEMENT_CHECK_REGEX.test(element)}`)
+
+                if(HTML_TAG_TO_SKIP_START_REGEX.test(element) && taglikeStack.length <= 0) { // Check for HTML tag to skip start
                     if(HTML_B_START_REGEX.test(element)) { // Check if the tag is a <b> tag
                         element = colorBoldHTML(element, markingColor) // Add coloring to the text that's already bolded via <b> tag 
                     }
                     htmlTagSkipCounter += 1
                 }
-                else if(HTML_TAG_END_REGEX.test(element) && htmlTagSkipCounter > 0) { // Check for HTML tags to skip end
-                    htmlTagSkipCounter -= 1
+                else if(HTML_TAG_START_REGEX.test(element) && !HTML_VOID_TAG_REGEX.test(element) && htmlTagSkipCounter <= 0 && taglikeStack.length <= 0) { // Check if the tag is a void tag (not standard start+end)
+                    htmlValidTagCounter += 1 
                 }
-                else if(htmlTagSkipCounter <= 0 && TAGLIKE_TO_SKIP_REGEX.test(element)) { // Check for Markdown tag-likes
+                else if(HTML_TAG_END_REGEX.test(element) && ( htmlTagSkipCounter > 0 || htmlValidTagCounter > 0) && taglikeStack.length <= 0) { // Check for HTML tags end
+                    // Check if the tag it's one of the skipped or void tags
+                    if(HTML_TAG_TO_SKIP_END_REGEX.test(element)) { htmlTagSkipCounter -= 1 }
+                    else if(!HTML_VOID_TAG_REGEX.test(element) && htmlTagSkipCounter <= 0) { htmlValidTagCounter -= 1 }
+                }
+                else if(TAGLIKE_TO_SKIP_REGEX.test(element) && htmlTagSkipCounter <= 0) { // Check for Markdown tag-likes  
                     if(taglikeStack.length > 0 && taglikeStack[taglikeStack.length - 1] == element) { taglikeStack.pop() }
-                    else { taglikeStack.push(element) }
+                    else if(!MULTILINE_TAGLIKE_TO_SKIP_REGEX.test(taglikeStack[taglikeStack.length - 1])) { taglikeStack.push(element) }
                     
-                    if(MARKDOWN_B_START_REGEX.test(element)) { // Check for ** or __ taglikes
+                    // Check for ** or __ taglikes
+                    if(MARKDOWN_B_START_REGEX.test(element) && !MULTILINE_TAGLIKE_TO_SKIP_REGEX.test(taglikeStack[taglikeStack.length - 1])) {
                         if(replaceNextBold) {
                             element = '</b>'
                             replaceNextBold = false
@@ -267,15 +292,19 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
                         }
                     }
                 }
-                else if(!ELEMENT_CHECK_REGEX.test(element) && htmlTagSkipCounter <= 0 && taglikeStack.length <= 0) {
+                else if(!ELEMENT_CHECK_REGEX.test(element) && htmlTagSkipCounter <= 0 && taglikeStack.length <= 0 && !(NESTED_LIST_INDICATOR_REGEX.test(element) && listCheck)) {
                     // Bold the text if it's not empty or only whitespaces or HTML tag or Markdown tag-like (or punctuation/special chars depending on settings)
                     let boldingLength = clamp(element.length * boldingPercentage, minCharsToBold, element.length)
-                    element = '**' + element.slice(0, boldingLength) + '**' + element.slice(boldingLength)
+
+                    // Bold text HTML or Markdown way, depending on if it's inside of HTML or not
+                    if(htmlValidTagCounter > 0) { element = '<b>' + element.slice(0, boldingLength) + '</b>' + element.slice(boldingLength) }
+                    else { element = '**' + element.slice(0, boldingLength) + '**' + element.slice(boldingLength) }
                 }
 
                 return element
             })
             line = textArray.join('') // Join converted elements into a line
+            console.log(line)
         }
         return line // Return converted line
     })
