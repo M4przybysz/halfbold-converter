@@ -4,8 +4,8 @@
 #### H4 Header
 ##### H5 Header
 ###### H6 Header
-**###**#### **N**ot **a** **hea**der **(**7 **has**hes)
-**#NoS**pace **n**ot **a** **hea**der
+####### **N**ot **a** **hea**der (**7** **has**hes)
+#**NoS**pace **n**ot **a** **hea**der
    ### Header with 3 leading spaces
 
 Setext H1
@@ -16,21 +16,19 @@ Setext H2
 
 ## Inline formatting
 
-**Pl**ain **te**xt **wi**th <b style="color: rgb(0, 0, 255);">bold</b>**,** <b style="color: rgb(0, 0, 255);">bold underscore</b>**,** *italic***,** _italic underscore_**,** ***bold italic*****,** ___bold italic underscore___**,** ~~strikethrough~~**,** **a**nd `inline code`**.**
+**Pl**ain **te**xt **wi**th <b style="color: rgb(0, 0, 255);">bold</b>, <b style="color: rgb(0, 0, 255);">bold underscore</b>, *italic*, _italic underscore_, ***bold italic***, ___bold italic underscore___, ~~strikethrough~~, **a**nd `inline code`.
 
-**Nes**ted: *italic with <b style="color: rgb(0, 0, 255);">bold</b> inside***,** <b style="color: rgb(0, 0, 255);">bold with *italic* inside</b>**.**
+**Esc**aped: \***n**ot **ita**lic\*, \*\***n**ot **bo**ld\*\*, \_**n**ot **ita**lic\_, \`**n**ot **co**de\`, \# **n**ot **hea**der.
 
-**Esca**ped: \***n**ot **ita**lic\***,** \*\***n**ot **bo**ld\*\***,** \_**n**ot **ita**lic\_**,** \`**n**ot **co**de\`**,** \# **n**ot **hea**der.
-
-**Em**pty **mark**ers: **** **a**nd **`**` **a**nd **~~**~~**.**
+**Em**pty **mar**kers: **** **a**nd `` **a**nd ~~~~.
 
 ## Line breaks
 
 **T**wo **trai**ling **spa**ces **br**eak  
-**ne**xt **li**ne **af**ter **bre**ak.
+**ne**xt **li**ne **af**ter **br**eak.
 
-**Back**slash **bre**ak\
-**ne**xt **li**ne **af**ter **backs**lash.
+**Back**slash **br**eak\
+**ne**xt **li**ne **af**ter **back**slash.
 
 ## Blockquotes
 
@@ -46,7 +44,7 @@ Setext H2
 - **Da**sh **it**em
 * **St**ar **it**em
 + **Pl**us **it**em
-**-Not**AList **(**no **spa**ce)
+-**NotA**List (**n**o **sp**ace)
 1. **Ord**ered **o**ne
 2. **Ord**ered **t**wo
 10. **Ord**ered **t**en
@@ -87,7 +85,7 @@ print("hello")
 ---
 ***
 ___
-- **-** **-**
+- - -
 * * *
 
 ## Links and images
@@ -104,12 +102,12 @@ ___
 ![Reference image][img1]
 <https://example.com/autolink>
 <mailto:test@example.com>
-**Ba**re **UR**L: https://example.com **a**nd www.example.com
+**Ba**re **U**RL: https://example.com **a**nd www.example.com
 
-**[re**f1]: https://example.com **"Refe**rence"
-**[Coll**apsed **re**f]: https://example.com
-**[Sho**rtcut **re**f]: https://example.com
-**[im**g1]: https://example.com/img.png
+[**re**f1]: https://example.com "**Refe**rence"
+[**Coll**apsed **r**ef]: https://example.com
+[**Shor**tcut **r**ef]: https://example.com
+[**im**g1]: https://example.com/img.png
 
 ## Tables
 
@@ -119,7 +117,7 @@ ___
 | **bold** | `code` | [link](https://example.com) |
 | | empty left | |
 
-**N**o **lea**ding **pi**pe **tab**le:
+**N**o **lea**ding **pi**pe **ta**ble:
 
 A | B
 --|--
@@ -127,7 +125,7 @@ A | B
 
 ## Footnotes
 
-**Te**xt **wi**th **foot**note[^1] **a**nd **ano**ther[^note]**.**
+**Te**xt **wi**th **foot**note[^1] **a**nd **ano**ther[^note].
 
 [^1]: Footnote one.
 [^note]: Footnote two with **bold**.
@@ -148,9 +146,9 @@ A | B
 
 **Uppe**rcase **ta**gs: <b style="color: rgb(0, 0, 255);">BOLD</B> <CODE>CODE</CODE>
 
-**Se**lf **clos**ing: <img src="a.png" alt="x > y" /> <hr /> <input type="text" value="a<b">
+**Se**lf **clo**sing: <img src="a.png" alt="x > y" /> <hr /> <input type="text" value="a<b">
 
-**Comm**ent: <!-- comment with <b>tag</b> inside -->
+**Com**ment: <!-- comment with <b>tag</b> inside -->
 
 ## HTML block tags
 
@@ -259,43 +257,43 @@ var x = "should not be bolded"; if (a < b && c > d) { alert('x'); }
 
 ## Punctuation
 
-**Per**iod. **Com**ma, **semic**olon; **col**on: **exclam**ation! **ques**tion? **Apostr**ophe's **"do**uble **quo**tes" **'si**ngle **quot**es'.
+**Per**iod. **Co**mma, **semi**colon; **co**lon: **excla**mation! **ques**tion? **Apost**rophe'**s** "**dou**ble **quo**tes" '**sin**gle **quo**tes'.
 
-**Brac**kets: **(ro**und) [square] **{cur**ly}.
+**Brac**kets: (**ro**und) [square] {**cu**rly}.
 
-**Das**hes: **hyphen**-ated, **en–d**ash, **em—d**ash, **mi**nus **-** **alo**ne.
+**Das**hes: **hyp**hen-**at**ed, **e**n–**da**sh, **e**m—**da**sh, **mi**nus - **al**one.
 
-**Ellip**sis... **a**nd **repea**ted!!! **?**?? **?!**?! **,**,, **;**;; **:**::
+**Elli**psis... **a**nd **repe**ated!!! ??? ?!?! ,,, ;;; :::
 
-**Quo**tes **a**t **edg**es: **"st**art **o**f **li**ne **a**nd **e**nd **o**f **lin**e".
+**Quo**tes **a**t **ed**ges: "**st**art **o**f **li**ne **a**nd **e**nd **o**f **li**ne".
 
 ## Special characters
 
-**Ema**il: **test@exa**mple.com, **pri**ce: **$19**.99, **disc**ount: **50**%, **ma**th: **a+b**=c, **pa**th: **/usr**/bin, **wind**ows: **C**:\U**se**rs\n**am**e, **pi**pe: **a|**b, **til**de: **~****ho**me, **ha**sh: **#t**ag, **car**et: **x^**2.
+**Em**ail: **te**st@**exa**mple.**c**om, **pr**ice: $**1**9.**9**9, **disc**ount: **5**0%, **ma**th: **a**+**b**=**c**, **pa**th: /**u**sr/**b**in, **win**dows: **C**:\U**se**rs\n**a**me, **pi**pe: **a**|**b**, **ti**lde: ~**ho**me, **ha**sh: #**t**ag, **ca**ret: **x**^**2**.
 
 **Enti**ties: &amp; &lt; &gt; &copy; &nbsp; &#169; &#x1F600; &quot;
 
-**Unic**ode: **ca**fé, **naï**ve, **Zaż**ółć **gę**ślą **ja**źń, **日本語の**テキスト, **При**вет **ми**р, **em**oji **�**� **�**�, **sym**bols **©** **®** **™** **€** **£** **¥** **§** **¶** **†** **‡** **•** **°** **±** **×** **÷**.
+**Uni**code: **ca**fé, **na**ïve, **Zaż**ółć **gę**ślą **ja**źń, **日本語の**テキスト, **При**вет **м**ир, **em**oji **�**� **�**�, **sym**bols **©** **®** **™** **€** **£** **¥** **§** **¶** **†** **‡** **•** **°** **±** **×** **÷**.
 
-**Em**oji **short**code: **:sm**ile: **:ta**da:
+**Em**oji **shor**tcode: :**sm**ile: :**ta**da:
 
 ## Whitespace edge cases
 
-**Mult**iple    **spa**ces    **bet**ween    **wor**ds.
-**T**ab	**bet**ween	**wor**ds.
+**Mult**iple    **spa**ces    **bet**ween    **wo**rds.
+**T**ab	**bet**ween	**wo**rds.
 **Trai**ling **spa**ces **a**t **e**nd   
-   **Lea**ding **spa**ces **(**3) **a**t **st**art
-**Whitesp**ace-only **li**ne **bel**ow:
+   **Lea**ding **spa**ces (**3**) **a**t **st**art
+**White**space-**on**ly **li**ne **be**low:
    
 
-**T**wo **bl**ank **li**nes **bel**ow:
+**T**wo **bl**ank **li**nes **be**low:
 
 
-**E**nd **o**f **sect**ion.
+**E**nd **o**f **sec**tion.
 
 ## Mixed edge cases
 
-**Li**ne **wi**th <b style="color: rgb(0, 0, 255);">html bold</b>**,** <b style="color: rgb(0, 0, 255);">markdown bold</b>**,** **pl**ain **te**xt, `inline code`**,** [a link](https://example.com)**,** <https://example.com>**,** ![img](a.png)**,** ~~strike~~**,** **a**nd <i><b>ht</b>ml <b>ita</b>lic</i> **a**ll **toge**ther!
+**Li**ne **wi**th <b style="color: rgb(0, 0, 255);">html bold</b>, <b style="color: rgb(0, 0, 255);">markdown bold</b>, **pl**ain **te**xt, `inline code`, [a link](https://example.com), <https://example.com>, ![img](a.png), ~~strike~~, **a**nd <i><b>ht</b>ml <b>ita</b>lic</i> **a**ll **toge**ther!
 
 <b style="color: rgb(0, 0, 255);">Bold at line start</b> **th**en **pl**ain **te**xt, **a**nd **pl**ain **te**xt **th**en <b style="color: rgb(0, 0, 255);">bold at line end</b>
 
@@ -307,10 +305,8 @@ two lines</b>
 <b style="color: rgb(0, 0, 255);">HTML bold across
 two lines</b>
 
-`code with <b style="color: rgb(0, 0, 255);">stars</b> and <b>tags</b> inside`
+`code with **stars** and <b>tags</b> inside`
 
 [link with `code` inside](https://example.com)
-
-<b style="color: rgb(0, 0, 255);">**double bold**</b> **a**nd <b style="color: rgb(0, 0, 255);"><b>double bold reversed</b></b>
 
 **La**st **li**ne **wit**hout **trai**ling **new**line

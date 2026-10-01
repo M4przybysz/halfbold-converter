@@ -170,7 +170,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
     const LINE_SPLIT_REGEX = /(\r\n|\r|\n)/
 
     // Create regex for splitting text in lines
-    const TEXT_SPLIT_REGEX = /(^\s*(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+|\s+|<!--[\s\S]*?-->|&[a-zA-Z0-9#]+;|\\.|!?\[[^\]]*\]\(\s*(?:[^()\s]|\([^()]*\))*(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)|!?\[[^\]]*\]\[[^\]]*\]|!?\[[^\]]*\](?!\(|\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\s]+|[^<>\s]+@[^<>\s]+)>|https?:\/\/[^\s<>]+|www\.[^\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\*+|_+|\`+|~+|\${1,2}|[.,;:!?'"()[\]{}–—]+|[@#$%^&*_+\-=<>\/\\|~`]+)/g
+    const TEXT_SPLIT_REGEX = /(^\s*(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+|\s+|<!--[\s\S]*?-->|&[a-zA-Z0-9#]+;|\\.|!?\[[^\]]*\]\(\s*(?:[^()\s]|\([^()]*\))*(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)|!?\[[^\]]*\]\[[^\]]*\]|!?\[[^\]]*\](?!\(|\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\s]+|[^<>\s]+@[^<>\s]+)>|https?:\/\/[^\s<>]+|www\.[^\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\*+|_+|\`+|~+|\${1,2}|[.,;:!?'"()[\]{}–—]+|[@#$%^&*_+\-=\/\\|~`]+)/g
 
     // Create regexes for lines to skip
     const LINES_TO_SKIP_ARRAY = ['#{1,6}\\s', '>', '===', '\\-\\-\\-', '\\*\\*\\*', '___', '\\|', '\\[\\^[^\\]]+\\]:', ':\\s']
@@ -182,8 +182,8 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
     const TABLE_SEPARATOR_REGEX = /^\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?\s*$/
 
     // Create regex for Markdown tag-likes to skip
-    const TAGLIKE_TO_SKIP_REGEX = /^(`|```|~~~|~~|\*{1,3}|_{1,3}|\${1,2})$/
-    const MULTILINE_TAGLIKE_TO_SKIP_REGEX = /^(```|~~~)$/
+    const TAGLIKE_TO_SKIP_REGEX = /^(`|```|~~~|~~|\*{1,3}|_{1,3})$/
+    const MULTILINE_TAGLIKE_TO_SKIP_REGEX = /^(`|```|~~~)$/
     const NESTED_LIST_INDICATOR_REGEX = /^\s+(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+$/
 
     // Create regexes for HTML tags
@@ -200,7 +200,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
     const MARKDOWN_B_START_REGEX = /^(\*\*|__)$/
 
     // Create regex for checking if element is convertable
-    const ELEMENT_CHECK_REGEX = /^(?:\s*(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+|\s*|<!--[\s\S]*?-->|&[a-zA-Z0-9#]+;|\\.|!?\[[^\]]*\]\(\s*(?:[^()\s]|\([^()]*\))*(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)|!?\[[^\]]*\]\[[^\]]*\]|!?\[[^\]]*\](?!\(|\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\s]+|[^<>\s]+@[^<>\s]+)>|https?:\/\/[^\s<>]+|www\.[^\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\*+|_+|```|~~~|~~|\${1,2}|[.,;:!?'"()[\]{}–—]+|[@#$%^&*_+\-=<>/\\|~`]+)$/
+    const ELEMENT_CHECK_REGEX = /^(?:\s*(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+|\s*|<!--[\s\S]*?-->|&[a-zA-Z0-9#]+;|\\.|!?\[[^\]]*\]\(\s*(?:[^()\s]|\([^()]*\))*(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)|!?\[[^\]]*\]\[[^\]]*\]|!?\[[^\]]*\](?!\(|\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\s]+|[^<>\s]+@[^<>\s]+)>|https?:\/\/[^\s<>]+|www\.[^\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\*+|_+|```|~~~|~~|\${1,2}|[.,;:!?'"()[\]{}–—]+|[@#$%^&*_+\-=/\\|~`]+)$/
 
     // Tag counters
     let htmlValidTagCounter = 0 // Counter for tags that do not block bolding. Used to switch between Markdown and HTML bolding methods
@@ -254,7 +254,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
                     else if(!MULTILINE_TAGLIKE_TO_SKIP_REGEX.test(taglikeStack[taglikeStack.length - 1])) { taglikeStack.push(element) }
                     
                     // Check for ** or __ taglikes
-                    if(MARKDOWN_B_START_REGEX.test(element) && !MULTILINE_TAGLIKE_TO_SKIP_REGEX.test(taglikeStack[taglikeStack.length - 1])) {
+                    if(MARKDOWN_B_START_REGEX.test(element) && !(taglikeStack.length > 0 && !MARKDOWN_B_START_REGEX.test(taglikeStack[taglikeStack.length - 1]))) {
                         if(replaceNextBold) {
                             element = '</b>'
                             replaceNextBold = false

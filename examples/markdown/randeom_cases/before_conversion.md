@@ -18,8 +18,6 @@ Setext H2
 
 Plain text with **bold**, __bold underscore__, *italic*, _italic underscore_, ***bold italic***, ___bold italic underscore___, ~~strikethrough~~, and `inline code`.
 
-Nested: *italic with **bold** inside*, **bold with *italic* inside**.
-
 Escaped: \*not italic\*, \*\*not bold\*\*, \_not italic\_, \`not code\`, \# not header.
 
 Empty markers: **** and `` and ~~~~.
@@ -310,7 +308,5 @@ two lines</b>
 `code with **stars** and <b>tags</b> inside`
 
 [link with `code` inside](https://example.com)
-
-<b>**double bold**</b> and **<b>double bold reversed</b>**
 
 Last line without trailing newline
