@@ -1,3 +1,7 @@
+//==================================================================================================================
+// Support functions, variables and constants
+//==================================================================================================================
+
 // Clamp function
 const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
 
@@ -8,10 +12,12 @@ const InputTextType = Object.freeze({
     MARKDOWN : "MARKDOWN",
 })
 
-// Output of scrolling percentage while using the boldingPercentage range input 
-function outputBoldingPercentage(value) {
-    document.getElementById('boldingPercentageOutput').textContent = Math.round(value * 100) + '%'
-}
+// Converter output element (div/textarea)
+let output = document.getElementById("outputTextarea")
+
+//==================================================================================================================
+// Text conversion functionality
+//==================================================================================================================
 
 // General converter function
 function convertText() {
@@ -24,31 +30,8 @@ function convertText() {
     let boldSpecialChars = document.getElementById('boldSpecialChars').checked // bold or don't bold special characters (true/false)
     let markingColor = document.getElementById('markingColor').value // Color of text that is already bolded in HTML (color)
 
-    // Log converter inpus
+    // Log converter inputs
     //console.log('Converter inputs: ', inputText, inputType, boldingPercentage, boldPunctuation, boldSpecialChars, markingColor)
-
-    // Assign output HTML element
-    let output = null  
-    if(inputType == InputTextType.PLAIN_TEXT) {
-        output = document.getElementById("outputDiv")
-
-        // Hide textarea and show outputDiv to make output text ready-to-read
-        if(window.getComputedStyle(output, null).display == 'none') { 
-            document.getElementById('openBigPageButton').style.display = 'block'
-            document.getElementById('outputTextarea').style.display = 'none' 
-            output.style.display = 'block'
-        }
-    }
-    else {
-        output = document.getElementById("outputTextarea")
-
-        // Hide div and show textarea to return HTML code with bolding applied
-        if(window.getComputedStyle(output, null).display == 'none') { 
-            document.getElementById('openBigPageButton').style.display = 'none'
-            document.getElementById("outputDiv").style.display = 'none' 
-            output.style.display = 'block'
-        }
-    }
 
     // Convert text based on input type
     switch(inputType) {
@@ -62,7 +45,7 @@ function convertText() {
             break;
 
         case InputTextType.MARKDOWN:
-            output.value = convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars, markingColor)
+            output.value = convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingColor)
             break;
         
         default:
@@ -181,18 +164,13 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
 }
 
 // Convert Markdown
-function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunctuation, boldSpecialChars, markingColor) 
+function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingColor) 
 {
     // Create regex for splitting input into lines
-    const LINE_SPLIT_REGEX = new RegExp(/(\r\n|\r|\n)/)
+    const LINE_SPLIT_REGEX = /(\r\n|\r|\n)/
 
     // Create regex for splitting text in lines
-    const TEXT_SPLIT_REGEX = new RegExp(
-        `(^\\s*(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+[.)])\\s+|\\s+|<!--[\\s\\S]*?-->|&[a-zA-Z0-9#]+;|\\\\.|!?\\[[^\\]]*\\]\\(\\s*(?:[^()\\s]|\\([^()]*\\))*(?:\\s+(?:"[^"]*"|'[^']*'))?\\s*\\)|!?\\[[^\\]]*\\]\\[[^\\]]*\\]|!?\\[[^\\]]*\\](?!\\(|\\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\\s]+|[^<>\\s]+@[^<>\\s]+)>|https?:\\/\\/[^\\s<>]+|www\\.[^\\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*+|_+|\`+|~+|\\${1,2}` +
-        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) +
-        (boldSpecialChars ? '' : `|[@#$%^&*_+\\-=<>\\/\\\\|~\`]+`) +
-        ')', 'g'
-    )
+    const TEXT_SPLIT_REGEX = /(^\s*(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+|\s+|<!--[\s\S]*?-->|&[a-zA-Z0-9#]+;|\\.|!?\[[^\]]*\]\(\s*(?:[^()\s]|\([^()]*\))*(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)|!?\[[^\]]*\]\[[^\]]*\]|!?\[[^\]]*\](?!\(|\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\s]+|[^<>\s]+@[^<>\s]+)>|https?:\/\/[^\s<>]+|www\.[^\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\*+|_+|\`+|~+|\${1,2}|[.,;:!?'"()[\]{}–—]+|[@#$%^&*_+\-=<>\/\\|~`]+)/g
 
     // Create regexes for lines to skip
     const LINES_TO_SKIP_ARRAY = ['#{1,6}\\s', '>', '===', '\\-\\-\\-', '\\*\\*\\*', '___', '\\|', '\\[\\^[^\\]]+\\]:', ':\\s']
@@ -222,12 +200,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, boldPunct
     const MARKDOWN_B_START_REGEX = /^(\*\*|__)$/
 
     // Create regex for checking if element is convertable
-    const ELEMENT_CHECK_REGEX = new RegExp(
-        `^(?:\\s*(?:[-*+]\\s+\\[[ xX]\\]|[-*+]|\\d+[.)])\\s+|\\s*|<!--[\\s\\S]*?-->|&[a-zA-Z0-9#]+;|\\\\.|!?\\[[^\\]]*\\]\\(\\s*(?:[^()\\s]|\\([^()]*\\))*(?:\\s+(?:"[^"]*"|'[^']*'))?\\s*\\)|!?\\[[^\\]]*\\]\\[[^\\]]*\\]|!?\\[[^\\]]*\\](?!\\(|\\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\\s]+|[^<>\\s]+@[^<>\\s]+)>|https?:\\/\\/[^\\s<>]+|www\\.[^\\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\\*+|_+|\`\`\`|~~~|~~|\\${1,2}` +
-        (boldPunctuation ? '' : `|[.,;:!?'"()[\\]{}–—]+`) +
-        (boldSpecialChars ? '' : `|[@#$%^&*_+\\-=<>/\\\\|~\`]+`) +
-        ')$'
-    )
+    const ELEMENT_CHECK_REGEX = /^(?:\s*(?:[-*+]\s+\[[ xX]\]|[-*+]|\d+[.)])\s+|\s*|<!--[\s\S]*?-->|&[a-zA-Z0-9#]+;|\\.|!?\[[^\]]*\]\(\s*(?:[^()\s]|\([^()]*\))*(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)|!?\[[^\]]*\]\[[^\]]*\]|!?\[[^\]]*\](?!\(|\[|:)|<(?:[a-zA-Z][a-zA-Z0-9+.-]*:[^<>\s]+|[^<>\s]+@[^<>\s]+)>|https?:\/\/[^\s<>]+|www\.[^\s<>]+|<(?:"[^"]*"|'[^']*'|[^'">])*>|\*+|_+|```|~~~|~~|\${1,2}|[.,;:!?'"()[\]{}–—]+|[@#$%^&*_+\-=<>/\\|~`]+)$/
 
     // Tag counters
     let htmlValidTagCounter = 0 // Counter for tags that do not block bolding. Used to switch between Markdown and HTML bolding methods
@@ -331,6 +304,74 @@ function colorBoldMarkdown(color)
     const bTag = temp.firstElementChild
     bTag.style.color = color
     return bTag.outerHTML.replace(/<\/b>$/i, '')
+}
+
+//==================================================================================================================
+// Converter page events/behaviour/etc.
+//==================================================================================================================
+
+// Output of scrolling percentage while using the boldingPercentage range input 
+function outputBoldingPercentage(value) {
+    document.getElementById('boldingPercentageOutput').textContent = Math.round(value * 100) + '%'
+}
+
+// Show/hide page elements based on selected input
+function selectInputType(type) {
+    let inputType = InputTextType[type]
+    let stupidBreaks = document.getElementsByClassName('stupidBreak')
+
+    switch (inputType) {
+        case InputTextType.PLAIN_TEXT:
+            // Switch output object
+            document.getElementById('outputTextarea').style.display = 'none' 
+            output = document.getElementById("outputDiv")
+            output.style.display = 'block'
+
+            // Show "Open big page" button
+            document.getElementById('openBigPageButton').style.display = 'block'
+
+            // Show punctuation and special chars checkboxes
+            document.getElementById('boldPunctuationDiv').style.display = 'block'
+            document.getElementById('boldSpecialCharsDiv').style.display = 'block'
+            for(const element of stupidBreaks) { element.style.display = "block" }
+
+            break;
+        
+        case InputTextType.HTML:
+            // Switch output object
+            document.getElementById("outputDiv").style.display = 'none' 
+            output = document.getElementById("outputTextarea")
+            output.style.display = 'block'
+
+            // Hide "Open big page" button
+            document.getElementById('openBigPageButton').style.display = 'none'
+
+            // Show punctuation and special chars checkboxes
+            document.getElementById('boldPunctuationDiv').style.display = 'block'
+            document.getElementById('boldSpecialCharsDiv').style.display = 'block'
+            for(const element of stupidBreaks) { element.style.display = "block" }
+
+            break;
+        
+        case InputTextType.MARKDOWN:
+            // Switch output object
+            document.getElementById("outputDiv").style.display = 'none' 
+            output = document.getElementById("outputTextarea")
+            output.style.display = 'block'
+
+            // Hide "Open big page" button
+            document.getElementById('openBigPageButton').style.display = 'none'
+
+            // Hide punctuation and special chars checkboxes
+            document.getElementById('boldPunctuationDiv').style.display = 'none'
+            document.getElementById('boldSpecialCharsDiv').style.display = 'none'
+            for(const element of stupidBreaks) { element.style.display = "none" }
+            break;
+        
+        default:
+            console.warn(`Unknown input text type: ${inputType}`) // Warning if someone somehow selects unsupported inputType
+            break;
+    }
 }
 
 // Open big page
