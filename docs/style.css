@@ -147,7 +147,7 @@ textarea {
 }
 
 #bigPageContainer {
-    background-color: rgba(100, 100, 100, 0.5);
+    background-color: rgba(50, 50, 50, 0.75);
     display: none;
     flex-direction: row;
     position: absolute;
@@ -176,11 +176,15 @@ textarea {
     display: none;
 }
 
+#bigPageSettings {
+    color: #ffffff;
+    margin: 5vh auto auto 1vh;
+}
+
 #closeBigPageButton {
     background-color: #ff6961;
     width: 5vh;
     height: 5vh;
-    margin: 5vh auto auto 1vh;
     border: 1px solid black;
     border-radius: 10px;
 }

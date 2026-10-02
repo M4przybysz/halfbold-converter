@@ -124,7 +124,44 @@
 
     <div id="bigPageContainer">
         <div id="bigPage"></div>
-        <input type="button" value="X" id="closeBigPageButton" onclick="closeBigPage()">
+        <div id="bigPageSettings">
+            <input type="button" value="X" id="closeBigPageButton" onclick="closeBigPage()">
+            <br><br>
+            <div class="inputPair">
+                <label for="bigPageFont">Font:</label>
+                <select name="bigPageFont" id="bigPageFont">
+                    <option value="Arial">Arial</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Tahoma">Tahoma</option>
+                    <option value="Trebuchet MS">Trebuchet MS</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Garamond">Garamond</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Brush Script MT">Brush Script MT</option>
+                </select>
+            </div>
+            <br>
+            <div class="inputPair">
+                <label for="bigPageTextColor">Text color:</label>
+                <input type="color" name="bigPageTextColor" id="bigPageTextColor">
+            </div>
+            <br>
+            <div class="inputPair">
+                <label for="bigPageTextSize">Text size:</label>
+                <input type="number" name="bigPageTextSize" id="bigPageTextSize">
+            </div>
+            <br>
+            <div class="inputPair">
+                <label for="bigPageBackgroundColor">Page background color:</label>
+                <input type="color" name="bigPageBackgroundColor" id="bigPageBackgroundColor">
+            </div>
+            <br>
+            <div class="inputPair">
+                <label for="bigPageWidth">Page width:</label>
+                <input type="number" name="bigPageWidth" id="bigPageWidth">
+            </div>
+        </div>
     </div>
 
     <script src="./converter.js"></script>
