@@ -36,7 +36,7 @@ To turn your text/HTML into half-bolded format follow these steps:
 7. Click the **Convert** button.
 8. Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML and Markdown, the eligible text is partially bolded with \<b\> tags and text that was bold before conversion gets colored to the chosen marking color.
 
-**NOTE (HTML):** If you're converting HTML, text outside of body, text inside these tags: [h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map], and HTML entities won't be converted by design. If there are no body tags (\<body\> and \</body\>), the entire code gets treated as if it was inside the HTML body.
+**NOTE (HTML):** If you're converting HTML, text outside of body, text inside these tags: [h[1-6], script, style, code, pre, textarea, noscript, svg, canvas, select, math, datalist, template, iframe, object, audio, video, progress, meter, map, blockquote], and HTML entities won't be converted by design. If there are no body tags (\<body\> and \</body\>), the entire code gets treated as if it was inside the HTML body.
 
 **NOTE (Markdown):** If you're converting markdown, HTML entities, text inside the HTML tags from the list above, and formatted into: [headers, horizontal lines, blockquotes, tables, footnotes, code, links, images] won't be converted by design. Additionaly bolding punctuation and special characters is turned off for Markdown, because of the problems caused by Markdown's ambiguity.
 
