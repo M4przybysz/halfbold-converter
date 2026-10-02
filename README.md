@@ -31,7 +31,7 @@ To turn your text/HTML into half-bolded format follow these steps:
 2. Choose **input type**: Plain text, HTML, or Markdown.
 3. Set the **bolding percentage** (5-75%) - how much of each word should be bolded.
 4. Set the **minimum number of characters to bold** in each word (1 or more).
-5. Check/uncheck **bolding of punctuation and special characters**.
+5. If you're converting plain text or HTML, check/uncheck **bolding of punctuation and special characters**.
 6. If you're converting HTML or Markdown, choose the **marking color** for text that's already bold.
 7. Click the **Convert** button.
 8. Plain text gets converted to a ready-to-read half-bolded version. In the case of HTML and Markdown, the eligible text is partially bolded with \<b\> tags and text that was bold before conversion gets colored to the chosen marking color.
