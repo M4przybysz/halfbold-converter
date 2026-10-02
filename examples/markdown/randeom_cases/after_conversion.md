@@ -162,7 +162,7 @@ A | B
 <h2 class="x">HTML H2</h2>
 <h6>HTML H6</h6>
 
-<blockquote><b>HT</b>ML <b>block</b>quote <b>te</b>xt</blockquote>
+<blockquote>HTML blockquote text</blockquote>
 
 <ul>
    <li><b>HT</b>ML <b>li</b>st <b>it</b>em <b>o</b>ne</li>

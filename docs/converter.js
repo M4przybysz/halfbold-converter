@@ -102,7 +102,7 @@ function convertHTML(inputText, boldingPercentage, minCharsToBold, boldPunctuati
     )
 
     // Create regexes for tags to skip
-    const TAGS_TO_SKIP_ARRAY = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
+    const TAGS_TO_SKIP_ARRAY = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map', 'blockquote']
     const TAG_START_REGEX = new RegExp('^<(?:b|' + TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$`, 'i')
     const TAG_END_REGEX = new RegExp('^<\\/(?:b|' + TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>$', 'i')
 
@@ -191,7 +191,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
     const HTML_TAG_END_REGEX = /^<\/(?:"[^"]*"|'[^']*'|[^'">])*>$/
     const HTML_VOID_TAGS = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']
     const HTML_VOID_TAG_REGEX = new RegExp(`^<(?:` + HTML_VOID_TAGS.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?\\/?>$`, 'i')
-    const HTML_TAGS_TO_SKIP_ARRAY = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map']
+    const HTML_TAGS_TO_SKIP_ARRAY = ['h[1-6]', 'script', 'style', 'code', 'pre', 'textarea', 'noscript', 'svg', 'canvas', 'select', 'math', 'datalist', 'template', 'iframe', 'object', 'audio', 'video', 'progress', 'meter', 'map', 'blockquote']
     const HTML_TAG_TO_SKIP_START_REGEX = new RegExp('^<(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + `)(?:\\s(?:"[^"]*"|'[^']*'|[^'">])*)?>$`, 'i')
     const HTML_TAG_TO_SKIP_END_REGEX = new RegExp('^<\\/(?:b|' + HTML_TAGS_TO_SKIP_ARRAY.join('|') + ')\\s*>$', 'i')
 
