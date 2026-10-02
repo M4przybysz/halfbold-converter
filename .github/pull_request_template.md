@@ -27,7 +27,7 @@ Describe the tests you ran/did to verify your changes. Provide instructions so w
 **Test config:**
 - OS: [e.g. Windows, Linux]
 - Browser: [e.g. Chrome, Firefox]
-- Browser version [e.g. 1.0.0]
+- Browser version: [e.g. 1.0.0]
 
 ### Additional context
 Any relevant screenshots, links, and/or resources.

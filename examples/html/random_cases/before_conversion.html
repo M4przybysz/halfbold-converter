@@ -1,61 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test page</title>
-    <style>body { font-family: sans-serif; }</style>
-    <script>console.log('should stay untouched, in head, not body');</script>
+    <title>Test Page Title</title>
+    <meta charset="UTF-8">
+    <style>
+        .cls > p { color: red; font-weight: bold; }
+        body::before { content: "**not markdown**"; }
+    </style>
+    <script>
+        var x = "should not be bolded"; if (a < b && c > d) { alert('x > y'); }
+    </script>
 </head>
 <body>
 
-    <h1>This heading should not be bolded</h1>
-    <h3>Neither should this one</h3>
+    <h1>H1 Header plain text</h1>
+    <h2 class="x" id="y">H2 with attributes</h2>
+    <h3>H3 with <b>bold inside header (should stay skipped)</b></h3>
+    <h4>H4 Header</h4>
+    <h5>H5 Header</h5>
+    <h6>H6 Header</h6>
 
-    <p>Plain paragraph text that should get partially bolded normally.</p>
+    <p>Paragraph with <b>bold text</b> and <strong>strong text</strong> mixed with plain text that should be bolded.</p>
 
-    <p>Text with <b>already bold</b> word in the middle.</p>
+    <p>Bold with attributes: <b class='x' data-a="a>b" style="color: #ff0000; font-family: Arial;">tricky bold</b></p>
 
-    <b>Top level bold at start of body</b>
+    <p>Nested bold: <b>outer <b>inner</b> outer</b></p>
 
-    <pre><b>Bold inside pre should not be colored or touched</b></pre>
+    <p>Uppercase tags: <B>BOLD</B> and <STRONG>STRONG</STRONG></p>
 
-    <code>var x = 1; // code block, should not be touched</code>
+    <p>Self-closing tags: <img src="a.png" alt="x > y" /> <hr/> <br/> <input type="text" value="a<b"></p>
 
-    <script>
-        function shouldNotBold() { return "ignored"; }
-    </script>
+    <p>Void elements without slash: <br> <hr> <img src="b.png" alt="test"> <input type="checkbox"></p>
 
-    <style>
-        .ignored { color: red; }
-    </style>
+    <p>Comment test: <!-- comment with <b>fake tag</b> inside --> plain text after comment.</p>
 
-    <textarea>Text inside textarea should not be bolded</textarea>
+    <p>Tag with single quotes: <span style='color: blue;'>single quoted attr</span></p>
 
-    <p>Nested <b>bold with <i>italic</i> inside</b> continues here.</p>
+    <p>Tag with mixed quotes: <a href="https://example.com" title='A "quoted" title'>mixed quotes link</a></p>
 
-    <div>
-        <p>Div wrapped paragraph, should bold normally.</p>
-        <pre>
-            <code>
-                nested pre + code, should not touch this either
-            </code>
-        </pre>
-    </div>
+    <p>Tag with no quotes: <div data-x=noquotes>unquoted attribute</div></p>
+
+    <p>Self-referencing angle in attr: <a href="https://example.com?a=<1>">weird href</a></p>
+
+    <blockquote>Blockquote text with <b>bold</b> inside, should this convert or skip?</blockquote>
+
+    <ul>
+        <li>List item one plain text</li>
+        <li>List item two with <b>bold</b></li>
+        <li>Nested list:
+            <ul>
+                <li>Nested item</li>
+            </ul>
+        </li>
+    </ul>
+
+    <ol>
+        <li>Ordered item one</li>
+        <li>Ordered item two</li>
+    </ol>
+
+    <table>
+        <thead>
+            <tr><th>Header 1</th><th>Header 2</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Cell text</td><td><b>Bold cell</b></td></tr>
+            <tr><td>Link cell: <a href="https://example.com">link</a></td><td>Plain</td></tr>
+        </tbody>
+    </table>
+
+    <pre>
+        Preformatted   text
+            keeps    spacing
+        should NOT be bolded
+    </pre>
+
+    <code>Standalone code block text, should be skipped</code>
+
+    <p>Inline <code>code with <b>fake bold</b> inside</code> mixed with plain text.</p>
+
+    <textarea>
+        Textarea content
+        should stay untouched
+    </textarea>
+
+    <noscript>Noscript fallback text should be skipped</noscript>
 
     <svg width="100" height="100">
+        <text x="10" y="20">SVG text content</text>
         <circle cx="50" cy="50" r="40" />
     </svg>
 
-    <p>   </p>
+    <canvas id="c" width="200" height="100">Canvas fallback text</canvas>
+
+    <select>
+        <option value="1">Option one</option>
+        <option value="2" selected>Option two</option>
+    </select>
+
+    <datalist id="d">
+        <option value="Suggestion one">
+        <option value="Suggestion two">
+    </datalist>
+
+    <math>
+        <mi>x</mi><mo>=</mo><mn>1</mn>
+    </math>
+
+    <template>
+        <div>Template content, inert</div>
+    </template>
+
+    <iframe src="https://example.com">Iframe fallback text</iframe>
+
+    <object data="a.swf">Object fallback text</object>
+
+    <audio controls>
+    <source src="a.mp3" type="audio/mpeg">
+        Audio fallback text
+    </audio>
+
+    <video controls width="300">
+    <source src="a.mp4" type="video/mp4">
+        Video fallback text
+    </video>
+
+    <progress value="5" max="10">50%</progress>
+    <meter value="0.6">60%</meter>
+
+    <map name="m">
+        <area shape="rect" coords="0,0,10,10" href="#">
+    </map>
+
+    <details>
+        <summary>Summary text (plain, should bold?)</summary>
+        Details body text
+    </details>
+
+    <dialog open>Dialog content text</dialog>
+
+    <figure>
+        <img src="a.png" alt="figure image">
+        <figcaption>Figure caption text</figcaption>
+    </figure>
+
+    <dl>
+        <dt>Term one</dt>
+        <dd>Definition one</dd>
+    </dl>
+
+    <section>
+        <article>
+            <header>Article header text</header>
+            <p>Article paragraph with <b>bold</b>.</p>
+            <footer>Article footer text</footer>
+        </article>
+    </section>
+
+    <nav><a href="#">Nav link</a></nav>
+    <aside>Aside content text</aside>
+    <main>Main content text</main>
+
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <button type="submit">Submit</button>
+    </form>
+
+    <p>Inline elements: <em>em</em> <i>i</i> <u>u</u> <s>s</s> <del>del</del> <ins>ins</ins> <mark>mark</mark> <small>small</small> <sub>sub</sub> <sup>sup</sup> <kbd>kbd</kbd> <samp>samp</samp> <var>var</var> <abbr title="abbreviation">abbr</abbr> <q>inline quote</q> <dfn>dfn</dfn> <time datetime="2026-09-28">time</time> citation <wbr></p>
+
+    <p>Anchor with fragment: <a href="#section1">jump link</a> and mailto: <a href="mailto:test@example.com">email link</a></p>
+
+    <p>Self-nesting-looking tag: <span><span><span>triple nested span</span></span></span></p>
+
+    <p>Empty tags: <b></b> <i></i> <span></span></p>
+
+    <p>Tag spanning what looks like multiple sentences. <b>Bold sentence one. Bold sentence two! Bold sentence three?</b> Plain text after.</p>
+
+    <p>&amp; &lt; &gt; &copy; &nbsp; &#169; &quot; entities mixed with plain text.</p>
+
+    <p>   Leading/trailing whitespace inside paragraph tags   </p>
 
     <p></p>
 
-    <p>Single<b>word</b>runtogether<b>bold</b>test.</p>
-
-    <select>
-        <option>should not bold</option>
-    </select>
-
-    <p>Final paragraph after all the edge cases, plain and simple.</p>
-
+    <div>
+    
+    </div>
 </body>
 </html>
