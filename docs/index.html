@@ -123,43 +123,47 @@
     </footer>
 
     <div id="bigPageContainer">
+        <div class="filler" id="fillerLeft"></div>
         <div id="bigPage"></div>
-        <div id="bigPageSettings">
+        <div class="filler" id="bigPageSettings">
             <input type="button" value="X" id="closeBigPageButton" onclick="closeBigPage()">
             <br><br>
             <div class="inputPair">
                 <label for="bigPageFont">Font:</label>
-                <select name="bigPageFont" id="bigPageFont">
+                <select name="bigPageFont" id="bigPageFont" onchange="bigPageFont(this.value)">
                     <option value="Arial">Arial</option>
-                    <option value="Verdana">Verdana</option>
-                    <option value="Tahoma">Tahoma</option>
-                    <option value="Trebuchet MS">Trebuchet MS</option>
-                    <option value="Times New Roman">Times New Roman</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Garamond">Garamond</option>
+                    <option value="Calibri">Calibri</option>
                     <option value="Courier New">Courier New</option>
-                    <option value="Brush Script MT">Brush Script MT</option>
+                    <option value="Garamond">Garamond</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Helvetica">Helvetica</option>
+                    <option value="Lato">Lato</option>
+                    <option value="Open Sans">Open Sans</option>
+                    <option value="Tahoma">Tahoma</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Trebuchet MS">Trebuchet MS</option>
+                    <option value="Verdana">Verdana</option>
                 </select>
             </div>
             <br>
             <div class="inputPair">
                 <label for="bigPageTextColor">Text color:</label>
-                <input type="color" name="bigPageTextColor" id="bigPageTextColor">
+                <input type="color" name="bigPageTextColor" id="bigPageTextColor" oninput="bigPageFontColor(this.value)">
             </div>
             <br>
             <div class="inputPair">
-                <label for="bigPageTextSize">Text size:</label>
-                <input type="number" name="bigPageTextSize" id="bigPageTextSize">
+                <label for="bigPageTextSize">Text size (px):</label>
+                <input type="number" name="bigPageTextSize" id="bigPageTextSize" value="16" min="1" max="40" oninput="bigPageFontSize(this.value)">
             </div>
             <br>
             <div class="inputPair">
                 <label for="bigPageBackgroundColor">Page background color:</label>
-                <input type="color" name="bigPageBackgroundColor" id="bigPageBackgroundColor">
+                <input type="color" name="bigPageBackgroundColor" id="bigPageBackgroundColor" value="#ff0000" oninput="bigPageBackgroundColor(this.value)">
             </div>
             <br>
             <div class="inputPair">
-                <label for="bigPageWidth">Page width:</label>
-                <input type="number" name="bigPageWidth" id="bigPageWidth">
+                <label for="bigPageWidth">Page width (%):</label>
+                <input type="number" name="bigPageWidth" id="bigPageWidth" value="40" min="20" max="60" onchange="bigPageWidth(this.value)">
             </div>
         </div>
     </div>
