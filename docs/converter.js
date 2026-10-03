@@ -13,7 +13,7 @@ const InputTextType = Object.freeze({
 })
 
 // Converter output element (div/textarea)
-let output = document.getElementById("outputTextarea")
+let output = document.getElementById("outputDiv")
 
 //==================================================================================================================
 // Text conversion functionality
@@ -210,7 +210,7 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
 
     // Split input line by line
     let textLineArray = inputText.split(LINE_SPLIT_REGEX).filter(line => line != '')
-    console.log(textLineArray)
+    //console.log(textLineArray)
 
     // Loop through lines
     textLineArray = textLineArray.map((line, i, array) => {
@@ -229,11 +229,11 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
         if(!whitespaceCheck && !lineCheck && !nextLineCheck && !tableCheck) { // Continue if the line shouldn't be skipped
             // Split text in the line
             let textArray = line.split(TEXT_SPLIT_REGEX).filter(element => element != '')
-            console.log(textArray)
+            //console.log(textArray)
 
             // Loop through the elements in the line
             textArray = textArray.map((element) => {
-                console.log(`Element: ${element} \nCounters: ${htmlValidTagCounter}, ${htmlTagSkipCounter}, ${taglikeStack}, ${replaceNextBold} \nChecks: ${HTML_TAG_TO_SKIP_START_REGEX.test(element)}, ${HTML_TAG_TO_SKIP_END_REGEX.test(element)}, ${HTML_B_START_REGEX.test(element)}, ${TAGLIKE_TO_SKIP_REGEX.test(element)}, ${MARKDOWN_B_START_REGEX.test(element)}, ${!ELEMENT_CHECK_REGEX.test(element)}`)
+                //console.log(`Element: ${element} \nCounters: ${htmlValidTagCounter}, ${htmlTagSkipCounter}, ${taglikeStack}, ${replaceNextBold} \nChecks: ${HTML_TAG_TO_SKIP_START_REGEX.test(element)}, ${HTML_TAG_TO_SKIP_END_REGEX.test(element)}, ${HTML_B_START_REGEX.test(element)}, ${TAGLIKE_TO_SKIP_REGEX.test(element)}, ${MARKDOWN_B_START_REGEX.test(element)}, ${!ELEMENT_CHECK_REGEX.test(element)}`)
 
                 if(HTML_TAG_TO_SKIP_START_REGEX.test(element) && taglikeStack.length <= 0) { // Check for HTML tag to skip start
                     if(HTML_B_START_REGEX.test(element)) { // Check if the tag is a <b> tag
@@ -277,7 +277,6 @@ function convertMarkdown(inputText, boldingPercentage, minCharsToBold, markingCo
                 return element
             })
             line = textArray.join('') // Join converted elements into a line
-            console.log(line)
         }
         return line // Return converted line
     })
@@ -333,7 +332,7 @@ function selectInputType(type) {
             // Show punctuation and special chars checkboxes
             document.getElementById('boldPunctuationDiv').style.display = 'block'
             document.getElementById('boldSpecialCharsDiv').style.display = 'block'
-            for(const element of stupidBreaks) { element.style.display = "block" }
+            for(const element of stupidBreaks) { element.style.display = 'block' }
 
             break;
         
@@ -349,7 +348,7 @@ function selectInputType(type) {
             // Show punctuation and special chars checkboxes
             document.getElementById('boldPunctuationDiv').style.display = 'block'
             document.getElementById('boldSpecialCharsDiv').style.display = 'block'
-            for(const element of stupidBreaks) { element.style.display = "block" }
+            for(const element of stupidBreaks) { element.style.display = 'block' }
 
             break;
         
@@ -365,7 +364,7 @@ function selectInputType(type) {
             // Hide punctuation and special chars checkboxes
             document.getElementById('boldPunctuationDiv').style.display = 'none'
             document.getElementById('boldSpecialCharsDiv').style.display = 'none'
-            for(const element of stupidBreaks) { element.style.display = "none" }
+            for(const element of stupidBreaks) { element.style.display = 'none' }
             break;
         
         default:
@@ -379,3 +378,25 @@ function openBigPage() { document.getElementById('bigPageContainer').style.displ
 
 // Close big page
 function closeBigPage() { document.getElementById('bigPageContainer').style.display = 'none' }
+
+// Big page color
+function bigPageBackgroundColor(value) {
+    document.getElementById('bigPage').style.backgroundColor = value;
+}
+
+// Big page font color
+function bigPageFontColor(value) {
+    document.getElementById('bigPage').style.color = value;
+}
+
+// Big page font 
+function bigPageFont(value) {
+    document.getElementById('bigPage').style.fontFamily = value;
+}
+
+// Big page width 
+function bigPageWidth(value) {
+    document.getElementById('bigPage').style.width = "calc(" + value + "vw - 40px)";
+    document.getElementById("fillerLeft").style.width = (100 - value) / 2 + "vw";
+    document.getElementById("bigPageSettings").style.width = (100 - value) / 2 + "vw";
+}

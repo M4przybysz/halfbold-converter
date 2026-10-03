@@ -11,15 +11,18 @@ For examples of text to convert, and before/after HTML conversion check the [exa
 The converter can run fully locally, no server is needed. Built with HTML, JS, and CSS. Licensed under [MIT License](./LICENSE).
 
 ## Features
-- Convert plain text, HTML, or Markdown into a half-bolded format
-- Adjustable bolding percentage (5-75%)
-- Adjustable minimum number of characters to bold (1+)
-- Bolding of punctuation and special characters that can be turned on/off
-- Marks already bolded text in HTML with custom color
-- Big page mode for more comfortable reading of converted plain text
+- Convert plain text, HTML, or Markdown into a half-bolded format.
+- Adjustable bolding percentage (5-75%).
+- Adjustable minimum number of characters to bold (1+).
+- Bolding of punctuation and special characters that can be turned on/off.
+- Marks already bolded text in HTML with custom color.
+- Big page mode for more comfortable reading of converted plain text.
+- Extensive settings options for big page mode, including: 12 fonts, fully customizable text and page background color, adjustable text size and page width.
 
 ## Planned features
-- QoL additions to big page mode (including: changing font, text size, page color, text color, and more)
+- Polish translation (tłumaczenie na język polski).
+- Customization of punctuation and special characters sets.
+- Customization of the set of HTML tags that are skipped during conversion. 
 
 ## How to use
 This tool can:
