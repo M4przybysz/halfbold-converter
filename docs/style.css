@@ -93,6 +93,10 @@ textarea {
     width: 50px;
 }
 
+#markingColorDiv {
+    display: none;
+}
+
 #convertButton {
     background-color: #e9dcdc;
     width: 50%;
