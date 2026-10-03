@@ -334,6 +334,9 @@ function selectInputType(type) {
             document.getElementById('boldSpecialCharsDiv').style.display = 'block'
             for(const element of stupidBreaks) { element.style.display = 'block' }
 
+            // Hide marking color
+            document.getElementById('markingColorDiv').style.display = 'none'
+
             break;
         
         case InputTextType.HTML:
@@ -350,6 +353,9 @@ function selectInputType(type) {
             document.getElementById('boldSpecialCharsDiv').style.display = 'block'
             for(const element of stupidBreaks) { element.style.display = 'block' }
 
+            // Show marking color
+            document.getElementById('markingColorDiv').style.display = 'block'
+
             break;
         
         case InputTextType.MARKDOWN:
@@ -365,6 +371,10 @@ function selectInputType(type) {
             document.getElementById('boldPunctuationDiv').style.display = 'none'
             document.getElementById('boldSpecialCharsDiv').style.display = 'none'
             for(const element of stupidBreaks) { element.style.display = 'none' }
+
+            // Show marking color
+            document.getElementById('markingColorDiv').style.display = 'block'
+
             break;
         
         default:
@@ -387,6 +397,11 @@ function bigPageBackgroundColor(value) {
 // Big page font color
 function bigPageFontColor(value) {
     document.getElementById('bigPage').style.color = value;
+}
+
+// Big page text size
+function bigPageTextSize(value) {
+    document.getElementById('bigPage').style.fontSize = value + "px"
 }
 
 // Big page font 

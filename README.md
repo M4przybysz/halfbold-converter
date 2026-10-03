@@ -1,6 +1,6 @@
 # HalfBold Converter
 
-**Half**Bold Converter is a small and simple text converter inspired by Bionic Reading. It allows you to turn plain text or HTML code into their partially bolded versions, making the text faster to read by adding fixation points your eyes can lock onto to every word. 
+**Half**Bold Converter is a small and simple text converter inspired by Bionic Reading. It allows you to turn plain text, HTML code or Markdown-formatted text into their partially bolded versions, making the text faster to read by adding fixation points your eyes can lock onto to every word. 
 
 **Half**Bold Converter is not limited to plain text, and can also convert HTML code and Markdown-formatted text. It also provides customization to the conversion process, including adjustable bolding percentage of each word and color for marking text that's bold in the HTML/Markdown input.
 
