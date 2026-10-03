@@ -117,8 +117,12 @@ textarea {
     border-radius: 10px;
 }
 
-#outputDiv {
+#outputTextarea {
     display: none;
+}
+
+#outputDiv {
+    /* display: none; */
     border: 1px solid black;
     word-wrap: break-word;
     white-space: pre-wrap;
@@ -146,8 +150,12 @@ textarea {
     width: calc(40% - 20px);
 }
 
+.filler{
+    width: 30vw;
+}
+
 #bigPageContainer {
-    background-color: rgba(100, 100, 100, 0.5);
+    background-color: rgba(50, 50, 50, 0.75);
     display: none;
     flex-direction: row;
     position: absolute;
@@ -159,28 +167,38 @@ textarea {
 
 #bigPage {
     background-color: #F5EDD6;
-    width: calc(50vw - 40px);
+    width: calc(40vw - 40px);
     height: calc(90vh - 3vh - 20px);
-    margin: 5vh 0px 5vh auto;
+    margin: 5vh 0px 5vh 0px;
     padding: 20px;
     border: 1px solid black;
     border-radius: 10px;
     white-space: pre-wrap;
+    text-wrap: wrap;
     overflow-x: hidden;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    font-size: 16px;
+}
+
+#bigPage > * {
+    font-family: inherit;
 }
 
 #bigPage::-webkit-scrollbar, #outputDiv::-webkit-scrollbar {
     display: none;
 }
 
+#bigPageSettings {
+    color: #ffffff;
+    margin: 5vh auto auto 1vh;
+}
+
 #closeBigPageButton {
     background-color: #ff6961;
     width: 5vh;
     height: 5vh;
-    margin: 5vh auto auto 1vh;
     border: 1px solid black;
     border-radius: 10px;
 }
